@@ -46,7 +46,7 @@ spring:
 guns:
   muti-datasource:
     open: false
-    url: jdbc:mysql://39.105.97.147:3306/team2_test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
     username: root
     password: 1239825268
     dataSourceNames:
