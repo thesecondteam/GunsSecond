@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.ShipMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Ship">
+        <id column="id" property="id" />
+        <result column="imo" property="imo" />
+        <result column="shipcname" property="shipcname" />
+        <result column="shipename" property="shipename" />
+        <result column="country" property="country" />
+        <result column="shiplength" property="shiplength" />
+        <result column="shipwidth" property="shipwidth" />
+        <result column="tonnage" property="tonnage" />
+        <result column="mmsi" property="mmsi" />
+        <result column="contacts" property="contacts" />
+        <result column="telphone" property="telphone" />
+        <result column="statecode" property="statecode" />
+        <result column="spare1" property="spare1" />
+        <result column="spare2" property="spare2" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        imo, shipcname, shipename, country, shiplength, shipwidth, tonnage, mmsi, contacts, telphone, statecode, id, spare1, spare2
+    </sql>
+
+</mapper>

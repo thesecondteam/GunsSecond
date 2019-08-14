@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.TrainMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Train">
+        <id column="id" property="id" />
+        <result column="traincode" property="traincode" />
+        <result column="carriagenum" property="carriagenum" />
+        <result column="carriagelen" property="carriagelen" />
+        <result column="statecode" property="statecode" />
+        <result column="spare1" property="spare1" />
+        <result column="spare2" property="spare2" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        traincode, carriagenum, carriagelen, statecode, id, spare1, spare2
+    </sql>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.HarbourMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Harbour">
+        <id column="id" property="id" />
+        <result column="harbourcode" property="harbourcode" />
+        <result column="harbourname" property="harbourname" />
+        <result column="country" property="country" />
+        <result column="province" property="province" />
+        <result column="city" property="city" />
+        <result column="shipnum" property="shipnum" />
+        <result column="volume" property="volume" />
+        <result column="statecode" property="statecode" />
+        <result column="spare1" property="spare1" />
+        <result column="spare2" property="spare2" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        harbourcode, harbourname, country, province, city, shipnum, volume, statecode, id, spare1, spare2
+    </sql>
+
+</mapper>

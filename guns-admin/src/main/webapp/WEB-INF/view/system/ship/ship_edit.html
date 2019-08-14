@@ -1,0 +1,39 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="imo" name="船舶IMO编号" value="${item.imo}" underline="true"/>
+                            <#input id="shipcname" name="船舶中文名" value="${item.shipcname}" underline="true"/>
+                            <#input id="shipename" name="船舶英文名" value="${item.shipename}" underline="true"/>
+                            <#input id="country" name="所属国" value="${item.country}" underline="true"/>
+                            <#input id="shiplength" name="长度" value="${item.shiplength}" underline="true"/>
+                            <#input id="shipwidth" name="宽度" value="${item.shipwidth}" underline="true"/>
+                            <#input id="tonnage" name="载重吨位" value="${item.tonnage}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="mmsi" name="MMSI" value="${item.mmsi}" underline="true"/>
+                            <#input id="contacts" name="联系人" value="${item.contacts}" underline="true"/>
+                            <#input id="telphone" name="电话" value="${item.telphone}" underline="true"/>
+                            <#input id="statecode" name="" type="hidden"  value="${item.statecode}" />
+                            <#input id="id" name="" value="${item.id}" type="hidden" />
+                            <#input id="spare1" name="" value="${item.spare1}" type="hidden"/>
+                            <#input id="spare2" name="" value="${item.spare2}" type="hidden"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ShipInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ShipInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/ship/ship_info.js"></script>
+@}

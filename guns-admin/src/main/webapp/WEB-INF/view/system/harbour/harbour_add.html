@@ -1,0 +1,39 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="harbourcode" name="港口号" underline="true"/>
+                            <#input id="harbourname" name="港口名称" underline="true"/>
+                            <#input id="country" name="国家"  underline="true"/>
+                            <#input id="province" name="省份"  underline="true"/>
+                            <#input id="city" name="城市" />
+
+                </div>
+
+                <div class="col-sm-6">
+
+                            <#input id="shipnum" name="轮船数量"  underline="true" />
+                            <#input id="volume" name="场地容量" underline="true"/>
+                            <#select id="statecode" name="状态" >
+                            <option value="1">已启用</option>
+                            <option value="0">已禁用</option>
+                            </#select>
+                            <#input id="id" name=""  type="hidden"    />
+                            <#input id="spare1" name=""  type="hidden"  />
+                            <#input id="spare2" name=""   type="hidden"  />
+                </div>
+            </div>
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="HarbourInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="HarbourInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/harbour/harbour_info.js"></script>
+@}

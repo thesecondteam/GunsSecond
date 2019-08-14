@@ -1,0 +1,45 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>站点管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#NameCon id="condition" name="名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#button name="搜索" icon="fa-search" clickFun="DictStation.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="DictStationTableToolbar" role="group">
+                            @if(shiro.hasPermission("/dictStation/add")){
+                                <#button name="添加" icon="fa-plus" clickFun="DictStation.openAddDictStation()"/>
+                            @}
+                            @if(shiro.hasPermission("/dictStation/update")){
+                                <#button name="修改" icon="fa-edit" clickFun="DictStation.openDictStationDetail()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/dictStation/delete")){
+                                <#button name="删除" icon="fa-remove" clickFun="DictStation.delete()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/dictStation/disable")){
+
+                            <#button name="禁用" icon="fa-stop" clickFun="DictStation.disable()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/dictStation/enable")){
+                            <#button name="启用" icon="fa-youtube-play" clickFun="DictStation.enable()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="DictStationTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/dictStation/dictStation.js"></script>
+@}

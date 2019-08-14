@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="traincode" name="火车编号" value="${item.traincode}" underline="true"/>
+                            <#input id="carriagenum" name="车厢数" value="${item.carriagenum}" underline="true"/>
+                            <#input id="carriagelen" name="车厢长度" value="${item.carriagelen}" underline="true"/>
+                            <#input id="statecode" name="" type="hidden"  value="${item.statecode}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="id" name=""   type="hidden"  value="${item.id}" />
+                            <#input id="spare1" name="" type="hidden"  value="${item.spare1}" />
+                            <#input id="spare2" name="" type="hidden"  value="${item.spare2}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="TrainInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="TrainInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/train/train_info.js"></script>
+@}

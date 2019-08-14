@@ -1,0 +1,42 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="imo" name="船舶IMO编号" underline="true"/>
+                            <#input id="shipcname" name="船舶中文名" underline="true"/>
+                            <#input id="shipename" name="船舶英文名" underline="true"/>
+                            <#input id="country" name="所属国" underline="true"/>
+                            <#input id="shiplength" name="长度" underline="true"/>
+                            <#input id="shipwidth" name="宽度" underline="true"/>
+                            <#input id="tonnage" name="载重吨位"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="mmsi" name="MMSI" underline="true"/>
+                            <#input id="contacts" name="联系人" underline="true"/>
+                            <#input id="telphone" name="电话" underline="true"/>
+                            <#select id="statecode" name="状态" >
+                            <option value="1">已启用</option>
+                            <option value="0">已禁用</option>
+                            </#select>
+                            <#input id="id" name="" type="hidden" />
+                            <#input id="spare1" name="" type="hidden" />
+                            <#input id="spare2" name="" type="hidden" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="ShipInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="ShipInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/ship/ship_info.js"></script>
+@}
