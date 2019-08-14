@@ -124,7 +124,7 @@ $(function () {
     Boxsize.table = table.init();
 });
 
-//双击修改内容
+//双击修改
 $('#'+Boxsize.id).on("dbl-click-row.bs.table",function(e, row, $element) {
     if (Boxsize.check()) {
         var index = layer.open({
