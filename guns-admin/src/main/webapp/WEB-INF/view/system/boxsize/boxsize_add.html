@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="sizecode" name="尺寸编码" underline="true"/>
+                            <#input id="sizetype" name="尺寸类型" underline="true"/>
+                            <#input id="inlength" name="内长"/>
+                            <#input id="inwidth" name="内宽" />
+                            <#input id="inheight" name="内高" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="outheight" name="外长"/>
+                            <#input id="outwidth" name="外宽" underline="true"/>
+                            <#input id="volume" name="体积" underline="true"/>
+                            <#input id="capacity" name="容量" underline="true"/>
+                            <#select id="statecode" name="状态" >
+                             <option value="1">已启用</option>
+                             <option value="0">已禁用</option>
+                            </#select>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BoxsizeInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BoxsizeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/boxsize/boxsize_info.js"></script>
+@}
