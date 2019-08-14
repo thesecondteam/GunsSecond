@@ -23,7 +23,7 @@ Boxsize.initColumn = function () {
             {title: '外宽', field: 'outwidth', visible: true, align: 'center', valign: 'middle'},
             {title: '体积', field: 'volume', visible: true, align: 'center', valign: 'middle'},
             {title: '容量', field: 'capacity', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态', field: 'stateName', visible: true, align: 'center', valign: 'middle'}
+            {title: '状态', field: 'stateName', visible: true, align: 'center', valign: 'middle'},
     ];
 };
 
@@ -114,9 +114,27 @@ Boxsize.search = function () {
     Boxsize.table.refresh({query: queryData});
 };
 
+
+
+
 $(function () {
     var defaultColunms = Boxsize.initColumn();
     var table = new BSTable(Boxsize.id, "/boxsize/list", defaultColunms);
     table.setPaginationType("client");
     Boxsize.table = table.init();
+});
+
+//双击修改
+$('#'+Boxsize.id).on("dbl-click-row.bs.table",function(e, row, $element) {
+    if (Boxsize.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '详情',
+            area: ['800px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/boxsize/boxsize_update/' + row.id
+        });
+        this.layerIndex = index;
+    }
 });
