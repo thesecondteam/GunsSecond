@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.warpper.BoxsizeWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Boxsize;
 import com.stylefeng.guns.modular.system.service.IBoxsizeService;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +30,7 @@ import java.util.Map;
 public class BoxsizeController extends BaseController {
 
     private String PREFIX = "/system/boxsize/";
+
 
     @Autowired
     private IBoxsizeService boxsizeService;
@@ -65,8 +69,16 @@ public class BoxsizeController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-
-        List<Map<String, Object>> list= boxsizeService.selectMaps(null);
+        EntityWrapper<Boxsize> boxsizeEntityWrapper=new EntityWrapper<Boxsize>();
+        List<Map<String, Object>> list;
+        if (ToolUtil.isNotEmpty(condition) ) {
+            boxsizeEntityWrapper.like("sizecode", condition).or().like("sizetype",condition);
+             list= boxsizeService.selectMaps(boxsizeEntityWrapper);
+        }
+        else
+        {
+             list= boxsizeService.selectMaps(null);
+        }
         return new BoxsizeWarpper(list).warp();
     }
 

@@ -1,0 +1,29 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="statecode" type="hidden" name="" value="${item.statecode}" />
+                    <#input id="typecode" name="类型编码" value="${item.typecode}" />
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="id" type="hidden" name="" value="${item.id}" />
+                    <#input id="type" name="类型" value="${item.type}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BoxtypeInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BoxtypeInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/boxtype/boxtype_info.js"></script>
+@}

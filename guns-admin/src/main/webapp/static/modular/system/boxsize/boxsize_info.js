@@ -2,7 +2,30 @@
  * 初始化详情对话框
  */
 var BoxsizeInfoDlg = {
-    boxsizeInfoData : {}
+    boxsizeInfoData : {},
+    validateFields: {
+        capacity: {
+            validators: {
+                notEmpty: {
+                    message: '集装箱容量不能为空'
+                }
+            }
+        },
+        sizecode: {
+            validators: {
+                notEmpty: {
+                    message: '集装箱尺寸编码不能为空'
+                }
+            }
+        },
+        sizetype: {
+            validators: {
+                notEmpty: {
+                    message: '集装箱尺寸类型不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -39,7 +62,14 @@ BoxsizeInfoDlg.get = function(key) {
 BoxsizeInfoDlg.close = function() {
     parent.layer.close(window.parent.Boxsize.layerIndex);
 }
-
+/**
+ * 验证数据是否为空
+ */
+BoxsizeInfoDlg.validate = function () {
+    $('#boxsizeInfoForm').data("bootstrapValidator").resetForm();
+    $('#boxsizeInfoForm').bootstrapValidator('validate');
+    return $("#boxsizeInfoForm").data('bootstrapValidator').isValid();
+}
 /**
  * 收集数据
  */
@@ -66,6 +96,10 @@ BoxsizeInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    /*if (!this.validate()) {
+        return;
+    }*/
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/boxsize/add", function(data){
         Feng.success("添加成功!");
@@ -86,6 +120,10 @@ BoxsizeInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+   /* if (!this.validate()) {
+        return;
+    }*/
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/boxsize/update", function(data){
         Feng.success("修改成功!");
@@ -99,5 +137,5 @@ BoxsizeInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+    Feng.initValidator("boxsizeInfoForm", BoxsizeInfoDlg.validateFields);
 });
