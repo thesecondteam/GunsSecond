@@ -1,0 +1,41 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+
+                            <#input id="ordernumber" name="订单编号" underline="true"/>
+                            <#input id="trantype" name="运输方式" underline="true"/>
+                            <#input id="goodstype" name="货物类型" underline="true"/>
+                            <#input id="goodsname" name="货物名称" underline="true"/>
+                            <#input id="goodsvolume" name="货物容量" underline="true"/>
+                            <#input id="startpoint" name="起点" underline="true"/>
+                            <#input id="recephone" name="收货方电话" underline="true"/>
+                            <#input id="receiver" name="收货方"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="endpoint" name="终点" underline="true"/>
+                            <#input id="consiphone" name="发货方电话" underline="true"/>
+                            <#input id="consignor" name="发货方" underline="true"/>
+                            <#input id="creationtime" name="创建时间" underline="true" type="date"  clickFun="laydate({istime:false,format:YYYY-MM-DD})"/>
+                            <#input id="ordercode" name="订单码" underline="true"/>
+                            <#input id="note" name="备注" underline="true"/>
+
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiOrderInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiOrderInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/webSys/busiOrder/busiOrder_info.js"></script>
+@}

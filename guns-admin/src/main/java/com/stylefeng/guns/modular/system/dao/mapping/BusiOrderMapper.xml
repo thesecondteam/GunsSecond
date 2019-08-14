@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.BusiOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.BusiOrder">
+        <id column="id" property="id" />
+        <result column="ordernumber" property="ordernumber" />
+        <result column="trantype" property="trantype" />
+        <result column="goodstype" property="goodstype" />
+        <result column="goodsname" property="goodsname" />
+        <result column="goodsvolume" property="goodsvolume" />
+        <result column="startpoint" property="startpoint" />
+        <result column="recephone" property="recephone" />
+        <result column="receiver" property="receiver" />
+        <result column="endpoint" property="endpoint" />
+        <result column="consiphone" property="consiphone" />
+        <result column="consignor" property="consignor" />
+        <result column="creationtime" property="creationtime" />
+        <result column="ordercode" property="ordercode" />
+        <result column="note" property="note" />
+        <result column="spare" property="spare" />
+        <result column="spare1" property="spare1" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, ordernumber, trantype, goodstype, goodsname, goodsvolume, startpoint, recephone, receiver, endpoint, consiphone, consignor, creationtime, ordercode, note, spare, spare1
+    </sql>
+
+</mapper>
