@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.VoyageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.stylefeng.guns.modular.system.model.Voyage">
+        <id column="id" property="id" />
+        <result column="voyagenum" property="voyagenum" />
+        <result column="imo" property="imo" />
+        <result column="starttime" property="starttime" />
+        <result column="endtime" property="endtime" />
+        <result column="consigncompany" property="consigncompany" />
+        <result column="recivecompany" property="recivecompany" />
+        <result column="boxnumber" property="boxnumber" />
+        <result column="distance" property="distance" />
+        <result column="statecode" property="statecode" />
+        <result column="loadcode" property="loadcode" />
+        <result column="unloadcode" property="unloadcode" />
+        <result column="loadtype" property="loadtype" />
+        <result column="endpoint" property="endpoint" />
+        <result column="startpiont" property="startpiont" />
+        <result column="spareone" property="spareone" />
+        <result column="sparetwo" property="sparetwo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, voyagenum, imo, starttime, endtime, consigncompany, recivecompany, boxnumber, distance, statecode, loadcode, unloadcode, loadtype, endpoint, startpiont, spareone, sparetwo
+    </sql>
+
+</mapper>

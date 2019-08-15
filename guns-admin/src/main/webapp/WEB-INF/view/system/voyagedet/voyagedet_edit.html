@@ -1,0 +1,38 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="voyagedetid" name="" value="${item.voyagedetid}" underline="true"/>
+                            <#input id="voyagenum" name="" value="${item.voyagenum}" underline="true"/>
+                            <#input id="boxid" name="" value="${item.boxid}" underline="true"/>
+                            <#input id="boxtype" name="" value="${item.boxtype}" underline="true"/>
+                            <#input id="boxsize" name="" value="${item.boxsize}" underline="true"/>
+                            <#input id="boxgoods" name="" value="${item.boxgoods}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="statecode" name="" value="${item.statecode}" underline="true"/>
+                            <#input id="createtime" name="" value="${item.createtime}" underline="true"/>
+                            <#input id="operation" name="" value="${item.operation}" underline="true"/>
+                            <#input id="finish" name="" value="${item.finish}" underline="true"/>
+                            <#input id="spareone" name="" value="${item.spareone}" underline="true"/>
+                            <#input id="sparetwo" name="" value="${item.sparetwo}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyagedetInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyagedetInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/voyagedet/voyagedet_info.js"></script>
+@}
