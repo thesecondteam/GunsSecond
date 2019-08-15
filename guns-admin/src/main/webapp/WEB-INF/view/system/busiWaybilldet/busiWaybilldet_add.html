@@ -1,0 +1,36 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="" underline="true"/>
+                            <#input id="waybilldetid" name="" underline="true"/>
+                            <#input id="waybillid" name="" underline="true"/>
+                            <#input id="boxid" name="" underline="true"/>
+                            <#input id="boxtype" name="" underline="true"/>
+                            <#input id="boxsize" name=""/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="boxgoods" name="" underline="true"/>
+                            <#input id="operation" name="" underline="true"/>
+                            <#input id="createtime" name="" underline="true"/>
+                            <#input id="statecode" name="" underline="true"/>
+                            <#input id="finish" name="" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybilldetInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiWaybilldetInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/busiWaybilldet/busiWaybilldet_info.js"></script>
+@}
