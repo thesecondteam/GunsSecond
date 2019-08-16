@@ -1,6 +1,10 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiWaybill;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,6 +15,9 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.BusiWaybilldet;
 import com.stylefeng.guns.modular.system.service.IBusiWaybilldetService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 运单详情管理控制器
@@ -60,7 +67,14 @@ public class BusiWaybilldetController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return busiWaybilldetService.selectList(null);
+        if(ToolUtil.isEmpty(condition)) {
+            return busiWaybilldetService.selectList(null);
+        }else
+        {
+            EntityWrapper<BusiWaybilldet>entityWrapper=new EntityWrapper<>();
+            Wrapper<BusiWaybilldet> wrapper=entityWrapper.like("Waybilldetid",condition);
+            return busiWaybilldetService.selectList(wrapper);
+        }
     }
 
     /**

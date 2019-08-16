@@ -14,7 +14,7 @@ var BusiWaybilldet = {
 BusiWaybilldet.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
+            {title: '', field: 'id', visible: false, align: 'center', valign: 'middle'},
             {title: '运单详情号', field: 'waybilldetid', visible: true, align: 'center', valign: 'middle'},
             {title: '运单号', field: 'waybillid', visible: true, align: 'center', valign: 'middle'},
             {title: '集装箱号', field: 'boxid', visible: true, align: 'center', valign: 'middle'},

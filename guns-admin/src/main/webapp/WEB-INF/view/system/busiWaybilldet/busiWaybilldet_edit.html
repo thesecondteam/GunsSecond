@@ -5,20 +5,20 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="waybilldetid" name="" value="${item.waybilldetid}" underline="true"/>
-                            <#input id="waybillid" name="" value="${item.waybillid}" underline="true"/>
-                            <#input id="boxid" name="" value="${item.boxid}" underline="true"/>
-                            <#input id="boxtype" name="" value="${item.boxtype}" underline="true"/>
-                            <#input id="boxsize" name="" value="${item.boxsize}" />
+                            <#input id="id" name="" value="${item.id}" type="hidden"/>
+                            <#input id="waybilldetid" name="运单详情号" value="${item.waybilldetid}" underline="true"/>
+                            <#input id="waybillid" name="运单号" value="${item.waybillid}" underline="true"/>
+                            <#input id="boxid" name="集装箱号" value="${item.boxid}" underline="true"/>
+                            <#input id="boxtype" name="集装箱类型" value="${item.boxtype}" underline="true"/>
+                            <#input id="boxsize" name="集装箱大小" value="${item.boxsize}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="boxgoods" name="" value="${item.boxgoods}" underline="true"/>
-                            <#input id="operation" name="" value="${item.operation}" underline="true"/>
-                            <#input id="createtime" name="" value="${item.createtime}" underline="true"/>
-                            <#input id="statecode" name="" value="${item.statecode}" underline="true"/>
-                            <#input id="finish" name="" value="${item.finish}" />
+                            <#input id="boxgoods" name="集装箱物品" value="${item.boxgoods}" underline="true"/>
+                            <#input id="operation" name="操作" value="${item.operation}" underline="true"/>
+                            <#input id="createtime" name="创建时间" value="${item.createtime}" underline="true"/>
+                            <#input id="statecode" name="状态码" value="${item.statecode}" underline="true"/>
+                            <#input id="finish" name="完成状态" value="${item.finish}" />
                 </div>
             </div>
 

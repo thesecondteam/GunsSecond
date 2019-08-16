@@ -14,7 +14,7 @@ var BusiWaybill = {
 BusiWaybill.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
+            {title: '', field: 'id', visible: false, align: 'center', valign: 'middle'},
             {title: '运单号', field: 'waybillid', visible: true, align: 'center', valign: 'middle'},
             {title: '车次', field: 'trainnum', visible: true, align: 'center', valign: 'middle'},
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},

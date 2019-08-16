@@ -5,24 +5,24 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="waybillid" name="" value="${item.waybillid}" underline="true"/>
-                            <#input id="trainnum" name="" value="${item.trainnum}" underline="true"/>
-                            <#input id="starttime" name="" value="${item.starttime}" underline="true"/>
-                            <#input id="endtime" name="" value="${item.endtime}" underline="true"/>
-                            <#input id="consigncompany" name="" value="${item.consigncompany}" underline="true"/>
-                            <#input id="recivecompany" name="" value="${item.recivecompany}" underline="true"/>
-                            <#input id="boxnumber" name="" value="${item.boxnumber}" />
+                            <#input id="id" name="" value="${item.id}" type="hidden"/>
+                            <#input id="waybillid" name="运单号" value="${item.waybillid}" underline="true"/>
+                            <#input id="trainnum" name="车次" value="${item.trainnum}" underline="true"/>
+                            <#input id="starttime" name="开始时间" value="${item.starttime}" underline="true"/>
+                            <#input id="endtime" name="结束时间" value="${item.endtime}" underline="true"/>
+                            <#input id="consigncompany" name="发货方" value="${item.consigncompany}" underline="true"/>
+                            <#input id="recivecompany" name="收货方" value="${item.recivecompany}" underline="true"/>
+                            <#input id="boxnumber" name="集装箱号" value="${item.boxnumber}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="startpoint" name="" value="${item.startpoint}" underline="true"/>
-                            <#input id="endpiont" name="" value="${item.endpiont}" underline="true"/>
-                            <#input id="distance" name="" value="${item.distance}" underline="true"/>
-                            <#input id="statecode" name="" value="${item.statecode}" underline="true"/>
-                            <#input id="loadtype" name="" value="${item.loadtype}" underline="true"/>
-                            <#input id="loadcode" name="" value="${item.loadcode}" underline="true"/>
-                            <#input id="unloadcode" name="" value="${item.unloadcode}" />
+                            <#input id="startpoint" name="起点" value="${item.startpoint}" underline="true"/>
+                            <#input id="endpiont" name="终点" value="${item.endpiont}" underline="true"/>
+                            <#input id="distance" name="距离" value="${item.distance}" underline="true"/>
+                            <#input id="statecode" name="状态码" value="${item.statecode}" underline="true"/>
+                            <#input id="loadtype" name="装货类型" value="${item.loadtype}" underline="true"/>
+                            <#input id="loadcode" name="装货码" value="${item.loadcode}" underline="true"/>
+                            <#input id="unloadcode" name="卸货码" value="${item.unloadcode}" />
                 </div>
             </div>
 
