@@ -1,0 +1,230 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>铁水联运EChart图</title>
+</head>
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--<include file="/common/_container.html"></include>-->
+<body style="background:#fdfdfe">
+<!--Step:1 Prepare a dom for ECharts which (must) has size (width & hight)-->
+<!--Step:1 为ECharts准备一个具备大小（宽高）的Dom-->
+<div class="container">
+    <div class="row">
+        <div >
+    </div>
+    <div class="row">
+        <div id="mainMap" style="height:100%;width:100%;background:#fdfdfe" class="col-md-12"></div>
+    </div>
+</div>
+<!--中国-->
+<!--Step:2 Import echarts.js-->
+<!--Step:2 引入echarts.js-->
+
+<script type="text/javascript" src="${ctxPath}/static/js/echarts/jquery-1.8.0.js"></script>
+<script src="${ctxPath}/static/js/echarts/echarts.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('#document').ready(function(){
+        getEcharts();
+        getWordEChart();
+    });
+</script>
+
+<!--世界地图-->
+
+<script src="${ctxPath}/static/js/echarts/chart/word.js"></script>
+<!--全部出口地点js-->
+
+
+<!--中国代码-->
+<script type="text/javascript">
+    function getEcharts(){
+        // Step:3 conifg ECharts's path, link to echarts.js from current page.
+        // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+        require.config({
+            paths: {
+                echarts: '../../../static/js/echarts'
+            }
+        });
+
+        // Step:4 require echarts and use it in the callback.
+        // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+        require(
+            [
+                'echarts',
+                'echarts/chart/map'
+            ],
+            function (ec) {
+                // --- 地图 ---
+                var myChart2 = ec.init(document.getElementById('mainMap'));
+                myChart2.setOption({
+                    dataRange: {
+                        min : 0,
+                        max : 100,
+                        calculable : true,
+                        color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+                        textStyle:{
+                            color:'#ff0a03'
+                        }
+                    },
+                    title: {
+                        text: '中国货运地图',
+                        left: 'center',
+                        top: 'top'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: function (params) {
+                            var value = (params.value + '').split('.');
+                            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');                                ;
+                            return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                        }
+                    },
+                    series : [
+                        {
+                            name: '全国',
+                            type: 'map',
+                            roam: true,
+                            hoverable: false,
+                            mapType: 'china',
+                            itemStyle:{
+                                normal:{
+                                    borderColor:'rgba(100,149,237,1)',
+                                    borderWidth:0.5,
+                                    areaStyle:{
+                                        color: '#fdfdfe'
+                                    }
+                                }
+                            },
+                            data:[],
+                            markLine : {
+                                smooth:true,
+                                symbol: ['none', 'circle'],
+                                symbolSize : 1,
+                                itemStyle : {
+                                    normal: {
+                                        color:'#fff',
+                                        borderWidth:1,
+                                        borderColor:'rgba(30,144,255,0.5)'
+                                    }
+                                },
+                                data : [
+                                ],
+                            },
+                            geoCoord: {
+                               '上海': [121.4648,31.2891],
+
+                            },
+                            markPoint : {
+                                symbol:'emptyCircle',
+                                symbolSize : function (v){
+                                    return 10 + v/10
+                                },
+                                effect : {
+                                    show: true,
+                                    shadowBlur : 0
+                                },
+                                itemStyle:{
+                                    normal:{
+                                        label:{show:false}
+                                    },
+                                    emphasis: {
+                                        label:{position:'top'}
+                                    }
+                                },
+                                data : [
+                                    {name:'上海',value:95},
+                                    {name:'广州',value:90},
+                                    {name:'大连',value:80},
+                                    {name:'南宁',value:70},
+                                    {name:'南昌',value:60},
+                                    {name:'拉萨',value:50},
+                                    {name:'长春',value:40},
+                                    {name:'包头',value:30},
+                                    {name:'重庆',value:20},
+                                    {name:'常州',value:10}
+                                ]
+                            }
+                        },
+                        {
+                            name: '秦皇岛 Top10',
+                            type: 'map',
+                            mapType: 'china',
+                            data:[],
+                            markLine : {
+                                smooth:true,
+                                effect : {
+                                    show: true,
+                                    scaleSize: 1,
+                                    period: 30,
+                                    color: '#fff',
+                                    shadowBlur: 10
+                                },
+                                itemStyle : {
+                                    normal: {
+                                        label:{show:false},
+                                        borderWidth:1,
+                                        lineStyle: {
+                                            type: 'solid',
+                                            shadowBlur: 10
+                                        }
+                                    }
+                                },
+                                data : [
+                                    [{name:'上海'}, {name:'北京',value:95}],
+                                    [{name:'广州'}, {name:'北京',value:90}],
+                                    [{name:'大连'}, {name:'北京',value:80}],
+                                    [{name:'南宁'}, {name:'北京',value:70}],
+                                    [{name:'南昌'}, {name:'北京',value:60}],
+                                    [{name:'拉萨'}, {name:'北京',value:50}],
+                                    [{name:'长春'}, {name:'北京',value:40}],
+                                    [{name:'包头'}, {name:'北京',value:30}],
+                                    [{name:'重庆'}, {name:'北京',value:20}],
+                                    [{name:'常州'}, {name:'北京',value:10}]
+                                ]
+                            },
+                            markPoint : {
+                                symbol:'emptyCircle',
+                                symbolSize : function (v){
+                                    return 0.1
+                                },
+                                effect : {
+                                    show: false,
+                                    shadowBlur : 0
+                                },
+                                itemStyle:{
+                                    normal:{
+                                        label:{show:true,
+                                            position:'top',
+                                            textStyle: {
+                                                fontSize: 14
+                                            }
+                                        }
+                                    },
+                                    emphasis: {
+                                        label:{show:false}
+                                    }
+                                },
+                                data : [
+                                    {name:'上海',value:95},
+                                    {name:'广州',value:90},
+                                    {name:'大连',value:80},
+                                    {name:'南宁',value:70},
+                                    {name:'南昌',value:60},
+                                    {name:'拉萨',value:50},
+                                    {name:'长春',value:40},
+                                    {name:'包头',value:30},
+                                    {name:'重庆',value:20},
+                                    {name:'常州',value:10}
+                                ]
+                            }
+                        }
+                    ]
+                });
+            });
+    }
+</script>
+
+</body>
+</html>

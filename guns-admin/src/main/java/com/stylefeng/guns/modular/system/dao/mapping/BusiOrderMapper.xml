@@ -25,7 +25,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, ordernumber, trantype, goodstype, goodsname, goodsvolume, startpoint, recephone, receiver, endpoint, consiphone, consignor, creationtime, ordercode, note, spare, spare1
+
     </sql>
 
 </mapper>
