@@ -5,33 +5,28 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" value="${item.id}" underline="true"/>
-                            <#input id="voyagedetid" name="" value="${item.voyagedetid}" underline="true"/>
-                            <#input id="voyagenum" name="" value="${item.voyagenum}" underline="true"/>
-                            <#input id="boxid" name="" value="${item.boxid}" underline="true"/>
-                            <#input id="boxtype" name="" value="${item.boxtype}" underline="true"/>
-                            <#input id="boxsize" name="" value="${item.boxsize}" underline="true"/>
-                            <#input id="boxgoods" name="" value="${item.boxgoods}" />
+                    <#input id="voyagedetid" name="航次详情编号" value="${item.voyagedetid}" underline="true"/>
+                    <#input id="voyagenum" name="航线编号" value="${item.voyagenum}" underline="true"/>
+                    <#input id="boxid" name="箱子编号" value="${item.boxid}" underline="true"/>
+                    <#input id="boxtype" name="箱子类型" value="${item.boxtype}" underline="true"/>
+                    <#input id="boxsize" name="箱子尺寸" value="${item.boxsize}" underline="true"/>
+                    <#input id="boxgoods" name="箱子所装货物" value="${item.boxgoods}" />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="statecode" name="" value="${item.statecode}" underline="true"/>
-                            <#input id="createtime" name="" value="${item.createtime}" underline="true"/>
-                            <#input id="operation" name="" value="${item.operation}" underline="true"/>
-                            <#input id="finish" name="" value="${item.finish}" underline="true"/>
-                            <#input id="spareone" name="" value="${item.spareone}" underline="true"/>
-                            <#input id="sparetwo" name="" value="${item.sparetwo}" />
-                </div>
-            </div>
-
-            <div class="row btn-group-m-t">
-                <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyagedetInfoDlg.editSubmit()"/>
-                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyagedetInfoDlg.close()"/>
+                    <#input id="statecode" name="状态码" value="${item.statecode}" underline="true"/>
+                    <#input id="createtime" name="创建时间" value="${item.createtime}" underline="true"/>
+                    <#input id="operation" name="装卸货操作" value="${item.operation}" underline="true"/>
+                    <#input id="finish" name="是否完成" value="${item.finish}" underline="true"/>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
+                    </div>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/voyagedet/voyagedet_info.js"></script>
