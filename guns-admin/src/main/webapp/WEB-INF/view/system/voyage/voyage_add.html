@@ -5,33 +5,29 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" underline="true"/>
-                            <#input id="voyagenum" name="航线编号" underline="true"/>
-                            <#input id="imo" name="轮船号" underline="true"/>
-                            <#input id="starttime" name="开始时间" underline="true"/>
-                            <#input id="endtime" name="结束时间" underline="true"/>
-                            <#input id="consigncompany" name="发货公司" underline="true"/>
-                            <#input id="recivecompany" name="收货公司" underline="true"/>
-                            <#input id="boxnumber" name="箱子编号" underline="true"/>
-                            <#input id="distance" name="里程数"/>
+                    <#input id="voyagenum" name="航线编号" underline="true"/>
+                    <#input id="imo" name="轮船号" underline="true"/>
+                    <#input id="starttime" name="开始时间" underline="true"/>
+                    <#input id="endtime" name="结束时间" underline="true"/>
+                    <#input id="consigncompany" name="发货公司" underline="true"/>
+                    <#input id="recivecompany" name="收货公司" underline="true"/>
+                    <#input id="boxnumber" name="箱子编号" underline="true"/>
+                    <#input id="distance" name="里程数"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="statecode" name="状态码" underline="true"/>
-                            <#input id="loadcode" name="装载码" underline="true"/>
-                            <#input id="unloadcode" name="卸载码" underline="true"/>
-                            <#input id="loadtype" name="类型" underline="true"/>
-                            <#input id="endpoint" name="终止点" underline="true"/>
-                            <#input id="startpiont" name="起始点" underline="true"/>
-                            <#input id="spareone" name="" underline="true"/>
-                            <#input id="sparetwo" name="" underline="true"/>
-                </div>
-            </div>
-
-            <div class="row btn-group-m-t">
-                <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.addSubmit()"/>
-                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="loadcode" name="装载码" underline="true"/>
+                    <#input id="unloadcode" name="卸载码" underline="true"/>
+                    <#input id="loadtype" name="类型" underline="true"/>
+                    <#input id="endpoint" name="终止点" underline="true"/>
+                    <#input id="startpiont" name="起始点" underline="true"/>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
+                    </div>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                    </div>
                 </div>
             </div>
         </div>
