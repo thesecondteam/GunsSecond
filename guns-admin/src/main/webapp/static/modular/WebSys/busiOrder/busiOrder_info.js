@@ -2,7 +2,93 @@
  * 初始化order详情对话框
  */
 var BusiOrderInfoDlg = {
-    busiOrderInfoData : {}
+    busiOrderInfoData : {},
+    validateFields:{
+        ordernumber:{
+            validators:{
+                notEmpty:{
+                    message:"订单编号不能为空"
+                }
+            }
+        },
+        trantype:{
+            validators:{
+                notEmpty:{
+                    message:"运输类型不能为空"
+                }
+            }
+        },
+        goodstype:{
+            validators:{
+                notEmpty:{
+                    message:"货物类型不能为空"
+                }
+            }
+        },
+        goodsname:{
+            validators:{
+                notEmpty:{
+                    message:"货物名称不能为空"
+                }
+            }
+        },
+        goodsvolumes:{
+            validators:{
+                notEmpty:{
+                    message:"货物体积不能为空"
+                }
+            }
+        },
+        recephone:{
+            validators:{
+                notEmpty:{
+                    message:"收货人电话不能为空"
+                }
+            }
+        },
+        startpoint:{
+            validators:{
+                notEmpty:{
+                    message:"发货起点不能为空"
+                }
+            }
+        },
+        receiver:{
+            validators:{
+                notEmpty:{
+                    message:"收货方不能为空"
+                }
+            }
+        },
+        endpoint:{
+            validators:{
+                notEmpty:{
+                    message:"终点不能为空"
+                }
+            }
+        },
+        consiphone:{
+            validators:{
+                notEmpty:{
+                    message:"发货方电话不能为空"
+                }
+            }
+        },
+        consignor:{
+            validators:{
+                notEmpty:{
+                    message:"发货方不能为空"
+                }
+            }
+        },
+        creationtime:{
+            validators:{
+                notEmpty:{
+                    message:"创建时间不能为空"
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -65,6 +151,15 @@ BusiOrderInfoDlg.collectData = function() {
 }
 
 /**
+ * 验证数据是否为空
+ */
+BusiOrderInfoDlg.validate = function () {
+    $('#busForm').data("bootstrapValidator").resetForm();
+    $('#busForm').bootstrapValidator('validate');
+    return $("#busForm").data('bootstrapValidator').isValid();
+}
+
+/**
  * 提交添加
  */
 BusiOrderInfoDlg.addSubmit = function() {
@@ -72,17 +167,20 @@ BusiOrderInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
-    //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/busiOrder/add", function(data){
-        Feng.success("添加成功!");
-        window.parent.BusiOrder.table.refresh();
-        BusiOrderInfoDlg.close();
-    },function(data){
-        Feng.error("添加失败!" + data.responseJSON.message + "!");
-    });
-    ajax.set(this.busiOrderInfoData);
-    ajax.start();
-}
+    if (!this.validate()) {
+        return;
+    }
+        //提交信息
+        var ajax = new $ax(Feng.ctxPath + "/busiOrder/add", function (data) {
+            Feng.success("添加成功!");
+            window.parent.BusiOrder.table.refresh();
+            BusiOrderInfoDlg.close();
+        }, function (data) {
+            Feng.error("添加失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.busiOrderInfoData);
+        ajax.start();
+    }
 
 /**
  * 提交修改
@@ -91,6 +189,10 @@ BusiOrderInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/busiOrder/update", function(data){
@@ -103,7 +205,8 @@ BusiOrderInfoDlg.editSubmit = function() {
     ajax.set(this.busiOrderInfoData);
     ajax.start();
 }
+    $(function(){
+        Feng.initValidator("busForm", BusiOrderInfoDlg.validateFields);
 
-$(function() {
+    });
 
-});
