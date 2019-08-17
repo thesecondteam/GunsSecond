@@ -2,7 +2,16 @@
  * 初始化船舶详情对话框
  */
 var ShipInfoDlg = {
-    shipInfoData : {}
+    shipInfoData : {},
+    validateFields: {
+        imo: {
+            validators: {
+                notEmpty: {
+                    message: '轮船IMO号不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -60,7 +69,14 @@ ShipInfoDlg.collectData = function() {
     .set('spare1')
     .set('spare2');
 }
-
+/**
+ * 验证数据是否为空
+ */
+ShipInfoDlg.validate = function () {
+    $('#shipInfoForm').data("bootstrapValidator").resetForm();
+    $('#shipInfoForm').bootstrapValidator('validate');
+    return $("#shipInfoForm").data('bootstrapValidator').isValid();
+}
 /**
  * 提交添加
  */
@@ -68,10 +84,19 @@ ShipInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/ship/add", function(data){
-        Feng.success("添加成功!");
+        if(data.code=="2336")
+        {
+            Feng.error(data.message);
+        }
+        else {
+            Feng.success("添加成功!");
+        }
         window.parent.Ship.table.refresh();
         ShipInfoDlg.close();
     },function(data){
@@ -88,10 +113,19 @@ ShipInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/ship/update", function(data){
-        Feng.success("修改成功!");
+        if(data.code=="2336")
+        {
+            Feng.error(data.message);
+        }
+        else {
+            Feng.success("修改成功!");
+        }
         window.parent.Ship.table.refresh();
         ShipInfoDlg.close();
     },function(data){
@@ -102,5 +136,6 @@ ShipInfoDlg.editSubmit = function() {
 }
 
 $(function() {
+    Feng.initValidator("shipInfoForm", ShipInfoDlg.validateFields);
 
 });

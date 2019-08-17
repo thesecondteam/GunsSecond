@@ -1,21 +1,22 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal"  id="trainInfoForm">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="traincode" name="火车编号" underline="true"/>
                             <#input id="carriagenum" name="车厢数" underline="true"/>
-                            <#input id="carriagelen" name="车厢长度" underline="true"/>
-                            <#select id="statecode" name="状态" >
-                            <option value="1">已启用</option>
-                            <option value="0">已禁用</option>
-                            </#select>
+                            <#input id="id" name=""   type="hidden"  />
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="id" name=""   type="hidden"  />
+                    <#input id="carriagelen" name="车厢长度" underline="true"/>
+                    <#select id="statecode" name="状态" >
+                    <option value="1">已启用</option>
+                    <option value="0">已禁用</option>
+                    </#select>
+
                             <#input id="spare1" name=""    type="hidden"   />
                             <#input id="spare2" name="" type="hidden"   />
                 </div>

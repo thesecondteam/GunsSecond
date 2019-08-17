@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Train;
 import com.stylefeng.guns.modular.system.service.ITrainService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 火车控制器
@@ -80,6 +83,18 @@ public class TrainController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Train train) {
+        List<Train>l=trainService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Train d:l) {
+            s.add(d.getTraincode());
+        }
+        if (s.contains(train.getTraincode()))
+        {
+            String str="{code:2335,message:\"添加错误，火车重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         trainService.insert(train);
         return SUCCESS_TIP;
     }
@@ -100,6 +115,18 @@ public class TrainController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Train train) {
+        List<Train>l=trainService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Train d:l) {
+            s.add(d.getTraincode());
+        }
+        if (s.contains(train.getTraincode()))
+        {
+            String str="{code:2335,message:\"修改错误，火车重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         trainService.updateById(train);
         return SUCCESS_TIP;
     }

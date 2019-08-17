@@ -1,21 +1,24 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal"    id="dictStationInfoForm" >
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="stationid" name="站点号" underline="true"/>
-                            <#input id="name" name="站点名称"/>
+                    <#input id="name" name="站点名称"  underline="true"/>
+                    <#input id="province" name="省份"  />
+
 
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="province" name="省份"  underline="true"/>
+
+
                     <#select id="statecode" name="状态" >
                     <option value="1">已启用</option>
                     <option value="0">已禁用</option>
-                     </#select>
+                </#select>
+                <#input id="stationid" type="hidden"  name=""/>
 
                 </div>
             </div>
