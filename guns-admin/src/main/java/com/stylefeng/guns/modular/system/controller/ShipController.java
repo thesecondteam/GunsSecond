@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Ship;
 import com.stylefeng.guns.modular.system.service.IShipService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 船舶控制器
@@ -81,6 +84,18 @@ public class ShipController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Ship ship) {
+        List<Ship>l=shipService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Ship d:l) {
+            s.add(d.getImo());
+        }
+        if (s.contains(ship.getImo()))
+        {
+            String str="{code:2336,message:\"添加错误，船舶重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         shipService.insert(ship);
         return SUCCESS_TIP;
     }
@@ -101,6 +116,18 @@ public class ShipController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Ship ship) {
+        List<Ship>l=shipService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Ship d:l) {
+            s.add(d.getImo());
+        }
+        if (s.contains(ship.getImo()))
+        {
+            String str="{code:2336,message:\"修改错误，船舶重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         shipService.updateById(ship);
         return SUCCESS_TIP;
     }

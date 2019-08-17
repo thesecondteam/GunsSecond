@@ -2,7 +2,23 @@
  * 初始化港口详情对话框
  */
 var HarbourInfoDlg = {
-    harbourInfoData : {}
+    harbourInfoData : {},
+    validateFields: {
+        harbourcode: {
+            validators: {
+                notEmpty: {
+                    message: '海港编号不能为空'
+                }
+            }
+        },
+        harbourname: {
+            validators: {
+                notEmpty: {
+                    message: '海港名称不能为空'
+                }
+            }
+        }
+    }
 };
 
 /**
@@ -57,7 +73,14 @@ HarbourInfoDlg.collectData = function() {
     .set('spare1')
     .set('spare2');
 }
-
+/**
+ * 验证数据是否为空
+ */
+HarbourInfoDlg.validate = function () {
+    $('#harbourInfoForm').data("bootstrapValidator").resetForm();
+    $('#harbourInfoForm').bootstrapValidator('validate');
+    return $("#harbourInfoForm").data('bootstrapValidator').isValid();
+}
 /**
  * 提交添加
  */
@@ -65,10 +88,19 @@ HarbourInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/harbour/add", function(data){
-        Feng.success("添加成功!");
+        if(data.code=="2334")
+        {
+            Feng.error(data.message);
+        }
+        else {
+            Feng.success("添加成功!");
+        }
         window.parent.Harbour.table.refresh();
         HarbourInfoDlg.close();
     },function(data){
@@ -85,10 +117,19 @@ HarbourInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/harbour/update", function(data){
-        Feng.success("修改成功!");
+        if(data.code=="2334")
+        {
+            Feng.error(data.message);
+        }
+        else {
+            Feng.success("修改成功!");
+        }
         window.parent.Harbour.table.refresh();
         HarbourInfoDlg.close();
     },function(data){
@@ -99,5 +140,6 @@ HarbourInfoDlg.editSubmit = function() {
 }
 
 $(function() {
+    Feng.initValidator("harbourInfoForm", HarbourInfoDlg.validateFields);
 
 });

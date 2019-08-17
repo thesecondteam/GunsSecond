@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.DictStation;
 import com.stylefeng.guns.modular.system.service.IDictStationService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 站点控制器
@@ -81,6 +84,18 @@ public class DictStationController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(DictStation dictStation) {
+        List<DictStation>l=dictStationService.selectList(null);
+        Set<String>s=new HashSet<String>();
+        for(DictStation d:l) {
+            s.add(d.getName());
+        }
+        if (s.contains(dictStation.getName()))
+        {
+            String str="{code:2333,message:\"添加错误，站点重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         dictStationService.insert(dictStation);
         return SUCCESS_TIP;
     }
@@ -101,6 +116,18 @@ public class DictStationController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(DictStation dictStation) {
+        List<DictStation>l=dictStationService.selectList(null);
+        Set<String>s=new HashSet<String>();
+        for(DictStation d:l) {
+            s.add(d.getName());
+        }
+        if (s.contains(dictStation.getName()))
+        {
+        String str="{code:2333,message:\"修改错误，站点重复！\"}";
+        System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         dictStationService.updateById(dictStation);
         return SUCCESS_TIP;
     }

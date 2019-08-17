@@ -15,7 +15,7 @@ DictStation.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: '', field: 'id', visible: false, align: 'center', valign: 'middle'},
-        {title: '站点号', field: 'stationid', visible: true, align: 'center', valign: 'middle'},
+        {title: '', field: 'stationid', visible: false, align: 'center', valign: 'middle'},
         {title: '站点名称', field: 'name', visible: true, align: 'center', valign: 'middle'},
             {title: '省份', field: 'province', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'stateName', visible: true, align: 'center', valign: 'middle'}

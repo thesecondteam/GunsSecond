@@ -1,5 +1,6 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Harbour;
 import com.stylefeng.guns.modular.system.service.IHarbourService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 港口控制器
@@ -80,6 +83,18 @@ public class HarbourController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Harbour harbour) {
+        List<Harbour>l=harbourService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Harbour d:l) {
+            s.add(d.getHarbourcode());
+        }
+        if (s.contains(harbour.getHarbourcode()))
+        {
+            String str="{code:2334,message:\"添加错误，港口重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         harbourService.insert(harbour);
         return SUCCESS_TIP;
     }
@@ -100,6 +115,18 @@ public class HarbourController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Harbour harbour) {
+        List<Harbour>l=harbourService.selectList(null);
+        Set<String> s=new HashSet<String>();
+        for(Harbour d:l) {
+            s.add(d.getHarbourcode());
+        }
+        if (s.contains(harbour.getHarbourcode()))
+        {
+            String str="{code:2334,message:\"修改错误，港口重复！\"}";
+            System.out.println(str);
+            JSONObject jsonObject=JSONObject.parseObject(str);
+            return jsonObject;
+        }
         harbourService.updateById(harbour);
         return SUCCESS_TIP;
     }
