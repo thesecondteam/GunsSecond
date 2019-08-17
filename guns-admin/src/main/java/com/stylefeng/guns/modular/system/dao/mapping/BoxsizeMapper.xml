@@ -19,7 +19,17 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        sizecode, sizetype, inlength, inwidth, inheight, outheight, outwidth, volume, capacity, statecode, id
+        sizecode,
+        sizetype,
+        inlength,
+        inwidth,
+        inheight,
+        outheight,
+        outwidth,
+        volume,
+        capacity,
+        statecode,
+        id
     </sql>
 
 </mapper>

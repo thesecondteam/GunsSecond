@@ -24,6 +24,13 @@ var BoxsizeInfoDlg = {
                     message: '集装箱尺寸类型不能为空'
                 }
             }
+        },
+        volume: {
+            validators: {
+                notEmpty: {
+                    message: '集装箱体积不能为空'
+                }
+            }
         }
     }
 };
@@ -96,9 +103,9 @@ BoxsizeInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
-    /*if (!this.validate()) {
+    if (!this.validate()) {
         return;
-    }*/
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/boxsize/add", function(data){
@@ -120,9 +127,9 @@ BoxsizeInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
-   /* if (!this.validate()) {
+    if (!this.validate()) {
         return;
-    }*/
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/boxsize/update", function(data){

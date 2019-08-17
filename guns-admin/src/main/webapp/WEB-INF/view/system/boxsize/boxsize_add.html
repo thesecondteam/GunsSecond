@@ -1,26 +1,28 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="boxsizeInfoForm">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="sizecode" name="尺寸编码" underline="true"/>
-                            <#input id="sizetype" name="尺寸类型" underline="true"/>
-                            <#input id="inlength" name="内长"/>
-                            <#input id="inwidth" name="内宽" />
-                            <#input id="inheight" name="内高" />
+                    <#input id="sizecode" name="尺寸编码" />
+                    <#input id="sizetype" name="尺寸类型" underline="true"/>
+                    <#input id="volume" name="体积" />
+                    <#input id="capacity" name="容量" underline="true"/>
+                    <#select id="statecode" name="状态" >
+                        <option value="1">已启用</option>
+                        <option value="0">已禁用</option>
+                    </#select>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="outheight" name="外长"/>
-                            <#input id="outwidth" name="外宽" underline="true"/>
-                            <#input id="volume" name="体积" underline="true"/>
-                            <#input id="capacity" name="容量" underline="true"/>
-                            <#select id="statecode" name="状态" >
-                             <option value="1">已启用</option>
-                             <option value="0">已禁用</option>
-                            </#select>
+                    <#input id="outheight" name="外长"/>
+                    <#input id="outwidth" name="外宽" underline="true"/>
+                    <#input id="inlength" name="内长"/>
+                    <#input id="inwidth" name="内宽" />
+                    <#input id="inheight" name="内高" />
+
+
                 </div>
             </div>
 

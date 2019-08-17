@@ -53,8 +53,10 @@ public class EchartController {
             StringBuffer buffer = new StringBuffer();
             try {
                 //建立URL，把请求地址给补全，其中urlencode（）方法用于把params里的参数给取出来
-                URL url = new URL("http://api.map.baidu.com/geocoder?address="+province+"&output=json&key=37492c0ee6f924cb5e934fa08c6b1676");
+                URL url = new URL("http://api.map.baidu.com/geocoder?address=秦皇岛&output=json&key=37492c0ee6f924cb5e934fa08c6b1676");
                 //打开http连接
+                /*URL url = new URL("http://api.map.baidu.com/geocoder?address="+province+"&output=json&key=37492c0ee6f924cb5e934fa08c6b1676");
+                //打开http连接*/
                 HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();
                 httpUrlConn.setDoInput(true);
                 httpUrlConn.setRequestMethod("GET");

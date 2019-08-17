@@ -18,11 +18,25 @@
 
     <!-- 全局变量：永不过期-->
     <cache name="CONSTANT"
-    	   maxElementsInMemory="50000"
+    	   maxElementsInMemory="20000"
            eternal="true"
     	   clearOnFlush="false"
            overflowToDisk="true"
            diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+
+    <!-- 全局变量：永不过期-->
+    <cache name="DICTIONARY"
+           maxElementsInMemory="10000"
+           eternal="true"
+           clearOnFlush="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="512"
            maxElementsOnDisk="100000"
            diskPersistent="false"
            diskExpiryThreadIntervalSeconds="120"
