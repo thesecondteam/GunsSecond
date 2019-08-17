@@ -5,29 +5,33 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="voyagenum" name="航线编号" value="${item.voyagenum}" underline="true"/>
-                    <#input id="imo" name="轮船号" value="${item.imo}" underline="true"/>
-                    <#input id="starttime" name="开始时间" value="${item.starttime}" underline="true"/>
-                    <#input id="endtime" name="结束时间" value="${item.endtime}" underline="true"/>
-                    <#input id="consigncompany" name="发货公司" value="${item.consigncompany}" underline="true"/>
-                    <#input id="recivecompany" name="收货公司" value="${item.recivecompany}" underline="true"/>
-                    <#input id="boxnumber" name="箱子编号" value="${item.boxnumber}" underline="true"/>
-                    <#input id="distance" name="里程数" value="${item.distance}" />
+                            <#input id="id" name="" value="${item.id}" underline="true"/>
+                            <#input id="voyagenum" name="" value="${item.voyagenum}" underline="true"/>
+                            <#input id="imo" name="" value="${item.imo}" underline="true"/>
+                            <#input id="starttime" name="" value="${item.starttime}" underline="true"/>
+                            <#input id="endtime" name="" value="${item.endtime}" underline="true"/>
+                            <#input id="consigncompany" name="" value="${item.consigncompany}" underline="true"/>
+                            <#input id="recivecompany" name="" value="${item.recivecompany}" underline="true"/>
+                            <#input id="boxnumber" name="" value="${item.boxnumber}" underline="true"/>
+                            <#input id="distance" name="" value="${item.distance}" />
                 </div>
 
-                <div class="col-sm-6 b-r">
-                    <#input id="statecode" name="状态码" value="${item.statecode}" underline="true"/>
-                    <#input id="loadcode" name="装载码" value="${item.loadcode}" underline="true"/>
-                    <#input id="unloadcode" name="卸载码" value="${item.unloadcode}" underline="true"/>
-                    <#input id="loadtype" name="类型" value="${item.loadtype}" underline="true"/>
-                    <#input id="endpoint" name="终止点" value="${item.endpoint}" underline="true"/>
-                    <#input id="startpiont" name="起始点" value="${item.startpiont}" underline="true"/>
-                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
-                    </div>
-                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
-                    </div>
+                <div class="col-sm-6">
+                            <#input id="statecode" name="" value="${item.statecode}" underline="true"/>
+                            <#input id="loadcode" name="" value="${item.loadcode}" underline="true"/>
+                            <#input id="unloadcode" name="" value="${item.unloadcode}" underline="true"/>
+                            <#input id="loadtype" name="" value="${item.loadtype}" underline="true"/>
+                            <#input id="endpoint" name="" value="${item.endpoint}" underline="true"/>
+                            <#input id="startpiont" name="" value="${item.startpiont}" underline="true"/>
+                            <#input id="spareone" name="" value="${item.spareone}" underline="true"/>
+                            <#input id="sparetwo" name="" value="${item.sparetwo}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
                 </div>
             </div>
         </div>

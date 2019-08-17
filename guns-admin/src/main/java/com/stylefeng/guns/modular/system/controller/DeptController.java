@@ -128,6 +128,7 @@ public class DeptController extends BaseController {
             throw new GunsException(BizExceptionEnum.REQUEST_NULL);
         }
         deptSetPids(dept);
+
         deptService.updateById(dept);
         return SUCCESS_TIP;
     }

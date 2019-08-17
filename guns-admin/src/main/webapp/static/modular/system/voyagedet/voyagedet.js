@@ -15,8 +15,8 @@ Voyagedet.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
-            {title: '航次详情编号', field: 'voyagedetid', visible: true, align: 'center', valign: 'middle'},
-            {title: '航线编号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
+            {title: '航线编号', field: 'voyagedetid', visible: true, align: 'center', valign: 'middle'},
+            {title: '轮船号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子编号', field: 'boxid', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子类型', field: 'boxtype', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子尺寸', field: 'boxsize', visible: true, align: 'center', valign: 'middle'},
