@@ -37,7 +37,7 @@ spring:
   profiles: local
   datasource:
     url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
-    username: root
+    username: team2
     password: 1239825268
     db-name: team2 #用来搜集数据库的所有表
     filters: wall,mergeStat
@@ -47,7 +47,7 @@ guns:
   muti-datasource:
     open: false
     url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
-    username: root
+    username: team2
     password: 1239825268
     dataSourceNames:
       - dataSourceGuns
@@ -59,7 +59,7 @@ spring:
   profiles: dev
   datasource:
     url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
-    username: root
+    username: team2
     password: 1239825268
     db-name: team2 #用来搜集数据库的所有表
     filters: wall,mergeStat
@@ -70,7 +70,7 @@ spring:
   profiles: test
   datasource:
     url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
-    username: root
+    username: team2
     password: 1239825268
     filters: wall,mergeStat
 
@@ -80,7 +80,7 @@ spring:
   profiles: produce
   datasource:
       url: jdbc:mysql://39.105.97.147:3306/team2?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC
-      username: root
+      username: team2
       password: 1239825268
       filters: wall,mergeStat
 

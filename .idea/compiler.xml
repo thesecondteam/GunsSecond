@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="guns-admin" />
-        <module name="guns-core" />
         <module name="guns-generator" />
+        <module name="guns-core" />
         <module name="guns-rest" />
       </profile>
     </annotationProcessing>
