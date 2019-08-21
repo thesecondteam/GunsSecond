@@ -14,7 +14,6 @@ var Voyage = {
 Voyage.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '航线编号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
             {title: '轮船号', field: 'imo', visible: true, align: 'center', valign: 'middle'},
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},
@@ -28,9 +27,7 @@ Voyage.initColumn = function () {
             {title: '卸载码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'},
             {title: '类型', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
             {title: '终止点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
-            {title: '起始点', field: 'startpiont', visible: true, align: 'center', valign: 'middle'},
-            {title: '', field: 'spareone', visible: true, align: 'center', valign: 'middle'},
-            {title: '', field: 'sparetwo', visible: true, align: 'center', valign: 'middle'}
+            {title: '起始点', field: 'startpiont', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -54,7 +51,7 @@ Voyage.check = function () {
 Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '添加voyage',
+        title: '生成航次信息',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,

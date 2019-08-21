@@ -2,17 +2,16 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
-
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="id" name="" type="hidden"/>
                             <#input id="waybillid" name="运单号" underline="true"/>
-                            <#input id="trainnum" name="车次" underline="true"/>
+                            <#select name="车次" id="trainnum" underline="true"/>
                             <#input id="starttime" name="开始时间" underline="true"/>
                             <#input id="endtime" name="结束时间" underline="true"/>
                             <#input id="consigncompany" name="发货方" underline="true"/>
                             <#input id="recivecompany" name="收货方" underline="true"/>
-                            <#input id="boxnumber" name="集装箱号"/>
+                            <#select name="集装箱号" id="boxnumber" underline="false"/>
                 </div>
 
                 <div class="col-sm-6">
@@ -37,4 +36,8 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/busiWaybill/busiWaybill_info.js"></script>
+<script type="text/javascript">
+    $("#trainnum").append("<option value='0'>请选择车次</option>");
+    $("#boxnumber").append("<option value='0'>请选择集装箱号</option>");
+</script>
 @}

@@ -103,5 +103,6 @@ BusiWaybillInfoDlg.editSubmit = function() {
 }
 
 $(function() {
-
+/*    var selDom = $("#trainnum");
+    selDom.append("<option value='0'>请选择车次</option>");*/
 });
