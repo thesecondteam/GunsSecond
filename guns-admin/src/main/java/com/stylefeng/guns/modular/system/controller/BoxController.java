@@ -1,6 +1,8 @@
 package com.stylefeng.guns.modular.system.controller;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.warpper.BoxWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Box;
 import com.stylefeng.guns.modular.system.service.IBoxService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -106,5 +109,23 @@ public class BoxController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("boxId") Integer boxId) {
         return boxService.selectById(boxId);
+    }
+    /**
+     * 获取所有集装箱箱号
+     */
+    @RequestMapping(value = "/getBoxCode")
+    @ResponseBody
+    public Object geBoxCode(String condition)
+    {
+        EntityWrapper<Box> boxEntityWrapper = new EntityWrapper<>();
+        if(ToolUtil.isNotEmpty(condition)){
+            boxEntityWrapper.like("boxcode",condition);
+        }
+        List<Map<String,Object>> list = this.boxService.selectMaps(boxEntityWrapper);
+        List<String> listBoxCode = new ArrayList<>();
+        for(Map<String,Object> m:list){
+            listBoxCode.add(m.get("boxcode").toString());
+        }
+        return listBoxCode;
     }
 }

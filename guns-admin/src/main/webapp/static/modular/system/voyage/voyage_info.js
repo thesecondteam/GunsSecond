@@ -116,7 +116,61 @@ VoyageInfoDlg.editSubmit = function() {
 }
 
 VoyageInfoDlg.getVoyageNum = function(){
-
+    var VoyageNum = $("select[id=imo]").val();
+    $("select[id=imo]").empty();      //清空
+    $("#voyagenum").append("<option value='0'>请选择轮船号</option>");
+    $.ajax({url:'/voyage/getImo',
+        type:"post",
+        data:{
+            VoyageNum: VoyageNum
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listVoyageNum){
+            if(listVoyageNum && listVoyageNum.length != 0){
+                for(var i=0; i<listVoyageNum.length; i++){
+                    if(!isEmpty(listVoyageNum[i])){
+                        var option="<option value=\""+listVoyageNum[i]+"\"";
+                        option += ">"+listVoyageNum[i]+"</option>";  //动态添加数据
+                        $("select[id=imo]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+/**
+ *动态增加集装箱号option
+ */
+VoyageInfoDlg.getBoxCode = function () {
+    var BoxCode = $("select[id=boxnumber]").val();
+    $("select[id=boxnumber]").empty();      //清空
+    $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
+    $.ajax({url:'/box/getBoxCode',
+        type:"post",
+        data:{
+            BoxCode : BoxCode
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listBoxCode){
+            if(listBoxCode && listBoxCode.length != 0){
+                for(var i=0; i<listBoxCode.length; i++){
+                    if(!isEmpty(listBoxCode[i])){
+                        var option="<option value=\""+listBoxCode[i]+"\"";
+                        option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
+                        $("select[id=boxnumber]").append(option);
+                    }
+                }
+            }
+        }
+    });
 }
 
 $(function() {

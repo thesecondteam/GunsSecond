@@ -150,7 +150,7 @@ BusiWaybillInfoDlg.getBoxCode = function () {
     var BoxCode = $("select[id=boxnumber]").val();
     $("select[id=boxnumber]").empty();      //清空
     $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'/busiWaybill/getBoxCode',
+    $.ajax({url:'/box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode

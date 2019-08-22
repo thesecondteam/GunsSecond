@@ -3,6 +3,8 @@ package com.stylefeng.guns.modular.system.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.Ship;
+import com.stylefeng.guns.modular.system.service.IShipService;
 import com.stylefeng.guns.modular.system.warpper.VoyageWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Voyage;
 import com.stylefeng.guns.modular.system.service.IVoyageService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 /**
@@ -31,6 +34,8 @@ public class VoyageController extends BaseController {
 
     @Autowired
     private IVoyageService voyageService;
+    @Autowired
+    private IShipService shipService;
 
     /**
      * 跳转到voyage首页
@@ -114,5 +119,25 @@ public class VoyageController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("voyageId") Integer voyageId) {
         return voyageService.selectById(voyageId);
+    }
+
+    /**
+     * 获取所有轮船船号
+     */
+    @RequestMapping(value="/getImo")
+    @ResponseBody
+    public Object getVoyageNum(String condition)
+    {
+        EntityWrapper<Ship> shipEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            shipEntityWrapper.like("imo", condition);
+        }
+        List<Map<String, Object>> list = this.shipService.selectMaps(shipEntityWrapper);
+        List<String> listVoyageNum = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listVoyageNum.add(m.get("imo").toString());
+        }
+        return listVoyageNum;
     }
 }
