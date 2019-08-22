@@ -13,6 +13,17 @@ VoyageInfoDlg.clearData = function() {
 }
 
 /**
+ * 判断字符串是否为空
+ */
+function isEmpty(obj) {
+    if (typeof obj == "undefined" || obj == null || obj == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * 设置对话框中的数据
  *
  * @param key 数据的名称
@@ -102,6 +113,10 @@ VoyageInfoDlg.editSubmit = function() {
     });
     ajax.set(this.voyageInfoData);
     ajax.start();
+}
+
+VoyageInfoDlg.getVoyageNum = function(){
+
 }
 
 $(function() {

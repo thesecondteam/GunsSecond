@@ -13,8 +13,18 @@ BusiWaybillInfoDlg.clearData = function() {
 }
 
 /**
+* 判断字符串是否为空
+*/
+function isEmpty(obj) {
+    if (typeof obj == "undefined" || obj == null || obj == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * 设置对话框中的数据
- *
  * @param key 数据的名称
  * @param val 数据的具体值
  */
@@ -102,7 +112,66 @@ BusiWaybillInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+/**
+ *动态增加车次option
+ */
+BusiWaybillInfoDlg.getTrainId = function () {
+    var TrainId = $("select[id=trainnum]").val();
+    $("select[id=trainnum]").empty();      //清空
+    $("#trainnum").append("<option value='0'>请选择车次</option>");
+    $.ajax({url:'/busiWaybill/getTrainId',
+        type:"post",
+        data:{
+            TrainId : TrainId
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listTrainId){
+            if(listTrainId && listTrainId.length != 0){
+                for(var i=0; i<listTrainId.length; i++){
+                    if(!isEmpty(listTrainId[i])){
+                        var option="<option value=\""+listTrainId[i]+"\"";
+                        option += ">"+listTrainId[i]+"</option>";  //动态添加数据
+                        $("select[id=trainnum]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+
+/**
+ *动态增加集装箱号option
+ */
+BusiWaybillInfoDlg.getBoxCode = function () {
+    var BoxCode = $("select[id=boxnumber]").val();
+    $("select[id=boxnumber]").empty();      //清空
+    $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
+    $.ajax({url:'/busiWaybill/getBoxCode',
+        type:"post",
+        data:{
+            BoxCode : BoxCode
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listBoxCode){
+            if(listBoxCode && listBoxCode.length != 0){
+                for(var i=0; i<listBoxCode.length; i++){
+                    if(!isEmpty(listBoxCode[i])){
+                        var option="<option value=\""+listBoxCode[i]+"\"";
+                        option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
+                        $("select[id=boxnumber]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
 $(function() {
-/*    var selDom = $("#trainnum");
-    selDom.append("<option value='0'>请选择车次</option>");*/
 });

@@ -4,7 +4,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.Box;
 import com.stylefeng.guns.modular.system.model.BusiWaybill;
+import com.stylefeng.guns.modular.system.model.Train;
+import com.stylefeng.guns.modular.system.service.IBoxService;
+import com.stylefeng.guns.modular.system.service.ITrainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +19,10 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.BusiWaybill;
 import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 运单管理控制器
@@ -30,6 +38,10 @@ public class BusiWaybillController extends BaseController {
 
     @Autowired
     private IBusiWaybillService busiWaybillService;
+    @Autowired
+    private ITrainService trainService;
+    @Autowired
+    private IBoxService boxService;
 
     /**
      * 跳转到运单管理首页
@@ -111,5 +123,42 @@ public class BusiWaybillController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("busiWaybillId") Integer busiWaybillId) {
         return busiWaybillService.selectById(busiWaybillId);
+    }
+    /**
+    * 获取所有火车车次
+    */
+    @RequestMapping(value="/getTrainId")
+    @ResponseBody
+    public Object getTrainId(String condition)
+    {
+        EntityWrapper<Train> trainEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            trainEntityWrapper.like("traincode", condition);
+        }
+        List<Map<String, Object>> list = this.trainService.selectMaps(trainEntityWrapper);
+        List<String> listTrainId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listTrainId.add(m.get("traincode").toString());
+        }
+        return listTrainId;
+    }
+    /**
+    * 获取所有集装箱箱号
+    */
+    @RequestMapping(value = "/getBoxCode")
+    @ResponseBody
+    public Object geBoxCode(String condition)
+    {
+        EntityWrapper<Box> boxEntityWrapper = new EntityWrapper<>();
+        if(ToolUtil.isNotEmpty(condition)){
+            boxEntityWrapper.like("boxcode",condition);
+        }
+        List<Map<String,Object>> list = this.boxService.selectMaps(boxEntityWrapper);
+        List<String> listBoxCode = new ArrayList<>();
+        for(Map<String,Object> m:list){
+            listBoxCode.add(m.get("boxcode").toString());
+        }
+        return listBoxCode;
     }
 }
