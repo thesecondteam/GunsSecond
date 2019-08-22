@@ -1,6 +1,7 @@
 /**
  * 运单详情管理管理初始化
  */
+
 var BusiWaybilldet = {
     id: "BusiWaybilldetTable",	//表格id
     seItem: null,		//选中的条目

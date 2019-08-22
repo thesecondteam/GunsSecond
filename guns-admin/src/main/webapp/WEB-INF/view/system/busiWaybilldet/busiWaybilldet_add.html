@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="id" name="" type="hidden"/>
-                            <#input id="waybilldetid" name="运单详情号" underline="true"/>
+                            <#input id="waybilldetid" name="运单详情号" underline="true" readonly="true"/>
                             <#input id="waybillid" name="运单号" underline="true"/>
                             <#input id="boxid" name="集装箱号" underline="true"/>
                             <#input id="boxtype" name="集装箱类型" underline="true"/>
@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                             <#input id="boxgoods" name="集装箱物品" underline="true"/>
                             <#input id="operation" name="操作" underline="true"/>
-                            <#input id="createtime" name="创建时间" underline="true"/>
+                            <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
                             <#input id="statecode" name="状态码" underline="true"/>
                             <#input id="finish" name="完成状态" underline="true"/>
                 </div>
@@ -32,5 +32,35 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    window.onload=function newid() {
+        //获取年月日
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        //获取时分秒
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        //检查是否小于10
+        h = check(h);
+        m = check(m);
+        s = check(s);
+        month = check(month);
+        day = check(day);
+        document.getElementById("waybilldetid").value = "T" + year + month + day + h + m + s;
+        document.getElementById("createtime").value = year + "-" + month + "-" + day;
+    }
+        //时间数字小于10，则在之前加个“0”补位。
+        function check(i){
+            //方法一，用三元运算符
+            var num;
+            i<10?num="0"+i:num=i;
+            return num;
+        }
+</script>
+
 <script src="${ctxPath}/static/modular/system/busiWaybilldet/busiWaybilldet_info.js"></script>
 @}

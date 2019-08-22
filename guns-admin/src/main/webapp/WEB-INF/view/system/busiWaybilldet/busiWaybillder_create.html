@@ -1,0 +1,62 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="id" name="" type="hidden"/>
+                    <#input id="waybilldetid" name="运单详情号" underline="true" readonly="true"/>
+                    <#input id="waybillid" name="运单号" underline="true"/>
+                    <#input id="boxid" name="集装箱号" underline="true"/>
+                    <#input id="boxtype" name="集装箱类型" underline="true"/>
+                    <#input id="boxsize" name="集装箱大小"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="boxgoods" name="集装箱物品" underline="true"/>
+                    <#input id="operation" name="操作" underline="true"/>
+                    <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
+                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="finish" name="完成状态" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybilldetInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiWaybilldetInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload=function newid()
+    {
+        var id ="T"+SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        document.getElementById("waybilldetid").value=id;
+        var now = new Date();
+        var year = now.getFullYear();       //年
+        var month = now.getMonth() + 1;     //月
+        var day = now.getDate();            //日
+        var hh = now.getHours();            //时
+        var mm = now.getMinutes();          //分
+        var clock = year + "-";
+        if(month < 10)
+            clock += "0";
+        clock += month + "-";
+        if(day < 10)
+            clock += "0";
+        clock += day + " ";
+        if(hh < 10)
+            clock += "0";
+        clock += hh + ":";
+        if (mm < 10) clock += '0';
+        clock += mm;
+        document.getElementById("createtime").value=clock;
+    }
+</script>
+<script src="${ctxPath}/static/modular/system/busiWaybilldet/busiWaybilldet_info.js"></script>
+@}
