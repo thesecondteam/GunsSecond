@@ -45,10 +45,10 @@ AreaInfoDlg.close = function() {
  */
 AreaInfoDlg.collectData = function() {
     this
-    .set('id')
-    .set('areacode')
-    .set('areatype')
-    .set('statecode');
+        .set('id')
+        .set('areacode')
+        .set('areatype')
+        .set('statecode');
 }
 
 /**

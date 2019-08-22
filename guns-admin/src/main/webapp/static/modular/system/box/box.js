@@ -17,15 +17,15 @@ Box.initColumn = function () {
             {title: '订单编号', field: 'ordernumber', visible: true, align: 'center', valign: 'middle'},
             {title: '运输方式', field: 'trantype', visible: true, align: 'center', valign: 'middle'},
             {title: '集装箱编码', field: 'boxcode', visible: true, align: 'center', valign: 'middle'},
-            {title: '场地', field: 'areaid', visible: true, align: 'center', valign: 'middle'},
+            {title: '场地', field: 'areatypeName', visible: true, align: 'center', valign: 'middle'},
             {title: '添加时间', field: 'addtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '箱子类型', field: 'boxtype', visible: true, align: 'center', valign: 'middle'},
+            {title: '箱子类型', field: 'boxtypeName', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子尺寸', field: 'boxsize', visible: true, align: 'center', valign: 'middle'},
-            {title: '货物类型', field: 'goodstype', visible: true, align: 'center', valign: 'middle'},
+            {title: '货物类型', field: 'goodstypeName', visible: true, align: 'center', valign: 'middle'},
             {title: '货物名称', field: 'goodsname', visible: true, align: 'center', valign: 'middle'},
             {title: '起点', field: 'startpointName', visible: true, align: 'center', valign: 'middle'},
             {title: '终点', field: 'endpointName', visible: true, align: 'center', valign: 'middle'},
-            {title: '是否空箱', field: 'emptycode', visible: true, align: 'center', valign: 'middle'},
+            {title: '是否空箱', field: 'emptyName', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'stateName', visible: true, align: 'center', valign: 'middle'}
     ];
 };

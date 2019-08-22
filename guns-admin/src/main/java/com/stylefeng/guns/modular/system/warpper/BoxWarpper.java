@@ -19,18 +19,31 @@ public class BoxWarpper extends BaseControllerWarpper {
     }
 
     private DicFactory dicFactory=new DicFactory();
-    private Map<Object,Object> maps=dicFactory.getStationNameMap();
+    private Map<Object,Object> stationmaps=dicFactory.getStationMap();
+    private Map<Object,Object> boxtypemaps=dicFactory.getBoxTypeMap();
+    private Map<Object,Object> goodstypemaps=dicFactory.getGoodsTypeMap();
+    private Map<Object,Object> areatypemaps=dicFactory.getAreaTypeMap();
     @Override
     public void warpTheMap(Map<String, Object> map) {
 
-        map.put("startpointName",maps.get(map.get("startpoint")));
-        map.put("endpointName",maps.get(map.get("endpoint")));
+        map.put("startpointName",stationmaps.get(map.get("startpoint")));
+        map.put("endpointName",stationmaps.get(map.get("endpoint")));
+        map.put("boxtypeName",boxtypemaps.get(map.get("boxtype")));
+        map.put("goodstypeName",goodstypemaps.get(map.get("goodstype")));
+        map.put("areatypeName",areatypemaps.get(map.get("areaid")));
+        if(map.get("emptycode").equals(0))
+            map.put("emptyName","是");
+        else if(map.get("emptycode").equals(1))
+            map.put("emptyName","否");
+        else
+            map.put("emptyName","未定义");
         if(map.get("statecode").equals(0))
             map.put("stateName","已禁用");
         else if(map.get("statecode").equals(1))
             map.put("stateName","已启用");
         else
-            map.put("stateName","未定义");
+                map.put("stateName","未定义");
+
     }
 
 }
