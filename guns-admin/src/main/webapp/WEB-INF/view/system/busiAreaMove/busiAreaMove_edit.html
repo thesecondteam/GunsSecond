@@ -1,0 +1,31 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="id" name="自增ID" value="${item.id}" underline="true"/>
+                            <#input id="oldArea" name="原场地" value="${item.oldArea}" underline="true"/>
+                            <#input id="newArea" name="目的场地" value="${item.newArea}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="operTime" name="操作时间" value="${item.operTime}" underline="true"/>
+                            <#input id="operPerson" name="操作人" value="${item.operPerson}" underline="true"/>
+                            <#input id="boxId" name="箱子编号" value="${item.boxId}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiAreaMoveInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiAreaMoveInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/busiAreaMove/busiAreaMove_info.js"></script>
+@}
