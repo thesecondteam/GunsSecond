@@ -2,6 +2,13 @@ package com.stylefeng.guns.modular.system.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.common.annotion.BussinessLog;
+import com.stylefeng.guns.core.shiro.ShiroKit;
+import com.stylefeng.guns.core.support.DateTime;
+import com.stylefeng.guns.modular.system.factory.DicFactory;
+
+import com.stylefeng.guns.modular.system.model.BusiMove;
+import com.stylefeng.guns.modular.system.service.IBusiMoveService;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.warpper.BoxWarpper;
 import org.springframework.stereotype.Controller;
@@ -16,6 +23,7 @@ import com.stylefeng.guns.modular.system.model.Box;
 import com.stylefeng.guns.modular.system.service.IBoxService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +41,13 @@ public class BoxController extends BaseController {
 
     @Autowired
     private IBoxService boxService;
+    /**************业务记录*************/
+    private DicFactory dicFactory=new DicFactory();
+    private Map<Object,Object> areaMaps=dicFactory.getAreaTypeMap();
+
+    @Autowired
+    private IBusiMoveService busiMoveService;
+    /**************业务记录*************/
 
     /**
      * 跳转到首页
@@ -75,6 +90,7 @@ public class BoxController extends BaseController {
     /**
      * 新增
      */
+    @BussinessLog(value = "添加箱子", key = "boxId")
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Box box) {
@@ -85,6 +101,7 @@ public class BoxController extends BaseController {
     /**
      * 删除
      */
+    @BussinessLog(value = "删除箱子", key = "boxId")
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer boxId) {
@@ -95,9 +112,32 @@ public class BoxController extends BaseController {
     /**
      * 修改
      */
+    @BussinessLog(value = "修改箱子", key = "boxId")
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Box box) {
+
+        /**************业务记录*************/
+        BusiMove busiMove=new BusiMove();
+        Map<String,Object>m=new HashMap<>();
+        m.put("id",box.getId());
+        List<Box> bList=boxService.selectByMap(m);//只有一条
+        for(Box b:bList)
+        {
+            busiMove.setOldArea(areaMaps.get(b.getAreaid()).toString());//旧地址
+        }
+        busiMove.setNewArea(areaMaps.get(box.getAreaid()).toString());//新地址
+        busiMove.setBoxCode(box.getBoxcode());//箱子编码
+        busiMove.setOperTime(new DateTime());//当前时间
+        busiMove.setOperPerson(ShiroKit.getUser().getName());
+        if(busiMove.getOldArea()!=busiMove.getNewArea())//新旧地址一样就不更新业务日志
+        {
+            busiMove.setOpeType("修改地址");
+            busiMoveService.insert(busiMove);
+        }
+        /**************业务记录*************/
+
+
         boxService.updateById(box);
         return SUCCESS_TIP;
     }
