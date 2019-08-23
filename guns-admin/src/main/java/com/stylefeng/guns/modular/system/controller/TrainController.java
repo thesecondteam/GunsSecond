@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Train;
 import com.stylefeng.guns.modular.system.service.ITrainService;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 火车控制器
@@ -159,5 +156,25 @@ public class TrainController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("trainId") Integer trainId) {
         return trainService.selectById(trainId);
+    }
+
+    /**
+     * 获取所有火车车次
+     */
+    @RequestMapping(value="/getTrainId")
+    @ResponseBody
+    public Object getTrainId(String condition)
+    {
+        EntityWrapper<Train> trainEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            trainEntityWrapper.like("traincode", condition);
+        }
+        List<Map<String, Object>> list = this.trainService.selectMaps(trainEntityWrapper);
+        List<String> listTrainId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listTrainId.add(m.get("traincode").toString());
+        }
+        return listTrainId;
     }
 }

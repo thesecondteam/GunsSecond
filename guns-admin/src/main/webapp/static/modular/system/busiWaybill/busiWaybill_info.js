@@ -119,7 +119,7 @@ BusiWaybillInfoDlg.getTrainId = function () {
     var TrainId = $("select[id=trainnum]").val();
     $("select[id=trainnum]").empty();      //清空
     $("#trainnum").append("<option value='0'>请选择车次</option>");
-    $.ajax({url:'/busiWaybill/getTrainId',
+    $.ajax({url:'/train/getTrainId',
         type:"post",
         data:{
             TrainId : TrainId

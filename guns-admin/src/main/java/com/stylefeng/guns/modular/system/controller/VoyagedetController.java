@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Voyagedet;
 import com.stylefeng.guns.modular.system.service.IVoyagedetService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -115,5 +116,25 @@ public class VoyagedetController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("voyagedetId") Integer voyagedetId) {
         return voyagedetService.selectById(voyagedetId);
+    }
+
+    /**
+     *  获取所有航次详情号
+     */
+    @RequestMapping(value = "/getVoyagedetId")
+    @ResponseBody
+    public Object getVoyagedetId(String condition)
+    {
+        EntityWrapper<Voyagedet> trainEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            trainEntityWrapper.like("voyagedetid", condition);
+        }
+        List<Map<String, Object>> list = this.voyagedetService.selectMaps(trainEntityWrapper);
+        List<String> listVoyagedetId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listVoyagedetId.add(m.get("voyagedetid").toString());
+        }
+        return listVoyagedetId;
     }
 }

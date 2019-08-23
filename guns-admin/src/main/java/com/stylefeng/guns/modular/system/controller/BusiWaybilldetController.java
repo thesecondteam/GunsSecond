@@ -15,8 +15,9 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.BusiWaybilldet;
 import com.stylefeng.guns.modular.system.service.IBusiWaybilldetService;
-import java.util.Calendar;
-import java.util.Date;
+
+import java.util.*;
+
 /**
  * 运单详情管理控制器
  *
@@ -112,5 +113,25 @@ public class BusiWaybilldetController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("busiWaybilldetId") Integer busiWaybilldetId) {
         return busiWaybilldetService.selectById(busiWaybilldetId);
+    }
+
+    /**
+    *  获取所有运单详情号
+    */
+    @RequestMapping(value = "/getWaybilldetId")
+    @ResponseBody
+    public Object getWaybilldetId(String condition)
+    {
+        EntityWrapper<BusiWaybilldet> trainEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            trainEntityWrapper.like("waybilldetid", condition);
+        }
+        List<Map<String, Object>> list = this.busiWaybilldetService.selectMaps(trainEntityWrapper);
+        List<String> listWaybilldetId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listWaybilldetId.add(m.get("waybilldetid").toString());
+        }
+        return listWaybilldetId;
     }
 }

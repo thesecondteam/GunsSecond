@@ -118,7 +118,7 @@ VoyageInfoDlg.editSubmit = function() {
 VoyageInfoDlg.getVoyageNum = function(){
     var VoyageNum = $("select[id=imo]").val();
     $("select[id=imo]").empty();      //清空
-    $("#voyagenum").append("<option value='0'>请选择轮船号</option>");
+    $("#imo").append("<option value='0'>请选择轮船号</option>");
     $.ajax({url:'/voyage/getImo',
         type:"post",
         data:{
