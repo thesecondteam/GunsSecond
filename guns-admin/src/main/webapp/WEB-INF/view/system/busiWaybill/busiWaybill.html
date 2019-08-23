@@ -20,6 +20,9 @@
                             @if(shiro.hasPermission("/busiWaybill/add")){
                                 <#button name="添加" icon="fa-plus" clickFun="BusiWaybill.openAddBusiWaybill()"/>
                             @}
+                            @if(shiro.hasPermission("/busiWaybill/create")){
+                            <#button name="生成" icon="fa-plus" clickFun="BusiWaybill.openCreateBusiWaybill()" space="true"/>
+                            @}
                             @if(shiro.hasPermission("/busiWaybill/update")){
                                 <#button name="修改" icon="fa-edit" clickFun="BusiWaybill.openBusiWaybillDetail()" space="true"/>
                             @}

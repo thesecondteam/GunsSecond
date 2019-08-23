@@ -5,12 +5,11 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="voyagenum" name="航线编号" underline="true"/>
+                    <#input id="voyagenum" name="航线编号" underline="true" readonly="true"/>
                     <#select name="轮船号" id="imo" underline="true"/>
-                    <#input id="starttime" name="开始时间" underline="true"/>
+                    <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
                     <#input id="endtime" name="结束时间" underline="true"/>
-                    <#input id="consigncompany" name="发货公司" underline="true"/>
-                    <#input id="recivecompany" name="收货公司" underline="true"/>
+
                     <#select name="集装箱号" id="boxnumber" underline="true"/>
                     <#input id="distance" name="里程数"/>
                 </div>
@@ -21,7 +20,7 @@
                     <#input id="unloadcode" name="卸载码" underline="true"/>
                     <#input id="loadtype" name="类型" underline="true"/>
                     <#input id="endpoint" name="终止点" underline="true"/>
-                    <#input id="startpiont" name="起始点" underline="true"/>
+                    <#input id="startpiont" name="起始点" underline="true" value="秦皇岛" readonly="true"/>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
                         <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
                     </div>
@@ -34,6 +33,39 @@
 
     </div>
 </div>
+
+<script type="text/javascript">
+    window.onload=function newid()
+    {
+        var id =Date.now();
+        document.getElementById("voyagenum").value="y"+id;
+        //获取年月日
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        //获取时分秒
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        //检查是否小于10
+        h = check(h);
+        m = check(m);
+        s = check(s);
+        month = check(month);
+        day = check(day);
+        document.getElementById("starttime").value = year + "-" + month + "-" + day;
+    }
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+    }
+
+</script>
+
 <script src="${ctxPath}/static/modular/system/voyage/voyage_info.js"></script>
 
 <script type="text/javascript">

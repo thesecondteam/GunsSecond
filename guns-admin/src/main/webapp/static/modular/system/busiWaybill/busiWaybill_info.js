@@ -91,6 +91,25 @@ BusiWaybillInfoDlg.addSubmit = function() {
     ajax.set(this.busiWaybillInfoData);
     ajax.start();
 }
+/**
+ * 提交生成
+ */
+BusiWaybillInfoDlg.createSubmit = function() {
+
+    this.clearData();
+    this.collectData();
+
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/busiWaybill/create", function(data){
+        Feng.success("生成成功!");
+        window.parent.BusiWaybill.table.refresh();
+        BusiWaybillInfoDlg.close();
+    },function(data){
+        Feng.error("生成失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set(this.busiWaybillInfoData);
+    ajax.start();
+}
 
 /**
  * 提交修改

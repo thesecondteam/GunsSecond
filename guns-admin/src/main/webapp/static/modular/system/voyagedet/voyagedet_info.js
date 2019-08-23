@@ -81,6 +81,26 @@ VoyagedetInfoDlg.addSubmit = function() {
 }
 
 /**
+ * 提交生成
+ */
+VoyagedetInfoDlg.createSubmit = function() {
+
+    this.clearData();
+    this.collectData();
+
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/voyagedet/create", function(data){
+        Feng.success("生成成功!");
+        window.parent.Voyagedet.table.refresh();
+        VoyagedetInfoDlg.close();
+    },function(data){
+        Feng.error("生成失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set(this.voyagedetInfoData);
+    ajax.start();
+}
+
+/**
  * 提交修改
  */
 VoyagedetInfoDlg.editSubmit = function() {

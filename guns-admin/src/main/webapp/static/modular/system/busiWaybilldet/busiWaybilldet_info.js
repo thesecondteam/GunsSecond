@@ -79,6 +79,26 @@ BusiWaybilldetInfoDlg.addSubmit = function() {
 }
 
 /**
+ * 提交生成
+ */
+BusiWaybilldetInfoDlg.createSubmit = function() {
+
+    this.clearData();
+    this.collectData();
+
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/busiWaybilldet/create", function(data){
+        Feng.success("生成成功!");
+        window.parent.BusiWaybilldet.table.refresh();
+        BusiWaybilldetInfoDlg.close();
+    },function(data){
+        Feng.error("生成失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set(this.busiWaybilldetInfoData);
+    ajax.start();
+}
+
+/**
  * 提交修改
  */
 BusiWaybilldetInfoDlg.editSubmit = function() {

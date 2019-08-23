@@ -43,13 +43,20 @@ public class BusiWaybillController extends BaseController {
     }
 
     /**
+     * 跳转到生成运单管理
+     */
+    @RequestMapping("/busiWaybill_create")
+    public String busiWaybillCreate() {
+        return PREFIX + "busiWaybill_create.html";
+    }
+
+    /**
      * 跳转到添加运单管理
      */
     @RequestMapping("/busiWaybill_add")
     public String busiWaybillAdd() {
         return PREFIX + "busiWaybill_add.html";
     }
-
     /**
      * 跳转到修改运单管理
      */
@@ -86,7 +93,15 @@ public class BusiWaybillController extends BaseController {
         busiWaybillService.insert(busiWaybill);
         return SUCCESS_TIP;
     }
-
+    /**
+     * 生成运单管理
+     */
+    @RequestMapping(value = "/create")
+    @ResponseBody
+    public Object create(BusiWaybill busiWaybill) {
+        busiWaybillService.insert(busiWaybill);
+        return SUCCESS_TIP;
+    }
     /**
      * 删除运单管理
      */

@@ -5,21 +5,24 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                    <#input id="voyagedetid" name="航次详情编号" underline="true" readonly="true"/>
-                    <#select id="voyagenum" name="航线编号" underline="true"/>
-                    <#select id="boxid" name="箱子编号" underline="true"/>
-                    <#input id="boxtype" name="箱子类型" underline="true"/>
-                    <#input id="boxsize" name="箱子尺寸" underline="true"/>
-                    <#input id="boxgoods" name="箱子所装货物"/>
+                    <#input id="voyagenum" name="航线编号" underline="true" readonly="true"/>
+                    <#select name="轮船号" id="imo" underline="true"/>
+                    <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
+                    <#input id="endtime" name="结束时间" underline="true"/>
+
+                    <#select name="集装箱号" id="boxnumber" underline="true"/>
+                    <#input id="distance" name="里程数"/>
                 </div>
 
                 <div class="col-sm-6">
                     <#input id="statecode" name="状态码" underline="true"/>
-                    <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
-                    <#input id="operation" name="装卸货操作" underline="true"/>
-                    <#input id="finish" name="是否完成" underline="true"/>
+                    <#input id="loadcode" name="装载码" underline="true"/>
+                    <#input id="unloadcode" name="卸载码" underline="true"/>
+                    <#input id="loadtype" name="类型" underline="true"/>
+                    <#input id="endpoint" name="终止点" underline="true"/>
+                    <#input id="startpiont" name="起始点" underline="true" value="秦皇岛" readonly="true"/>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.addSubmit()"/>
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.createSubmit()"/>
                     </div>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
                         <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
@@ -27,11 +30,15 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
 <script type="text/javascript">
-    window.onload=function newid() {
+    window.onload=function newid()
+    {
+        var id =Date.now();
+        document.getElementById("voyagenum").value="y"+id;
         //获取年月日
         var time = new Date();
         var year = time.getFullYear();
@@ -47,8 +54,7 @@
         s = check(s);
         month = check(month);
         day = check(day);
-        document.getElementById("voyagedetid").value = "Y" + year + month + day + h + m + s;
-        document.getElementById("createtime").value = year + "-" + month + "-" + day;
+        document.getElementById("starttime").value = year + "-" + month + "-" + day;
     }
     //时间数字小于10，则在之前加个“0”补位。
     function check(i){
@@ -57,7 +63,11 @@
         i<10?num="0"+i:num=i;
         return num;
     }
+
 </script>
 
-<script src="${ctxPath}/static/modular/system/voyagedet/voyagedet_info.js"></script>
+<script src="${ctxPath}/static/modular/system/voyage/voyage_info.js"></script>
+<script type="text/javascript">
+    VoyageInfoDlg.getVoyageNum();
+</script>
 @}

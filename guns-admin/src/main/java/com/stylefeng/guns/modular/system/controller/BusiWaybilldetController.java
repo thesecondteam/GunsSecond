@@ -50,6 +50,14 @@ public class BusiWaybilldetController extends BaseController {
     }
 
     /**
+     * 跳转到添加运单详情管理
+     */
+    @RequestMapping("/busiWaybilldet_create")
+    public String busiWaybilldetCreate() {
+        return PREFIX + "busiWaybilldet_create.html";
+    }
+
+    /**
      * 跳转到修改运单详情管理
      */
     @RequestMapping("/busiWaybilldet_update/{busiWaybilldetId}")
@@ -82,6 +90,16 @@ public class BusiWaybilldetController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(BusiWaybilldet busiWaybilldet) {
+        busiWaybilldetService.insert(busiWaybilldet);
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 新增运单详情管理
+     */
+    @RequestMapping(value = "/create")
+    @ResponseBody
+    public Object create(BusiWaybilldet busiWaybilldet) {
         busiWaybilldetService.insert(busiWaybilldet);
         return SUCCESS_TIP;
     }

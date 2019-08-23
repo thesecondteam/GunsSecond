@@ -20,6 +20,9 @@
                             @if(shiro.hasPermission("/busiWaybilldet/add")){
                                 <#button name="添加" icon="fa-plus" clickFun="BusiWaybilldet.openAddBusiWaybilldet()"/>
                             @}
+                            @if(shiro.hasPermission("/busiWaybilldet/create")){
+                            <#button name="生成" icon="fa-plus" clickFun="BusiWaybilldet.openCreateBusiWaybilldet()" space="true"/>
+                            @}
                             @if(shiro.hasPermission("/busiWaybilldet/update")){
                                 <#button name="修改" icon="fa-edit" clickFun="BusiWaybilldet.openBusiWaybilldetDetail()" space="true"/>
                             @}

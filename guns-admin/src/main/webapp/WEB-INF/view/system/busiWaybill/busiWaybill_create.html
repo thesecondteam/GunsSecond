@@ -5,29 +5,29 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" type="hidden"/>
-                            <#input id="waybillid" name="运单号" underline="true" readonly="true"/>
-                            <#select name="车次" id="trainnum" underline="true"/>
-                            <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
-                            <#input id="endtime" name="结束时间" underline="true"/>
+                    <#input id="id" name="" type="hidden"/>
+                    <#input id="waybillid" name="运单号" underline="true" readonly="true"/>
+                    <#select name="车次" id="trainnum" underline="true"/>
+                    <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
+                    <#input id="endtime" name="结束时间" underline="true"/>
 
-                            <#select name="集装箱号" id="boxnumber" underline="false"/>
+                    <#select name="集装箱号" id="boxnumber" underline="false"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="startpoint" name="起点" underline="true" value="秦皇岛" readonly="true"/>
-                            <#input id="endpiont" name="终点" underline="true"/>
-                            <#input id="distance" name="距离" underline="true"/>
-                            <#input id="statecode" name="状态码" underline="true"/>
-                            <#input id="loadtype" name="装货类型" underline="true"/>
-                            <#input id="loadcode" name="装货码" underline="true"/>
-                            <#input id="unloadcode" name="卸货码" underline="true"/>
+                    <#input id="startpoint" name="起点" underline="true" value="秦皇岛" readonly="true"/>
+                    <#input id="endpiont" name="终点" underline="true"/>
+                    <#input id="distance" name="距离" underline="true"/>
+                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="loadtype" name="装货类型" underline="true"/>
+                    <#input id="loadcode" name="装货码" underline="true"/>
+                    <#input id="unloadcode" name="卸货码" underline="true"/>
                 </div>
             </div>
 
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybillInfoDlg.addSubmit()"/>
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybillInfoDlg.createSubmit()"/>
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiWaybillInfoDlg.close()"/>
                 </div>
             </div>

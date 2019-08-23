@@ -43,6 +43,14 @@ public class VoyagedetController extends BaseController {
     }
 
     /**
+     * 跳转到生成voyagedet
+     */
+    @RequestMapping("/voyagedet_create")
+    public String voyagedetCreate() {
+        return PREFIX + "voyagedet_create.html";
+    }
+
+    /**
      * 跳转到添加voyagedet
      */
     @RequestMapping("/voyagedet_add")
@@ -85,6 +93,16 @@ public class VoyagedetController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Voyagedet voyagedet) {
+        voyagedetService.insert(voyagedet);
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 生成voyagedet
+     */
+    @RequestMapping(value = "/create")
+    @ResponseBody
+    public Object create(Voyagedet voyagedet) {
         voyagedetService.insert(voyagedet);
         return SUCCESS_TIP;
     }

@@ -51,11 +51,26 @@ Voyage.check = function () {
 Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '生成航次信息',
+        title: '添加航次信息',
         area: ['800px', '420px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_add'
+    });
+    this.layerIndex = index;
+};
+
+/**
+* 点击生成voyage
+*/
+Voyage.openCreateVoyage = function () {
+    var index = layer.open({
+        type: 2,
+        title: '生成航次信息',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/voyage/voyage_create'
     });
     this.layerIndex = index;
 };

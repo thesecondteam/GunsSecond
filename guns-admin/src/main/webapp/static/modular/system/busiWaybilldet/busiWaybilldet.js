@@ -59,6 +59,21 @@ BusiWaybilldet.openAddBusiWaybilldet = function () {
 };
 
 /**
+ * 点击生成运单详情管理
+ */
+BusiWaybilldet.openCreateBusiWaybilldet = function () {
+    var index = layer.open({
+        type: 2,
+        title: '添加运单详情管理',
+        area: ['800px', '420px'], //宽高
+        fix: false, //不固定
+        maxmin: true,
+        content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_create'
+    });
+    this.layerIndex = index;
+};
+
+/**
  * 打开查看运单详情管理详情
  */
 BusiWaybilldet.openBusiWaybilldetDetail = function () {
