@@ -90,7 +90,7 @@ var BusiOrderInfoDlg = {
         }
     }
 };
-
+var dataInfo;
 /**
  * 清除数据
  */
@@ -207,6 +207,52 @@ BusiOrderInfoDlg.editSubmit = function() {
 }
     $(function(){
         Feng.initValidator("busForm", BusiOrderInfoDlg.validateFields);
+        //提交信息
+        var ajax = new $ax(Feng.ctxPath + "/busiOrder/getInfoS", function(data){
+            dataInfo=data;
+        },function(data){
 
+
+
+            Feng.error("失败!" + data.responseJSON.message + "!");
+        });
+        ajax.start();
     });
 
+$("#trantype").change(function () {
+
+           if($(this).val()==0){
+               $("#endpoint").empty();
+           for (var key in dataInfo.harbour) {
+               console.log(key);
+               var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
+               option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
+               $("#endpoint").append(option);
+           }
+           }
+    if($(this).val()==1) {
+        $("#endpoint").empty();
+        for (var key in dataInfo.station) {
+            console.log(key);
+            var option = "<option value=\"" + dataInfo.station[key].id + "\"";
+            option += ">" + dataInfo.station[key].name + "</option>";  //动态添加数据
+            $("#endpoint").append(option);
+        }
+
+    }
+
+});
+BusiOrderInfoDlg.getfirst = function () {
+
+    $.ajax({url:'/busiOrder/getInfoS',
+        type:"post",
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(){
+
+        }
+    });
+}

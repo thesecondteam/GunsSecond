@@ -6,6 +6,7 @@ import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.core.exception.GunsException;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.warpper.DictWarpper;
+import com.stylefeng.guns.modular.system.warpper.DictGoodstypeWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import com.stylefeng.guns.modular.webSys.service.IDictGoodstypeService;
 
 import java.sql.Wrapper;
 import java.util.List;
+import java.util.Map;
 
 /**
  * goodstype控制器
@@ -68,15 +70,20 @@ public class DictGoodstypeController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
+        EntityWrapper<DictGoodstype> dictGoodstypeEntityWrapper = new EntityWrapper<>();
 
-      if(ToolUtil.isEmpty(condition)){
-          return dictGoodstypeService.selectList(null);
-      } else{
-         EntityWrapper<DictGoodstype>entityWrapper=new EntityWrapper<>();
-
-          return dictGoodstypeService.selectList(entityWrapper.like("goodstype",condition));
-     }
-    }
+        if (ToolUtil.isEmpty(condition)) {
+            dictGoodstypeEntityWrapper.like("goodstype", condition);
+        }
+            // return dictGoodstypeService.selectList(null);
+//      } else{
+//         EntityWrapper<DictGoodstype>entityWrapper=new EntityWrapper<>();
+//
+//          return dictGoodstypeService.selectList(entityWrapper.like("goodstype",condition));
+//     }
+            List<Map<String, Object>> list = this.dictGoodstypeService.selectMaps(dictGoodstypeEntityWrapper);
+            return new DictGoodstypeWrapper(list).warp();
+        }
 
     /**
      * 新增goodstype
@@ -121,5 +128,27 @@ public class DictGoodstypeController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("dictGoodstypeId") Integer dictGoodstypeId) {
         return dictGoodstypeService.selectById(dictGoodstypeId);
+    }
+
+
+    /**
+     * 禁用
+     */
+    @RequestMapping(value = "/disable")
+    @ResponseBody
+    public Object disable(DictGoodstype goodstype) {
+        goodstype.setStatecode(0);
+       dictGoodstypeService.updateById(goodstype);
+        return SUCCESS_TIP;
+    }
+    /**
+     * 启用
+     */
+    @RequestMapping(value = "/enable")
+    @ResponseBody
+    public Object enable(DictGoodstype goodstype) {
+        goodstype.setStatecode(1);
+        dictGoodstypeService.updateById(goodstype);
+        return SUCCESS_TIP;
     }
 }
