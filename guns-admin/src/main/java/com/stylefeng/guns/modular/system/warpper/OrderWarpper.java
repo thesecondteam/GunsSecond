@@ -20,7 +20,7 @@ public class OrderWarpper extends BaseControllerWarpper {
 
     private DicFactory dicFactory=new DicFactory();
     private Map<Object,Object> stationmaps=dicFactory.getStationMap();
-    private Map<Object,Object>harbourmaps=dicFactory.getHarbourMap();
+    //private Map<Object,Object>harbourmaps=dicFactory.getHarbourMap();
     private Map<Object,Object> boxtypemaps=dicFactory.getBoxTypeMap();
     private Map<Object,Object> goodstypemaps=dicFactory.getGoodsTypeMap();
     private Map<Object,Object> areatypemaps=dicFactory.getAreaTypeMap();
