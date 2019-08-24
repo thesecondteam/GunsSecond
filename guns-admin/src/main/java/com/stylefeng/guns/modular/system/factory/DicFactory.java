@@ -1,10 +1,9 @@
 package com.stylefeng.guns.modular.system.factory;
 
 import com.stylefeng.guns.core.util.SpringContextHolder;
-import com.stylefeng.guns.modular.system.dao.AreaMapper;
-import com.stylefeng.guns.modular.system.dao.BoxtypeMapper;
-import com.stylefeng.guns.modular.system.dao.DictGoodstypeMapper;
-import com.stylefeng.guns.modular.system.dao.DictStationMapper;
+import com.stylefeng.guns.modular.system.dao.*;
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ public class DicFactory {
     private DictGoodstypeMapper goodstypeMapper = SpringContextHolder.getBean(DictGoodstypeMapper.class);
     private BoxtypeMapper boxtypeMapper=SpringContextHolder.getBean(BoxtypeMapper.class);
     private AreaMapper areatypeMapper=SpringContextHolder.getBean(AreaMapper.class);
+    private ShipMapper shipMapper=SpringContextHolder.getBean(ShipMapper.class);
 
     /*
      * 站点名称封装
@@ -22,6 +22,7 @@ public class DicFactory {
         Map<Object,Object> map=new HashMap<Object,Object>();
         List<Map<String, Object>> list = stationMapper.selectMaps(null);
         for (Integer i=0;i<list.size();i++) {
+
             map.put(list.get(i).get("id"),list.get(i).get("name"));
         }
         return map;
@@ -63,4 +64,15 @@ public class DicFactory {
         return map;
     }
 
+    /*
+     * 场地类型封装
+     */
+    public Map<Object,Object> getShipNameMap(){
+        Map<Object,Object> map=new HashMap<Object,Object>();
+        List<Map<String, Object>> list = shipMapper.selectMaps(null);
+        for (Integer i=0;i<list.size();i++) {
+            map.put(list.get(i).get("imo"),list.get(i).get("shipcname"));
+        }
+        return map;
+    }
 }
