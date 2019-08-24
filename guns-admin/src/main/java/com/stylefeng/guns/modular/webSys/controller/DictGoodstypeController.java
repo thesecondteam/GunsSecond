@@ -82,6 +82,7 @@ public class DictGoodstypeController extends BaseController {
 //          return dictGoodstypeService.selectList(entityWrapper.like("goodstype",condition));
 //     }
             List<Map<String, Object>> list = this.dictGoodstypeService.selectMaps(dictGoodstypeEntityWrapper);
+
             return new DictGoodstypeWrapper(list).warp();
         }
 
