@@ -16,7 +16,7 @@ DictGoodstype.initColumn = function () {
         {field: 'selectItem', radio: true},
             //{title: '', field: 'id', visible: true, align: 'center', valign: 'middle'},
             {title: '货物类型', field: 'goodstype', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
+            {title: '状态', field: 'stateName', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare1', visible: true, align: 'center', valign: 'middle'}
     ];
@@ -99,3 +99,35 @@ $(function () {
     table.setPaginationType("client");
     DictGoodstype.table = table.init();
 });
+
+/**
+ * 禁用
+ */
+DictGoodstype.disable = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/dictGoodstype/disable", function (data) {
+            Feng.success("禁用成功!");
+            DictGoodstype.table.refresh();
+        }, function (data) {
+            Feng.error("禁用失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};
+
+/**
+ * 启用
+ */
+DictGoodstype.enable = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/dictGoodstype/enable", function (data) {
+            Feng.success("启用成功!");
+            DictGoodstype.table.refresh();
+        }, function (data) {
+            Feng.error("启用失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};

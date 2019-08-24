@@ -125,3 +125,5 @@ DictGoodstypeInfoDlg.validate = function () {
 $(function() {
 Feng.initValidator("goodsForm",DictGoodstypeInfoDlg.validateFields);
 });
+
+

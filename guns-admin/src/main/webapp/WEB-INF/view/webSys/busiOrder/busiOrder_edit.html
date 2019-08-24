@@ -6,22 +6,22 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <!--<#input id="id" name="" value="${item.id}" underline="true"/>-->
-                            <#input id="ordernumber" name="订单编号" value="${item.ordernumber}" underline="true"/>
-                            <#input id="trantype" name="运输方式" value="${item.trantype}" underline="true"/>
+                            <#input id="ordernumber" name="订单编号" value="${item.ordernumber}" underline="true" readonly="true"/>
                             <#input id="goodstype" name="货物类型" value="${item.goodstype}" underline="true"/>
                             <#input id="goodsname" name="货物名称" value="${item.goodsname}" underline="true"/>
-                            <#input id="goodsvolume" name="货物容量" value="${item.goodsvolume}" underline="true"/>
-                            <#input id="startpoint" name="起点" value="${item.startpoint}" underline="true"/>
+                            <#input id="goodsvolume" name="货物容量(单位：吨)" value="${item.goodsvolume}" underline="true"/>
                             <#input id="recephone" name="收货方电话" value="${item.recephone}" underline="true"/>
-                            <#input id="receiver" name="收货方" value="${item.receiver}" />
+                            <#input id="receiver" name="收货方" value="${item.receiver}" underline="true" />
+                            <#input id="trantype"  name= "运输方式" value="${item.trantype}" underline="true"/>
+
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="endpoint" name="终点" value="${item.endpoint}" underline="true"/>
+                            <#input  name="站点/港口" id="endpoint" type="text" value="${item.endpoint}" underline="true"/>
                             <#input id="consiphone" name="发货方电话" value="${item.consiphone}" underline="true"/>
                             <#input id="consignor" name="发货方" value="${item.consignor}" underline="true"/>
-                            <#input id="creationtime" name="创建时间" value="${item.creationtime}" underline="true" type="date"  clickFun="laydate({istime:false,format:YYYY-MM-DD})"/>
-                            <#input id="ordercode" name="订单码" value="${item.ordercode}" underline="true"/>
+                            <#input id="creationtime" name="创建时间" value="${item.creationtime}" underline="true" readonly="true"/>
+                            <#input id="ordercode" name="状态码" value="${item.ordercode}" underline="true" />
                             <#input id="note" name="备注" value="${item.note}" underline="true"/>
                               <#input id="id" name="" type="hidden" value="${item.id}"  />
 

@@ -19,15 +19,15 @@ BusiOrder.initColumn = function () {
             {title: '运输方式', field: 'trantype', visible: true, align: 'center', valign: 'middle'},
             {title: '货物类型', field: 'goodstype', visible: true, align: 'center', valign: 'middle'},
             {title: '货物名称', field: 'goodsname', visible: true, align: 'center', valign: 'middle'},
-            {title: '货物容量', field: 'goodsvolume', visible: true, align: 'center', valign: 'middle'},
-            {title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
+            {title: '货物容量(单位：吨)', field: 'goodsvolume', visible: true, align: 'center', valign: 'middle'},
+            //{title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '收货方电话', field: 'recephone', visible: true, align: 'center', valign: 'middle'},
-            {title: '收货方', field: 'receiver', visible: true, align: 'center', valign: 'middle'},
+           {title: '收货方', field: 'receiver', visible: true, align: 'center', valign: 'middle'},
             {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
-            {title: '发货方电话', field: 'consiphone', visible: true, align: 'center', valign: 'middle'},
+             {title: '发货方电话', field: 'consiphone', visible: true, align: 'center', valign: 'middle'},
             {title: '发货方', field: 'consignor', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'creationtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单码', field: 'ordercode', visible: true, align: 'center', valign: 'middle'},
+            {title: '状态码', field: 'ordercode', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'note', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare1', visible: true, align: 'center', valign: 'middle'}
@@ -111,3 +111,48 @@ $(function () {
     table.setPaginationType("client");
     BusiOrder.table = table.init();
 });
+
+//
+// /*生成guid码，订单号*/
+// function newGuid()
+// {
+//     var guid = "";
+//     for (var i = 1; i <= 32; i++){
+//         var n = Math.floor(Math.random()*16.0).toString(16);
+//         guid +=   n;
+//         if((i==8)||(i==12)||(i==16)||(i==20))
+//             guid += "-";
+//     }
+//     return guid;
+// }
+/**
+ * 禁用
+ */
+BusiOrder.disable = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/busiOrder/disable", function (data) {
+            Feng.success("禁用成功!");
+            BusiOrder.table.refresh();
+        }, function (data) {
+            Feng.error("禁用失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};
+
+/**
+ * 启用
+ */
+BusiOrder.enable = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/busiOrder/enable", function (data) {
+            Feng.success("启用成功!");
+            BusiOrder.table.refresh();
+        }, function (data) {
+            Feng.error("启用失败!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};

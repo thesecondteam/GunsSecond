@@ -26,6 +26,12 @@
                             @if(shiro.hasPermission("/dictGoodstype/delete")){
                                 <#button name="删除" icon="fa-remove" clickFun="DictGoodstype.delete()" space="true"/>
                             @}
+                            @if(shiro.hasPermission("/dictGoodstype/enable")){
+                            <#button name="启用" icon="fa-remove" clickFun="DictGoodstype.enable()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/dictGoodstype/disable")){
+                            <#button name="禁用" icon="fa-remove" clickFun="DictGoodstype.disable()" space="true"/>
+                            @}
                         </div>
                         <#table id="DictGoodstypeTable"/>
                     </div>
