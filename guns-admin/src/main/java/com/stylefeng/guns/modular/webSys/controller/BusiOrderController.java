@@ -2,8 +2,10 @@ package com.stylefeng.guns.modular.webSys.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.google.common.collect.Maps;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.annotion.BussinessLog;
+import com.stylefeng.guns.core.common.constant.state.Order;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.DictStation;
 import com.stylefeng.guns.modular.system.model.Harbour;
@@ -14,6 +16,7 @@ import com.stylefeng.guns.modular.system.service.IHarbourService;
 import com.stylefeng.guns.modular.system.warpper.HarbourWarpper;
 import com.stylefeng.guns.modular.system.warpper.OrderWarpper;
 import org.beetl.ext.fn.Json;
+import org.springframework.cglib.beans.BeanMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,21 +102,38 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-//        if(ToolUtil.isEmpty(condition)) {
-//            return busiOrderService.selectList(null);
-//        }else
-//        {
-//            EntityWrapper<BusiOrder>entityWrapper=new EntityWrapper<>();
-//            Wrapper<BusiOrder>wrapper=entityWrapper.like("ordernumber",condition);
-//            return busiOrderService.selectList(wrapper);
-//        }
-        EntityWrapper<BusiOrder> busiOrderEntityWrapper= new EntityWrapper<>();
-
-        if (ToolUtil.isEmpty(condition)) {
-            busiOrderEntityWrapper.like("ordernumber", condition);
+       List<BusiOrder>odList= new ArrayList<>();
+        if(ToolUtil.isEmpty(condition)) {
+            odList= busiOrderService.selectList(null);
+        }else
+        {
+            EntityWrapper<BusiOrder>entityWrapper=new EntityWrapper<>();
+            Wrapper<BusiOrder>wrapper=entityWrapper.like("ordernumber",condition);
+           odList= busiOrderService.selectList(wrapper);
         }
-        List<Map<String, Object>> list = this.busiOrderService.selectMaps(busiOrderEntityWrapper);
-        return new OrderWarpper(list).warp();
+        List<Map<String,Object>>reList=new ArrayList<>();
+        for(BusiOrder bo:odList)
+        {
+            Map<String,Object> m=new HashMap<>();
+            if(bo.getTrantype()==0)//海运
+            {
+                m=beanToMap(bo);
+                m.put("trainWay","海运");
+
+            }else//陆运
+            {
+
+            }
+        }
+
+        return  odList;
+//        EntityWrapper<BusiOrder> busiOrderEntityWrapper= new EntityWrapper<>();
+//
+//        if (ToolUtil.isEmpty(condition)) {
+//            busiOrderEntityWrapper.like("ordernumber", condition);
+//        }
+//        List<Map<String, Object>> list = this.busiOrderService.selectMaps(busiOrderEntityWrapper);
+//        return new OrderWarpper(list).warp();
     }
 
     /**
@@ -179,5 +199,14 @@ public class BusiOrderController extends BaseController {
 //       busiOrderService.updateById(busiOrder);
 //        return SUCCESS_TIP;
 //    }
-
+public static <T> Map<String, Object> beanToMap(T bean) {
+    Map<String, Object> map = Maps.newHashMap();
+    if (bean != null) {
+        BeanMap beanMap = BeanMap.create(bean);
+        for (Object key : beanMap.keySet()) {
+            map.put(key+"", beanMap.get(key));
+        }
+    }
+    return map;
+}
 }
