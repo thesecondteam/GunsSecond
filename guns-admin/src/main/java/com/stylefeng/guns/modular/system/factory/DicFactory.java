@@ -67,7 +67,7 @@ public class DicFactory {
     }
 
     /*
-     * 场地类型封装
+     * 船名称封装
      */
     public Map<Object,Object> getShipNameMap(){
         Map<Object,Object> map=new HashMap<Object,Object>();
