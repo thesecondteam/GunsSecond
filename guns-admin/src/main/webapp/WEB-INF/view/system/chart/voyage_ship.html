@@ -19,7 +19,7 @@
         $.ajax({
             contentType : "application/json",
             type : "post",
-            url : Feng.ctxPath + "/BoxareaChart/list/",
+            url : Feng.ctxPath + "/VoyageshipChart/list/",
             data:{},
             dataType : "json",
             success : function(data) {
@@ -35,22 +35,47 @@
                     obj.value=data[i][1];
                     y[i]=obj;
                 }
-
                 mychart.setOption({
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
                     xAxis: {
-                        name:'场位类型',
-                        type: 'category',
-                        data:x
+                        type: 'value',
+                        boundaryGap: [0, 0.01]
                     },
                     yAxis: {
-                        name:'集装箱数量',
-                        type: 'value'
+                        type: 'category',
+                        data: x
                     },
-                    series: [{
-                        data: y,
-                        type: 'bar'
-                    }]
+                    series: [
+                        {
+                            type: 'bar',
+                            itemStyle: {
+                                normal: {
+                                    color: function(params) {
+                                        // build a color map as your need.
+                                        var colorList = [
+                                            '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                                            '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                                            '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                                        ];
+                                        return colorList[params.dataIndex]
+                                    }
+                                }
+                            },
+                            data: y
 
+                        }
+                    ]
 
                 });
 

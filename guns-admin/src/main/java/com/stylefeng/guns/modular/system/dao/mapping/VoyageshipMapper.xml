@@ -6,7 +6,7 @@
 
     <!-- 通用查询结果列 -->
     <select id="list" resultType="map">
-        SELECT imo ,count(imo)as sums from busi_voyage GROUP BY imo
+        SELECT shipcname ,count(busi_voyage.imo)as sums from busi_voyage,enti_ship where busi_voyage.imo=enti_ship.imo GROUP BY busi_voyage.imo
 
     </select>
 

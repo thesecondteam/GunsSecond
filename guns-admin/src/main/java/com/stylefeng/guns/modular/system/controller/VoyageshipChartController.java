@@ -3,6 +3,7 @@ package com.stylefeng.guns.modular.system.controller;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.modular.system.service.IBoxareaService;
 import com.stylefeng.guns.modular.system.service.IVoyageshipService;
+import com.stylefeng.guns.modular.system.warpper.VoyageshipWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class VoyageshipChartController extends BaseController {
      */
     @RequestMapping("")
     public String index() {
-        return PREFIX + "box_area.html";
+        return PREFIX + "voyage_ship.html";
     }
 
     @RequestMapping(value = "/list")
@@ -32,12 +33,10 @@ public class VoyageshipChartController extends BaseController {
     public Object list() {
 
         List<Map<String,Object>> listdata = this.voyageshipService.list();
-        
-        Object[][] array = new Object[listdata.size()][10];
+        Object[][] array = new Object[listdata.size()][20];
         for(int i=0;i<listdata.size();i++){
             array[i] = listdata.get(i).values().toArray();
         }
-        System.out.println(array);
         return array;
 
 
