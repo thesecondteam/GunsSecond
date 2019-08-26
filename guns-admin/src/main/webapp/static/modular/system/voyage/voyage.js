@@ -20,7 +20,7 @@ Voyage.initColumn = function () {
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
             {title: '发货公司', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
             {title: '收货公司', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '箱子编号', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
+            {title: '集装箱数量', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
             {title: '里程数', field: 'distance', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
             {title: '装载码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},

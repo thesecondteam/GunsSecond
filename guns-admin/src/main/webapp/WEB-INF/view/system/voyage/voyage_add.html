@@ -8,14 +8,14 @@
                     <#input id="voyagenum" name="航线编号" underline="true" readonly="true"/>
                     <#select name="轮船号" id="imo" underline="true"/>
                     <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
-                    <#input id="endtime" name="结束时间" underline="true"/>
 
-                    <#select name="集装箱号" id="boxnumber" underline="true"/>
+                    <#input id="boxnumber" name="集装箱数量" underline="true"/>
+
                     <#input id="distance" name="里程数"/>
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="statecode" name="状态码" underline="true" value="未完成" readonly="true"/>
                     <#input id="loadcode" name="装载码" underline="true"/>
                     <#input id="unloadcode" name="卸载码" underline="true"/>
                     <#input id="loadtype" name="类型" underline="true"/>
