@@ -7,6 +7,7 @@ import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.common.constant.state.Order;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.factory.DicFactory;
 import com.stylefeng.guns.modular.system.model.DictStation;
 import com.stylefeng.guns.modular.system.model.Harbour;
 import com.stylefeng.guns.modular.system.model.Train;
@@ -102,31 +103,50 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-       List<BusiOrder>odList= new ArrayList<>();
+        EntityWrapper<BusiOrder>entityWrapper=new EntityWrapper<>();
+        List<BusiOrder>odList= new ArrayList<>();
         if(ToolUtil.isEmpty(condition)) {
-            odList= busiOrderService.selectList(null);
+
+            List<Map<String,Object>>reList=new ArrayList<>();
+            List<BusiOrder>reList1=new ArrayList<>();
+            List<BusiOrder>reList2=new ArrayList<>();
+            for(BusiOrder bo:odList)
+            {
+                if(bo.getTrantype()==0)//海运
+                {
+                    reList1.add(bo);
+                }else//陆运
+                {
+                    reList2.add(bo);
+                }
+            }
+
+            List<Map<String, Object>> list = this.busiOrderService.selectMaps(entityWrapper);
+            System.out.println("====================>"+list);
+            System.out.println("====================>"+new OrderWarpper(list).warp());
+            return  new OrderWarpper(list).warp();
         }else
         {
-            EntityWrapper<BusiOrder>entityWrapper=new EntityWrapper<>();
+
             Wrapper<BusiOrder>wrapper=entityWrapper.like("ordernumber",condition);
            odList= busiOrderService.selectList(wrapper);
         }
         List<Map<String,Object>>reList=new ArrayList<>();
+        List<BusiOrder>reList1=new ArrayList<>();
+        List<BusiOrder>reList2=new ArrayList<>();
         for(BusiOrder bo:odList)
         {
-            Map<String,Object> m=new HashMap<>();
             if(bo.getTrantype()==0)//海运
             {
-                m=beanToMap(bo);
-                m.put("trainWay","海运");
-
+                reList1.add(bo);
             }else//陆运
             {
-
+                reList2.add(bo);
             }
         }
-
-        return  odList;
+        System.out.println(reList1);
+        List<Map<String, Object>> list = this.busiOrderService.selectMaps(entityWrapper);
+        return  new OrderWarpper(list).warp();
 //        EntityWrapper<BusiOrder> busiOrderEntityWrapper= new EntityWrapper<>();
 //
 //        if (ToolUtil.isEmpty(condition)) {

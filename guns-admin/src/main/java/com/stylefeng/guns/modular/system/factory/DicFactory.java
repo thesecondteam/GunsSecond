@@ -46,9 +46,11 @@ public class DicFactory {
     public Map<Object,Object> getGoodsTypeMap(){
         Map<Object,Object> map=new HashMap<Object,Object>();
         List<Map<String, Object>> list = goodstypeMapper.selectMaps(null);
+
         for (Integer i=0;i<list.size();i++) {
             map.put(list.get(i).get("id"),list.get(i).get("goodstype"));
         }
+        System.out.println("===========qqqqqqqqqq===>"+map);
         return map;
     }
 

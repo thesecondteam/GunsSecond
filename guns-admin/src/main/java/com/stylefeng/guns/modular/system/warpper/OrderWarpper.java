@@ -31,12 +31,19 @@ public class OrderWarpper extends BaseControllerWarpper {
           map.put("endpointName",stationmaps.get(map.get("endpoint")));
 
 //        map.put("boxtypeName",boxtypemaps.get(map.get("boxtype")));
+
         map.put("goodstypeName",goodstypemaps.get(map.get("goodstype")));
 //        map.put("areatypeName",areatypemaps.get(map.get("areaid")));
 
-        if(map.get("statecode").equals(0))
+
+        if(map.get("trantype").equals(0))
+            map.put("transName","海运");
+        else if(map.get("trantype").equals(1))
+            map.put("transName","陆运");
+
+        if(map.get("ordercode").equals(0))
             map.put("stateName","未处理");
-        else if(map.get("statecode").equals(1))
+        else if(map.get("ordercode").equals(1))
             map.put("stateName","已装箱");
         else
                 map.put("stateName","已完成");
