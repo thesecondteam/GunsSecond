@@ -133,7 +133,9 @@ VoyageInfoDlg.editSubmit = function() {
     ajax.set(this.voyageInfoData);
     ajax.start();
 }
-
+/**
+ * 动态增加轮船号option
+ */
 VoyageInfoDlg.getVoyageNum = function(){
     var VoyageNum = $("select[id=imo]").val();
     $("select[id=imo]").empty();      //清空

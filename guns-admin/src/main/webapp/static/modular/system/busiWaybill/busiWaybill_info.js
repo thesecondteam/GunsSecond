@@ -192,5 +192,44 @@ BusiWaybillInfoDlg.getBoxCode = function () {
         }
     });
 }
+
+/*BusiWaybillInfoDlg.text = function(){
+    var x = document.getElementById("boxnumber").selectedIndex;
+    alert(x);
+    var y = document.getElementById("boxnumber");
+    var z = y.option[x].text;
+    alert(z);
+}*/
+
+BusiWaybillInfoDlg.boxNumberChange = function(){
+/*    var x = document.getElementById("boxnumber");
+    alert(x);*/
+/*    this.console("11");
+    this.alert("1111");*/
+/*    var index = document.getElementById("boxnumber").selectedIndex;
+    this.console(index);*/
+   /* $.ajax({url:'/box/boxnumber',
+        type:"post",
+        data:{
+            BoxCode : BoxCode
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listBoxCode){
+            if(listBoxCode && listBoxCode.length != 0){
+                for(var i=0; i<listBoxCode.length; i++){
+                    if(!isEmpty(listBoxCode[i])){
+                        var option="<option value=\""+listBoxCode[i]+"\"";
+                        option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
+                        $("select[id=boxnumber]").append(option);
+                    }
+                }
+            }
+        }
+    });*/
+}
 $(function() {
 });
