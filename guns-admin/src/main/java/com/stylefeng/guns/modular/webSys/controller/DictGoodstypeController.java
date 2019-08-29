@@ -19,6 +19,7 @@ import com.stylefeng.guns.modular.system.model.DictGoodstype;
 import com.stylefeng.guns.modular.webSys.service.IDictGoodstypeService;
 
 import java.sql.Wrapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -151,5 +152,21 @@ public class DictGoodstypeController extends BaseController {
         goodstype.setStatecode(1);
         dictGoodstypeService.updateById(goodstype);
         return SUCCESS_TIP;
+    }
+
+
+    /**
+     * 获取所有货物类型
+     */
+    @RequestMapping(value="/getGoodsId")
+    @ResponseBody
+    public Object getGoodsId(String condition)
+    {
+        EntityWrapper<DictGoodstype> dictGoodstypeEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            dictGoodstypeEntityWrapper.like("goodstype", condition);
+        }
+        List<Map<String, Object>> list = this.dictGoodstypeService.selectMaps(dictGoodstypeEntityWrapper);
+        return list;
     }
 }

@@ -109,6 +109,19 @@ BusiOrderInfoDlg.set = function(key, val) {
     return this;
 }
 
+
+/**
+ * 判断字符串是否为空
+ */
+function isEmpty(obj) {
+    if (typeof obj == "undefined" || obj == null || obj == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 /**
  * 设置对话框中的数据
  *
@@ -256,3 +269,38 @@ BusiOrderInfoDlg.getfirst = function () {
         }
     });
 }
+
+/**
+ *动态增加货物类型
+ */
+BusiOrderInfoDlg.getGoodsId = function () {
+    var GoodsId = $("select[id=goodstype]").val();
+    $("select[id=goodstype]").empty();      //清空
+    $("#goodstype").append("<option value='0'>请选择类型</option>");
+    $.ajax({url:'/dictGoodstype/getGoodsId',
+        type:"post",
+        data:{
+            GoodsId: GoodsId
+        },
+
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listGoodsId){
+            if(listGoodsId&& listGoodsId.length != 0){
+
+                for(var i=0; i<listGoodsId.length; i++){
+                    console.log(listGoodsId[i]);
+                    if(listGoodsId[i]){
+                        var option="<option value=\""+ listGoodsId[i].id+"\"";
+                        option += ">"+listGoodsId[i].goodstype+"</option>";  //动态添加数据
+                        $("select[id=goodstype]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+

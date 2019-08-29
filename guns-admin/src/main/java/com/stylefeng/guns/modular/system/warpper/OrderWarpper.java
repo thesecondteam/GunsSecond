@@ -19,7 +19,8 @@ public class OrderWarpper extends BaseControllerWarpper {
     }
     private DicFactory dicFactory=new DicFactory();
     private Map<Object,Object> stationmaps=dicFactory.getStationMap();
-    //private Map<Object,Object>harbourmaps=dicFactory.getHarbourMap();
+
+    private Map<Object,Object>harbourmaps=dicFactory.getHarbourMap();
     private Map<Object,Object> boxtypemaps=dicFactory.getBoxTypeMap();
     private Map<Object,Object> goodstypemaps=dicFactory.getGoodsTypeMap();
     private Map<Object,Object> areatypemaps=dicFactory.getAreaTypeMap();
@@ -28,7 +29,8 @@ public class OrderWarpper extends BaseControllerWarpper {
     public void warpTheMap(Map<String, Object> map) {
 
 //        map.put("startpointName",stationmaps.get(map.get("startpoint")));
-          map.put("endpointName",stationmaps.get(map.get("endpoint")));
+       //   map.put("endpointName",stationmaps.get(map.get("endpoint")));
+      //  map.put("endpointName",harbourmaps.get(map.get("endpoint")));
 
 //        map.put("boxtypeName",boxtypemaps.get(map.get("boxtype")));
 
@@ -37,10 +39,12 @@ public class OrderWarpper extends BaseControllerWarpper {
 
 
         if(map.get("trantype").equals(0))
-            map.put("transName","海运");
-        else if(map.get("trantype").equals(1))
-            map.put("transName","陆运");
-
+        {  map.put("transName","海运");
+            map.put("endpointName",harbourmaps.get(map.get("endpoint")));}
+        else if(map.get("trantype").equals(1)) {
+            map.put("transName", "陆运");
+            map.put("endpointName",stationmaps.get(map.get("endpoint")));
+        }
         if(map.get("ordercode").equals(0))
             map.put("stateName","未处理");
         else if(map.get("ordercode").equals(1))

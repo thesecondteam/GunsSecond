@@ -8,12 +8,11 @@ import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.common.constant.state.Order;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.factory.DicFactory;
-import com.stylefeng.guns.modular.system.model.DictStation;
-import com.stylefeng.guns.modular.system.model.Harbour;
-import com.stylefeng.guns.modular.system.model.Train;
+import com.stylefeng.guns.modular.system.model.*;
 
 import com.stylefeng.guns.modular.system.service.IDictStationService;
 import com.stylefeng.guns.modular.system.service.IHarbourService;
+import com.stylefeng.guns.modular.system.warpper.DictGoodstypeWrapper;
 import com.stylefeng.guns.modular.system.warpper.HarbourWarpper;
 import com.stylefeng.guns.modular.system.warpper.OrderWarpper;
 import org.beetl.ext.fn.Json;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.stylefeng.guns.modular.system.model.BusiOrder;
 import com.stylefeng.guns.modular.webSys.service.IBusiOrderService;
 
 import java.util.ArrayList;
@@ -77,6 +75,7 @@ public class BusiOrderController extends BaseController {
     {
         EntityWrapper<Harbour> harbourEntityWrapper = new EntityWrapper<>();
         EntityWrapper<DictStation> stationEntityWrapper = new EntityWrapper<>();
+
         List<Map<String, Object>> liststation = this.dictStationService.selectMaps(stationEntityWrapper);
         List<Map<String, Object>> listharbour = this.harbourService.selectMaps(harbourEntityWrapper);
         Map<String,Object> m=new HashMap<>();
@@ -91,9 +90,30 @@ public class BusiOrderController extends BaseController {
      */
     @RequestMapping("/busiOrder_update/{busiOrderId}")
     public String busiOrderUpdate(@PathVariable Integer busiOrderId, Model model) {
+
         BusiOrder busiOrder = busiOrderService.selectById(busiOrderId);
-        model.addAttribute("item",busiOrder);
-        LogObjectHolder.me().set(busiOrder);
+        Map<String,Object> map=new HashMap<>();
+        BeanMap beanMap=BeanMap.create(busiOrder);
+
+        for(Object key:beanMap.keySet())
+        {
+            map.put(key+"",beanMap.get(key));
+        }
+        List<Map<String,Object>> list=new ArrayList<>();
+        list.add(map);
+        System.out.println("__________________List"+list);
+        Object object=new OrderWarpper(list).warp();
+        System.out.println("__________________OBJECT"+object);
+//        Map<String,Object> map2=new HashMap<>();
+//        BeanMap beanMap2=BeanMap.create(object);
+//
+//        for(Object key:beanMap2.keySet())
+//        {
+//            map2.put(key+"",beanMap2.get(key));
+//        }
+//        System.out.println("__________________"+map2);
+        model.addAttribute("item",object);
+//        LogObjectHolder.me().set(busiOrder);
         return PREFIX + "busiOrder_edit.html";
     }
 
@@ -122,8 +142,6 @@ public class BusiOrderController extends BaseController {
             }
 
             List<Map<String, Object>> list = this.busiOrderService.selectMaps(entityWrapper);
-            System.out.println("====================>"+list);
-            System.out.println("====================>"+new OrderWarpper(list).warp());
             return  new OrderWarpper(list).warp();
         }else
         {
@@ -147,13 +165,6 @@ public class BusiOrderController extends BaseController {
         System.out.println(reList1);
         List<Map<String, Object>> list = this.busiOrderService.selectMaps(entityWrapper);
         return  new OrderWarpper(list).warp();
-//        EntityWrapper<BusiOrder> busiOrderEntityWrapper= new EntityWrapper<>();
-//
-//        if (ToolUtil.isEmpty(condition)) {
-//            busiOrderEntityWrapper.like("ordernumber", condition);
-//        }
-//        List<Map<String, Object>> list = this.busiOrderService.selectMaps(busiOrderEntityWrapper);
-//        return new OrderWarpper(list).warp();
     }
 
     /**
@@ -219,14 +230,20 @@ public class BusiOrderController extends BaseController {
 //       busiOrderService.updateById(busiOrder);
 //        return SUCCESS_TIP;
 //    }
-public static <T> Map<String, Object> beanToMap(T bean) {
-    Map<String, Object> map = Maps.newHashMap();
-    if (bean != null) {
-        BeanMap beanMap = BeanMap.create(bean);
-        for (Object key : beanMap.keySet()) {
-            map.put(key+"", beanMap.get(key));
-        }
-    }
-    return map;
-}
+//public static <T> Map<String, Object> beanToMap(T bean) {
+//    Map<String, Object> map = Maps.newHashMap();
+//    if (bean != null) {
+//        BeanMap beanMap = BeanMap.create(bean);
+//        for (Object key : beanMap.keySet()) {
+//            map.put(key+"", beanMap.get(key));
+//        }
+//    }
+//    return map;
+//}
+
+
+
+
+
+
 }

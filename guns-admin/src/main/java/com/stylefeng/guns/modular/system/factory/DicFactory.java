@@ -2,6 +2,7 @@ package com.stylefeng.guns.modular.system.factory;
 
 import com.stylefeng.guns.core.util.SpringContextHolder;
 import com.stylefeng.guns.modular.system.dao.*;
+import com.stylefeng.guns.modular.system.model.Harbour;
 
 
 import java.util.HashMap;
@@ -14,7 +15,8 @@ public class DicFactory {
     private BoxtypeMapper boxtypeMapper=SpringContextHolder.getBean(BoxtypeMapper.class);
     private AreaMapper areatypeMapper=SpringContextHolder.getBean(AreaMapper.class);
     private ShipMapper shipMapper=SpringContextHolder.getBean(ShipMapper.class);
-
+    private HarbourMapper harbourMapper = SpringContextHolder.getBean(HarbourMapper.class);
+    private DictStationMapper station1Mapper = SpringContextHolder.getBean(DictStationMapper.class);
     /*
      * 站点名称封装
      */
@@ -77,4 +79,21 @@ public class DicFactory {
         }
         return map;
     }
+
+
+
+    /*
+     * 港口名称封装
+     */
+    public Map<Object,Object> getHarbourMap(){
+        Map<Object,Object> map=new HashMap<Object,Object>();
+        List<Map<String, Object>> list = harbourMapper.selectMaps(null);
+        for (Integer i=0;i<list.size();i++) {
+
+            map.put(list.get(i).get("id"),list.get(i).get("harbourname"));
+        }
+        return map;
+    }
+
 }
+

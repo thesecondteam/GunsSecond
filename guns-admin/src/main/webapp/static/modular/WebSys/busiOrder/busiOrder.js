@@ -27,7 +27,7 @@ BusiOrder.initColumn = function () {
              {title: '发货方电话', field: 'consiphone', visible: true, align: 'center', valign: 'middle'},
             {title: '发货方', field: 'consignor', visible: true, align: 'center', valign: 'middle'},
             {title: '创建时间', field: 'creationtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态码', field: 'stateName', visible: true, align: 'center', valign: 'middle'},
+            {title: '状态', field: 'stateName', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'note', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare', visible: true, align: 'center', valign: 'middle'},
             // {title: '', field: 'spare1', visible: true, align: 'center', valign: 'middle'}

@@ -127,3 +127,6 @@ Feng.initValidator("goodsForm",DictGoodstypeInfoDlg.validateFields);
 });
 
 
+
+
+

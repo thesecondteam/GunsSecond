@@ -7,7 +7,7 @@
                 <div class="col-sm-6 b-r">
 
                             <#input id="ordernumber" name="订单编号" underline="true" readonly="true"/>
-                            <#input id="goodstype" name="货物类型" underline="true"/>
+                            <#select  id="goodstype" name="货物类型" underline="true"/>
                             <#input id="goodsname" name="货物名称" underline="true"/>
                             <#input id="goodsvolume" name="货物容量(单位：吨)" underline="true"/>
                             <#input id="recephone" name="收货方电话" underline="true"/>
@@ -25,8 +25,9 @@
                             <#input id="consiphone" name="发货方电话" underline="true"/>
                             <#input id="consignor" name="发货方" underline="true"/>
                             <#input id="creationtime" name="创建时间" underline="true"  readonly="true" />
-                            <#input id="ordercode" name="状态" underline="true"   readonly="true"  />
+
                             <#input id="note" name="备注" underline="true"/>
+                            <#input id="ordercode" name="" underline="true"   readonly="true" type="hidden" />
                 </div>
 
             </div>
@@ -42,6 +43,10 @@
     </div>
 </div>
 <script type="text/javascript">
+       //使用jquery的ready方法似的加载运行
+
+
+
     window.onload=function newGuid()
     {
         var guid =Date.now();
@@ -67,8 +72,11 @@
         if (mm < 10) clock += '0';
         clock += mm;
         document.getElementById("creationtime").value=clock;
-        document.getElementById("ordercode").value=1;
+        document.getElementById("ordercode").value=0;
+        BusiOrderInfoDlg.getGoodsId();
+
     }
+
 </script>
 
 <script src="${ctxPath}/static/modular/webSys/busiOrder/busiOrder_info.js"></script>
