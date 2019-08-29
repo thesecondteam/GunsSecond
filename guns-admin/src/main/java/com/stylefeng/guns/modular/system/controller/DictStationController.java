@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.DictStation;
 import com.stylefeng.guns.modular.system.service.IDictStationService;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 站点控制器
@@ -160,5 +157,27 @@ public class DictStationController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("dictStationId") Integer dictStationId) {
         return dictStationService.selectById(dictStationId);
+    }
+
+    /**
+     * 获取所有站点
+     */
+    @RequestMapping(value="/getStationId")
+    @ResponseBody
+    public Object getStationId(String condition)
+    {
+        EntityWrapper<DictStation> dictStationEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            dictStationEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.dictStationService.selectMaps(dictStationEntityWrapper);
+        List<String> listStationId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            if(!m.get("id").toString().equals("7")){
+                listStationId.add(m.get("name").toString());
+            }
+        }
+        return listStationId;
     }
 }

@@ -26,7 +26,7 @@ BusiWaybill.initColumn = function () {
             {title: '终点', field: 'endpiont', visible: true, align: 'center', valign: 'middle'},
             {title: '距离', field: 'distance', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
-            {title: '装货类型', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
+            {title: '装/卸种类', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
             {title: '装货码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},
             {title: '卸货码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'}
     ];
@@ -47,7 +47,7 @@ BusiWaybill.check = function () {
 };
 
 /**
- * 点击添加运单管理
+ * 点击添加到达运单管理
  */
 BusiWaybill.openAddBusiWaybill = function () {
     var index = layer.open({
@@ -62,7 +62,7 @@ BusiWaybill.openAddBusiWaybill = function () {
 };
 
 /**
- * 点击生成运单管理
+ * 点击生成出发运单管理
  */
 BusiWaybill.openCreateBusiWaybill = function () {
     var index = layer.open({

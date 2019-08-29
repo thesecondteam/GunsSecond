@@ -193,17 +193,69 @@ BusiWaybillInfoDlg.getBoxCode = function () {
     });
 }
 
-/*BusiWaybillInfoDlg.text = function(){
-    var x = document.getElementById("boxnumber").selectedIndex;
-    alert(x);
-    var y = document.getElementById("boxnumber");
-    var z = y.option[x].text;
-    alert(z);
-}*/
+/**
+ *动态增加站点option
+ */
+BusiWaybillInfoDlg.getStartStationId = function () {
+    var StationId = $("select[id=startpoint]").val();
+    $("select[id=startpoint]").empty();      //清空
+    $("#startpoint").append("<option value='0'>请选择起点站点</option>");
+    $.ajax({
+        url: '/dictStation/getStationId',
+        type: "post",
+        data: {
+            StationId: StationId
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error: function () {
+        },
+        success: function (listStationId) {
+            if (listStationId && listStationId.length != 0) {
+                for (var i = 0; i < listStationId.length; i++) {
+                    if (!isEmpty(listStationId[i])) {
+                        var option = "<option value=\"" + listStationId[i] + "\"";
+                        option += ">" + listStationId[i] + "</option>";  //动态添加数据
+                        $("select[id=startpoint]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
 
-BusiWaybillInfoDlg.boxNumberChange = function(){
-/*    var x = document.getElementById("boxnumber");
-    alert(x);*/
+BusiWaybillInfoDlg.getEndStationId = function () {
+    var StationId = $("select[id=endpoint]").val();
+    $("select[id=endpoint]").empty();      //清空
+    $("#endpoint").append("<option value='0'>请选择终点站点</option>");
+    $.ajax({url:'/dictStation/getStationId',
+        type:"post",
+        data:{
+        StationId : StationId
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listStationId){
+        if(listStationId && listStationId.length != 0){
+            for(var i=0; i<listStationId.length; i++){
+                if(!isEmpty(listStationId[i])){
+                    var option="<option value=\""+listStationId[i]+"\"";
+                    option += ">"+listStationId[i]+"</option>";  //动态添加数据
+                    $("select[id=endpoint]").append(option);
+                }
+            }
+        }
+    }
+    });
+}
+
+    BusiWaybillInfoDlg.boxNumberChange = function(){
+    /*    var x = document.getElementById("boxnumber");
+        alert(x);*/
 /*    this.console("11");
     this.alert("1111");*/
 /*    var index = document.getElementById("boxnumber").selectedIndex;
