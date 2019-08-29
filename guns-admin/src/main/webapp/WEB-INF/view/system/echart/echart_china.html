@@ -21,7 +21,17 @@
 <!--中国-->
 <!--Step:2 Import echarts.js-->
 <!--Step:2 引入echarts.js-->
+<script>
+    var name_point;
+    $.ajax({
+        url:"/showEchart/getChina",
+        type:"json",
+        success:function(address){
+            name_point=address;
+        }
+    });
 
+</script>
 <script type="text/javascript" src="${ctxPath}/static/js/echarts/jquery-1.8.0.js"></script>
 <script src="${ctxPath}/static/js/echarts/echarts.js" charset="UTF-8"></script>
 <script type="text/javascript">
@@ -39,6 +49,7 @@
 
 <!--中国代码-->
 <script type="text/javascript">
+
     function getEcharts(){
         // Step:3 conifg ECharts's path, link to echarts.js from current page.
         // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
@@ -56,12 +67,19 @@
                 'echarts/chart/map'
             ],
             function (ec) {
+                var name_point={};
+                $.ajax({
+                    url:"/showEchart/getChina",
+                    type:"json",
+                    success:function(address){
+                        name_point=address;
+                        console.log(name_point[2]);
                 // --- 地图 ---
                 var myChart2 = ec.init(document.getElementById('mainMap'));
                 myChart2.setOption({
                     dataRange: {
                         min : 0,
-                        max : 100,
+                        max : 300,
                         calculable : true,
                         color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
                         textStyle:{
@@ -110,12 +128,10 @@
                                     }
                                 },
                                 data : [
+
                                 ],
                             },
-                            geoCoord: {
-                               '上海': [121.4648,31.2891],
-
-                            },
+                            geoCoord:name_point[0],
                             markPoint : {
                                 symbol:'emptyCircle',
                                 symbolSize : function (v){
@@ -133,18 +149,8 @@
                                         label:{position:'top'}
                                     }
                                 },
-                                data : [
-                                    {name:'上海',value:95},
-                                    {name:'广州',value:90},
-                                    {name:'大连',value:80},
-                                    {name:'南宁',value:70},
-                                    {name:'南昌',value:60},
-                                    {name:'拉萨',value:50},
-                                    {name:'长春',value:40},
-                                    {name:'包头',value:30},
-                                    {name:'重庆',value:20},
-                                    {name:'常州',value:10}
-                                ]
+                                data :name_point[1]
+
                             }
                         },
                         {
@@ -171,18 +177,7 @@
                                         }
                                     }
                                 },
-                                data : [
-                                    [{name:'上海'}, {name:'北京',value:95}],
-                                    [{name:'广州'}, {name:'北京',value:90}],
-                                    [{name:'大连'}, {name:'北京',value:80}],
-                                    [{name:'南宁'}, {name:'北京',value:70}],
-                                    [{name:'南昌'}, {name:'北京',value:60}],
-                                    [{name:'拉萨'}, {name:'北京',value:50}],
-                                    [{name:'长春'}, {name:'北京',value:40}],
-                                    [{name:'包头'}, {name:'北京',value:30}],
-                                    [{name:'重庆'}, {name:'北京',value:20}],
-                                    [{name:'常州'}, {name:'北京',value:10}]
-                                ]
+                                data :name_point[2]
                             },
                             markPoint : {
                                 symbol:'emptyCircle',
@@ -206,21 +201,12 @@
                                         label:{show:false}
                                     }
                                 },
-                                data : [
-                                    {name:'上海',value:95},
-                                    {name:'广州',value:90},
-                                    {name:'大连',value:80},
-                                    {name:'南宁',value:70},
-                                    {name:'南昌',value:60},
-                                    {name:'拉萨',value:50},
-                                    {name:'长春',value:40},
-                                    {name:'包头',value:30},
-                                    {name:'重庆',value:20},
-                                    {name:'常州',value:10}
-                                ]
+                                data :name_point[1]
                             }
                         }
                     ]
+                });
+                    }
                 });
             });
     }
