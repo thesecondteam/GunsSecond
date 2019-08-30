@@ -1,0 +1,52 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <#input id="id" name="标识ID" value="${item.id}" underline="true"  readonly="readonly"/>
+                </div>
+                <div class="col-sm-4">
+                    <#input id="optime" name="操作时间" value="${item.optime}" underline="true" readonly="readonly"/>
+                </div>
+                <div class="col-sm-4">
+                    <#input id="oprman" name="操作人" value="${item.oprman}" underline="true" readonly="readonly"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">旧内容</label>
+                        <div class="col-sm-9">
+                             <textarea id="oldcontent" name="旧内容"
+                                       underline="true" style="overflow:scroll;resize:none;width: 100%"rows="7" readonly="readonly">${item.oldcontent}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">新内容</label>
+                        <div class="col-sm-9">
+                             <textarea id="newcontent" name="新内容"
+                                       underline="true" style="overflow:scroll;resize:none;width: 100%"rows="7" readonly="readonly">${item.newcontent}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <label class="col-sm-3 control-label">操作内容</label>
+                        <div class="col-sm-9">
+                             <textarea id="optype" name="操作内容"
+                                       underline="true" style="overflow:scroll;resize:none;width: 100%"rows="7" readonly="readonly">${item.optype}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/busiRecord/busiRecord_info.js"></script>
+@}
