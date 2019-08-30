@@ -115,16 +115,16 @@ public class EchartController {
         Map<String,Object>mapB=new HashMap<>();
         //得到 秦皇岛——其他地方 的对象
         for(BusiWaybill B:listBW)
-        {   if(B.getStartpoint()==null||B.getEndpiont()==null)
+        {   if(B.getStartpoint()==null||B.getEndpoint()==null)
             continue;
-            if(B.getStartpoint()==0&&B.getEndpiont()!=null)//0代表秦皇岛本地
+            if(B.getStartpoint()==0&&B.getEndpoint()!=null)//0代表秦皇岛本地
                 listGetBW.add(B);
         }
         //给各地累加箱数
 
         for(BusiWaybill bwb:listGetBW)
         {
-            DictStation listStation = this.dictStationService.selectById(bwb.getEndpiont());
+            DictStation listStation = this.dictStationService.selectById(bwb.getEndpoint());
 
             if(mapB.containsKey(listStation.getProvince()))
             {
@@ -170,7 +170,7 @@ public class EchartController {
                                                             "value":205
                                                         }*/
         reList.add(list4);//返回这样的格式 [{name:'天津'}, {name:'秦皇岛',value:95}],
-                                    //[{name:'河北省'}, {name:'北京',value:90}]
+                        //[{name:'河北省'}, {name:'北京',value:90}]
         return  reList;//一个接口返回三组数据
     }
 }
