@@ -93,6 +93,21 @@ Voyage.openVoyageDetail = function () {
 };
 
 /**
+ * 结束
+ */
+Voyage.finish = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/voyage/finish", function (data) {
+            Feng.success("航次已结束!");
+            Voyage.table.refresh();
+        }, function (data) {
+            Feng.error("结束异常!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};
+/**
  * 删除voyage
  */
 Voyage.delete = function () {

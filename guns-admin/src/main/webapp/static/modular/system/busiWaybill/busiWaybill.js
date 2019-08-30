@@ -108,6 +108,21 @@ BusiWaybill.delete = function () {
         ajax.start();
     }
 };
+/**
+ * 结束
+ */
+BusiWaybill.finish = function () {
+    if (this.check()) {
+        var ajax = new $ax(Feng.ctxPath + "/busiWaybill/finish", function (data) {
+            Feng.success("运单已结束!");
+            BusiWaybill.table.refresh();
+        }, function (data) {
+            Feng.error("结束异常!" + data.responseJSON.message + "!");
+        });
+        ajax.set(this.seItem);
+        ajax.start();
+    }
+};
 
 /**
  * 查询运单管理列表

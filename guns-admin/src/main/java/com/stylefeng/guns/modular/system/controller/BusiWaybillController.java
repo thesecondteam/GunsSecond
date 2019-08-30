@@ -16,6 +16,8 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
 
+import java.util.Date;
+import java.lang.String;
 
 /**
  * 运单管理控制器
@@ -118,6 +120,18 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(BusiWaybill busiWaybill) {
+        busiWaybillService.updateById(busiWaybill);
+        return SUCCESS_TIP;
+    }
+
+    /**
+     * 结束运单;返回状态码和结束时间；
+     */
+    @RequestMapping(value = "/finish")
+    @ResponseBody
+    public Object finish(BusiWaybill busiWaybill) {
+        busiWaybill.setStatecode(1);
+        busiWaybill.setEndtime(endtime());
         busiWaybillService.updateById(busiWaybill);
         return SUCCESS_TIP;
     }

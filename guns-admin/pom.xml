@@ -148,11 +148,26 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
-
+        <!--解决application.yml报错问题-->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!--解决application.yml报错问题-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <delimiters>@</delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -162,6 +177,13 @@
             </plugin>
         </plugins>
         <resources>
+
+            <!--解决application.yml报错问题-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+
             <resource>
                 <directory>src/main/webapp</directory>
             </resource>

@@ -131,6 +131,16 @@ public class VoyageController extends BaseController {
     }
 
     /**
+     * 结束
+     */
+    @RequestMapping(value = "/finish")
+    @ResponseBody
+    public Object finish(Voyage voyage) {
+        voyage.setStatecode(1);
+        voyageService.updateById(voyage);
+        return SUCCESS_TIP;
+    }
+    /**
      * voyage详情
      */
     @RequestMapping(value = "/detail/{voyageId}")
