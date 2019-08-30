@@ -68,9 +68,20 @@
                     ],
                     series : [
                         {
-                            name:'直接访问',
                             type:'bar',
                             barWidth: '60%',
+                            itemStyle: {
+                                normal: {
+                                    color: function(params) {
+                                        // build a color map as your need.
+                                        var colorList = [
+                                            '#60C0DD'
+
+                                        ];
+                                        return colorList[params.dataIndex]
+                                    }
+                                }
+                            },
                             data:y
                         }
                     ]

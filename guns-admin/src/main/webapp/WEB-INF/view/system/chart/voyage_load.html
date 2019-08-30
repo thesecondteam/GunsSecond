@@ -1,0 +1,142 @@
+@layout("/common/_container.html"){
+<script src="${ctxPath}/static/js/plugins/echarts.min.js"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>装卸货按月对比</h5>
+            </div>
+            <div id="voyageloadchart" style="width: 100%;height:380px;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="${ctxPath}/static/js/plugins/echarts/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var mychart = echarts.init(document.getElementById('voyageloadchart'));
+    function chart(mychart){
+        $.ajax({
+            contentType : "application/json",
+            type : "post",
+            url : Feng.ctxPath + "/VoyageloadChart/list/",
+            data:{},
+            dataType : "json",
+            success : function(data) {
+                var x=[];
+                var y=[];
+                for(var i=0;i<12;i++){
+                    x[i]=data[i];
+                }
+                for(var i=12;i<24;i++){
+                    y[i-12]=data[i];
+                }
+                console.log(x);
+                console.log(y);
+
+
+                mychart.setOption({
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['装货','卸货']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series: [
+                        {
+                            name:'装货',
+                            type:'line',
+                            data:x,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'},
+                                    [{
+                                        symbol: 'none',
+                                        x: '90%',
+                                        yAxis: 'max'
+                                    }, {
+                                        symbol: 'circle',
+                                        label: {
+                                            normal: {
+                                                position: 'start',
+                                                formatter: '最大装箱数'
+                                            }
+                                        },
+                                        type: 'max',
+                                        name: '最高点'
+                                    }]
+                                ]
+                            }
+                        },
+                        {
+                            name:'卸货',
+                            type:'line',
+                            data:y,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'},
+                                    [{
+                                        symbol: 'none',
+                                        x: '90%',
+                                        yAxis: 'max'
+                                    }, {
+                                        symbol: 'circle',
+                                        label: {
+                                            normal: {
+                                                position: 'start',
+                                                formatter: '最大卸箱数'
+                                            }
+                                        },
+                                        type: 'max',
+                                        name: '最高点'
+                                    }]
+                                ]
+                            }
+                        }
+                    ]
+
+
+                });
+
+            }
+        });
+
+    }
+
+    chart(mychart);
+
+</script>
+@}

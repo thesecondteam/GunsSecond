@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.VoyageloadChartMapper">
+
+
+
+    <!-- 通用查询结果列 -->
+    <select id="list" resultType="map">
+        select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where loadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where loadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where unloadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where unloadcode='1' group by months
+
+    </select>
+
+</mapper>

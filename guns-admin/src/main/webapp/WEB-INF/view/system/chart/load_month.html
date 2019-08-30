@@ -1,0 +1,137 @@
+@layout("/common/_container.html"){
+<script src="${ctxPath}/static/js/plugins/echarts.min.js"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>装卸货动态对比</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <#SelectCon  id="month" name="月份" >
+                                <option value="1" >一月</option>
+                                <option value="2" >二月</option>
+                                <option value="3" >三月</option>
+                                <option value="4" >四月</option>
+                                <option value="5" >五月</option>
+                                <option value="6" >六月</option>
+                                <option value="7" >七月</option>
+                                <option value="8" selected="selected">八月</option>
+                                <option value="9" >九月</option>
+                                <option value="10" >十月</option>
+                                <option value="11" >十一月</option>
+                                <option value="12" >十二月</option>
+                            </#SelectCon>
+                            </div>
+                        <div class="col-sm-3">
+                            <#button name="搜索" icon="fa-search" clickFun="search()"/>
+                        </div>
+                        </div>
+                </div>
+            </div>
+            <div id="loadmonthchart" style="width: 100%;height:380px;"></div>
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="${ctxPath}/static/js/plugins/echarts/echarts.min.js"></script>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var mychart = echarts.init(document.getElementById('loadmonthchart'));
+    function chart(mychart,month){
+        $.ajax({
+            url : Feng.ctxPath + "/Loadmonth/list",
+            data:{month:month},
+            dataType : "json",
+            success : function(data) {
+                var x=[data[0],data[1]];
+                var y=[data[2],data[3]];
+                console.log(x);
+                console.log(y);
+
+
+                mychart.setOption({
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['装货','卸货']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type:  'bar'},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : ['航次','运单']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'装货',
+                            type:'bar',
+                            data:x,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'卸货',
+                            type:'bar',
+                            data:y,
+                            markPoint : {
+                                data : [
+                                    {type : 'max', name: '最大值'},
+                                    {type : 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine : {
+                                data : [
+                                    {type : 'average', name : '平均值'}
+                                ]
+                            }
+                        }
+                    ]
+
+
+
+                });
+
+            }
+        });
+
+    }
+
+    chart(mychart,8);
+
+
+    $("#month").change(function () {
+        chart(mychart,$("#month").val());
+    })
+
+</script>
+@}
