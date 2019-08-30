@@ -6,10 +6,12 @@ import com.google.common.collect.Maps;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.common.constant.state.Order;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.factory.DicFactory;
 import com.stylefeng.guns.modular.system.model.*;
 
+import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.service.IDictStationService;
 import com.stylefeng.guns.modular.system.service.IHarbourService;
 import com.stylefeng.guns.modular.system.warpper.DictGoodstypeWrapper;
@@ -27,10 +29,8 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.webSys.service.IBusiOrderService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * order控制器
@@ -50,6 +50,8 @@ public class BusiOrderController extends BaseController {
     private IDictStationService dictStationService;
     @Autowired
     private IHarbourService harbourService;
+    @Autowired
+    private IBusiRecordService busiRecordService;
     /**
      * 跳转到order首页
      */
@@ -174,6 +176,18 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(BusiOrder busiOrder) {
+        /*********************操作记录****************************/
+        BusiOrder busiOrderOld=busiOrderService.selectById(busiOrder.getId());
+        if(busiOrderOld==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent("空");
+        busiRecord.setNewcontent(busiOrder.toString());
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("新增order");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         busiOrderService.insert(busiOrder);
         return SUCCESS_TIP;
     }
@@ -185,6 +199,19 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer busiOrderId) {
+        /*********************操作记录****************************/
+        BusiOrder busiOrderOld=busiOrderService.selectById(busiOrderId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(busiOrderOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除order");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
+
         busiOrderService.deleteById(busiOrderId);
         return SUCCESS_TIP;
     }
@@ -196,6 +223,31 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(BusiOrder busiOrder) {
+        /*********************操作记录****************************/
+        BusiOrder busiOrderOld=busiOrderService.selectById(busiOrder.getId());
+        if(busiOrderOld!=null)
+        {
+            Class clsOld=busiOrderOld.getClass();
+            Class clsNew=busiOrder.getClass();
+            Field[] fieldsOld=clsOld.getDeclaredFields();
+            Field[] fieldsNew=clsNew.getDeclaredFields();
+            String op="修改了Order:";
+            for(int i=0;i<fieldsOld.length;i++)
+            {
+                if(fieldsOld[i]!=fieldsNew[i])
+                {
+                    op+="属性："+fieldsOld[i].getName()+",由\""+fieldsOld[i]+"\"-->\""+fieldsNew[i]+"\"";
+                }
+            }
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(busiOrderOld.toString());
+            busiRecord.setNewcontent(busiOrder.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         busiOrderService.updateById(busiOrder);
         return SUCCESS_TIP;
     }
