@@ -18,6 +18,7 @@ import com.stylefeng.guns.modular.system.model.Voyage;
 import com.stylefeng.guns.modular.system.service.IVoyageService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 /**
@@ -137,6 +138,7 @@ public class VoyageController extends BaseController {
     @ResponseBody
     public Object finish(Voyage voyage) {
         voyage.setStatecode(1);
+        voyage.setEndtime(new Date());
         voyageService.updateById(voyage);
         return SUCCESS_TIP;
     }

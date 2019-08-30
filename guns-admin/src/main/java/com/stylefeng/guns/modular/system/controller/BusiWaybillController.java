@@ -3,19 +3,21 @@ package com.stylefeng.guns.modular.system.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.log.LogObjectHolder;
 import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.BusiWaybill;
+import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
 import com.stylefeng.guns.modular.system.service.ITrainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.stylefeng.guns.core.log.LogObjectHolder;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.lang.String;
 
@@ -131,7 +133,7 @@ public class BusiWaybillController extends BaseController {
     @ResponseBody
     public Object finish(BusiWaybill busiWaybill) {
         busiWaybill.setStatecode(1);
-        busiWaybill.setEndtime(endtime());
+        busiWaybill.setEndtime(new Date());
         busiWaybillService.updateById(busiWaybill);
         return SUCCESS_TIP;
     }
