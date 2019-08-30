@@ -29,8 +29,21 @@ function isEmpty(obj) {
  * @param val 数据的具体值
  */
 BusiWaybillInfoDlg.set = function(key, val) {
-    this.busiWaybillInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
-    return this;
+        if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
+            if(key=="endpoint"){
+                console.log("111");
+                this.busiWaybillInfoData[key] = $("#" + key).val();
+                return this;
+            }
+            else {
+                this.busiWaybillInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+                return this;
+            }
+        }
+        else {
+            this.busiWaybillInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
+            return this;
+        }
 }
 
 /**
@@ -59,12 +72,12 @@ BusiWaybillInfoDlg.collectData = function() {
     .set('waybillid')
     .set('trainnum')
     .set('starttime')
-    .set('endtime')
+/*    .set('endtime')*/
     .set('consigncompany')
     .set('recivecompany')
     .set('boxnumber')
     .set('startpoint')
-    .set('endpiont')
+    .set('endpoint')
     .set('distance')
     .set('statecode')
     .set('loadtype')
@@ -183,7 +196,7 @@ BusiWaybillInfoDlg.getBoxCode = function () {
             if(listBoxCode && listBoxCode.length != 0){
                 for(var i=0; i<listBoxCode.length; i++){
                     if(!isEmpty(listBoxCode[i])){
-                        var option="<option value=\""+listBoxCode[i]+"\"";
+                        var option="<option value=\""+i+"\"";
                         option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
                         $("select[id=boxnumber]").append(option);
                     }
@@ -212,12 +225,26 @@ BusiWaybillInfoDlg.getStartStationId = function () {
         error: function () {
         },
         success: function (listStationId) {
-            if (listStationId && listStationId.length != 0) {
-                for (var i = 0; i < listStationId.length; i++) {
-                    if (!isEmpty(listStationId[i])) {
-                        var option = "<option value=\"" + listStationId[i] + "\"";
-                        option += ">" + listStationId[i] + "</option>";  //动态添加数据
-                        $("select[id=startpoint]").append(option);
+            if(listStationId && listStationId.length != 0) {
+                if (listStationId.length > "7") {
+                    for (var i = 1; i < listStationId.length + 1; i++) {
+                        if (!isEmpty(listStationId[i])) {
+                            if (i == "7") {
+                                i++;
+                                var option = "<option value=\"" + i + "\"";
+                                option += ">" + listStationId[i] + "</option>";  //动态添加数据
+                            }
+                            $("select[id=startpoint]").append(option);
+                        }
+                    }
+                }
+                else {
+                    for (var i = 1; i < listStationId.length + 1; i++) {
+                        if (!isEmpty(listStationId[i])) {
+                            var option = "<option value=\"" + i + "\"";
+                            option += ">" + listStationId[i] + "</option>";  //动态添加数据
+                            $("select[id=startpoint]").append(option);
+                        }
                     }
                 }
             }
@@ -241,11 +268,25 @@ BusiWaybillInfoDlg.getEndStationId = function () {
         },
         success:function(listStationId){
         if(listStationId && listStationId.length != 0){
-            for(var i=0; i<listStationId.length; i++){
-                if(!isEmpty(listStationId[i])){
-                    var option="<option value=\""+listStationId[i]+"\"";
-                    option += ">"+listStationId[i]+"</option>";  //动态添加数据
-                    $("select[id=endpoint]").append(option);
+            if(listStationId.length > "7"){
+                for(var i=1; i<listStationId.length+1; i++){
+                    if(!isEmpty(listStationId[i])){
+                        if(i == "7"){
+                            i++;
+                            var option="<option value=\""+i+"\"";
+                            option += ">"+listStationId[i]+"</option>";  //动态添加数据
+                        }
+                        $("select[id=endpoint]").append(option);
+                    }
+                }
+            }
+        else {
+                for(var i=1; i<listStationId.length+1; i++){
+                    if(!isEmpty(listStationId[i])){
+                            var option="<option value=\""+i+"\"";
+                            option += ">"+listStationId[i]+"</option>";  //动态添加数据
+                        $("select[id=endpoint]").append(option);
+                    }
                 }
             }
         }

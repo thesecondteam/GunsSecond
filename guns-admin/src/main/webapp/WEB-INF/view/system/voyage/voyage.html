@@ -18,10 +18,10 @@
                         </div>
                         <div class="hidden-xs" id="VoyageTableToolbar" role="group">
                             @if(shiro.hasPermission("/voyage/add")){
-                                <#button name="添加到达航次" icon="fa-plus" clickFun="Voyage.openAddVoyage()" space="true"/>
+                                <#button name="生成到达航次" icon="fa-plus" clickFun="Voyage.openAddVoyage()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/create")){
-                                <#button name="生成出发航次" icon="fa-plus" clickFun="Voyage.openCreateVoyage()" space="true"/>
+                                <#button name="添加出发航次" icon="fa-plus" clickFun="Voyage.openCreateVoyage()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/update")){
                                 <#button name="修改选中航次" icon="fa-edit" clickFun="Voyage.openVoyageDetail()" space="true"/>

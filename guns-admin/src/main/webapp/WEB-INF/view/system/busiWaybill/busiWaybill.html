@@ -18,10 +18,10 @@
                         </div>
                         <div class="hidden-xs" id="BusiWaybillTableToolbar" role="group">
                             @if(shiro.hasPermission("/busiWaybill/add")){
-                                <#button name="添加到达运单" icon="fa-plus" clickFun="BusiWaybill.openAddBusiWaybill()"/>
+                                <#button name="生成到达运单" icon="fa-plus" clickFun="BusiWaybill.openAddBusiWaybill()"/>
                             @}
                             @if(shiro.hasPermission("/busiWaybill/create")){
-                                <#button name="生成出发运单" icon="fa-plus" clickFun="BusiWaybill.openCreateBusiWaybill()" space="true"/>
+                                <#button name="添加出发运单" icon="fa-plus" clickFun="BusiWaybill.openCreateBusiWaybill()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/busiWaybill/update")){
                                 <#button name="修改选中运单" icon="fa-edit" clickFun="BusiWaybill.openBusiWaybillDetail()" space="true"/>
