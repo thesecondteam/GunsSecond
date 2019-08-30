@@ -48,7 +48,7 @@ Voyagedet.openAddVoyagedet = function () {
     var index = layer.open({
         type: 2,
         title: '添加voyagedet',
-        area: ['800px', '420px'], //宽高
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyagedet/voyagedet_add'
@@ -63,7 +63,7 @@ Voyagedet.openCreateVoyagedet = function () {
     var index = layer.open({
         type: 2,
         title: '添加voyagedet',
-        area: ['800px', '420px'], //宽高
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyagedet/voyagedet_create'
@@ -79,7 +79,7 @@ Voyagedet.openVoyagedetDetail = function () {
         var index = layer.open({
             type: 2,
             title: 'voyagedet详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyagedet/voyagedet_update/' + Voyagedet.seItem.id

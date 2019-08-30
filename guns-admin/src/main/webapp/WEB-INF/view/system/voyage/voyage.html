@@ -3,31 +3,31 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>voyage管理</h5>
+                <h5>航次管理</h5>
             </div>
             <div class="ibox-content">
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3">
-                                <#NameCon id="condition" name="航线编号" />
+                                <#NameCon id="condition" name="航次号" />
                             </div>
                             <div class="col-sm-3">
-                                <#button name="搜索" icon="fa-search" clickFun="Voyage.search()"/>
+                                <#button name="按航次号搜索" icon="fa-search" clickFun="Voyage.search()"/>
                             </div>
                         </div>
                         <div class="hidden-xs" id="VoyageTableToolbar" role="group">
                             @if(shiro.hasPermission("/voyage/add")){
-                                <#button name="添加" icon="fa-plus" clickFun="Voyage.openAddVoyage()"/>
+                                <#button name="添加到达航次" icon="fa-plus" clickFun="Voyage.openAddVoyage()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/create")){
-                            <#button name="生成" icon="fa-plus" clickFun="Voyage.openCreateVoyage()" space="true"/>
+                                <#button name="生成出发航次" icon="fa-plus" clickFun="Voyage.openCreateVoyage()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/update")){
-                                <#button name="修改" icon="fa-edit" clickFun="Voyage.openVoyageDetail()" space="true"/>
+                                <#button name="修改选中航次" icon="fa-edit" clickFun="Voyage.openVoyageDetail()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/delete")){
-                                <#button name="删除" icon="fa-remove" clickFun="Voyage.delete()" space="true"/>
+                                <#button name="删除选中航次" icon="fa-remove" clickFun="Voyage.delete()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/voyage/finish")){
                             <#button name="结束" icon="fa-stop" clickFun="Voyage.finish()" space="true"/>

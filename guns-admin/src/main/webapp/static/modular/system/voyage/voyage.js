@@ -14,20 +14,20 @@ var Voyage = {
 Voyage.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '航线编号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
+            {title: '航次号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
             {title: '轮船号', field: 'imo', visible: true, align: 'center', valign: 'middle'},
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '发货公司', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '收货公司', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '集装箱数量', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '里程数', field: 'distance', visible: true, align: 'center', valign: 'middle'},
+            {title: '发货方', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
+            {title: '收货方', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
+            {title: '集装箱数', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
+            {title: '起点', field: 'startpiont', visible: true, align: 'center', valign: 'middle'},
+            {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
+            {title: '里程', field: 'distance', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
+            {title: '装/卸种类', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
             {title: '装载码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},
-            {title: '卸载码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'},
-            {title: '类型', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
-            {title: '终止点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
-            {title: '起始点', field: 'startpiont', visible: true, align: 'center', valign: 'middle'}
+            {title: '卸载码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -51,8 +51,8 @@ Voyage.check = function () {
 Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '添加航次信息',
-        area: ['800px', '420px'], //宽高
+        title: '添加到达航次信息',
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_add'
@@ -66,8 +66,8 @@ Voyage.openAddVoyage = function () {
 Voyage.openCreateVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '生成航次信息',
-        area: ['800px', '420px'], //宽高
+        title: '生成出发航次信息',
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_create'
@@ -83,7 +83,7 @@ Voyage.openVoyageDetail = function () {
         var index = layer.open({
             type: 2,
             title: 'voyage详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyage/voyage_update/' + Voyage.seItem.id

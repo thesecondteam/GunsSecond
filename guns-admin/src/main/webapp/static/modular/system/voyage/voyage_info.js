@@ -194,6 +194,67 @@ VoyageInfoDlg.getBoxCode = function () {
     });
 }
 
+/**
+ *动态增加港口option
+ */
+VoyageInfoDlg.getStartHarbourName = function () {
+    var HarbourName = $("select[id=startpoint]").val();
+    $("select[id=startpoint]").empty();      //清空
+    $("#startpoint").append("<option value='0'>请选择起点港口</option>");
+    $.ajax({
+        url: '/harbour/getHarbourName',
+        type: "post",
+        data: {
+            HarbourName: HarbourName
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error: function () {
+        },
+        success: function (listHarbourName) {
+            if (listHarbourName && listHarbourName.length != 0) {
+                for (var i = 0; i < listHarbourName.length; i++) {
+                    if (!isEmpty(listHarbourName[i])) {
+                        var option = "<option value=\"" + listHarbourName[i] + "\"";
+                        option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                        $("select[id=startpoint]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+
+VoyageInfoDlg.getEndHarbourName = function(){
+    var HarbourName = $("select[id=endpoint]").val();
+    $("select[id=endpoint]").empty();      //清空
+    $("#endpoint").append("<option value='0'>请选择终点港口</option>");
+    $.ajax({
+        url: '/harbour/getHarbourName',
+        type: "post",
+        data: {
+            HarbourName: HarbourName
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error: function () {
+        },
+        success: function (listHarbourName) {
+            if (listHarbourName && listHarbourName.length != 0) {
+                for (var i = 0; i < listHarbourName.length; i++) {
+                    if (!isEmpty(listHarbourName[i])) {
+                        var option = "<option value=\"" + listHarbourName[i] + "\"";
+                        option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                        $("select[id=endpoint]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+
 $(function() {
 
 });

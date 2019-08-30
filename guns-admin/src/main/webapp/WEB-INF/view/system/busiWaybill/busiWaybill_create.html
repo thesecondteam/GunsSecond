@@ -9,7 +9,7 @@
                     <#select name="车次" id="trainnum" underline="true"/>
                     <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
                     <#input id="endtime" name="结束时间" underline="true"/>
-                    <#select name="集装箱号" id="boxnumber" underline="true"/>
+                    <#input name="集装箱数" id="boxnumber" underline="true"/>
                     <#input id="statecode" name="状态码" underline="true"/>
                 </div>
 
@@ -18,7 +18,7 @@
                     <#input id="startpoint" name="起点" underline="true" value="秦皇岛" readonly="true"/>
                     <#select id="endpoint" name="终点" underline="true"/>
                     <#input id="distance" name="距离" underline="true"/>
-                    <#input id="loadtype" name="装/卸种类" underline="true"/>
+                    <#input id="loadtype" name="装/卸种类" underline="true" value="装货" readonly="true"/>
                     <#input id="loadcode" name="装货码" underline="true"/>
                     <#input id="unloadcode" name="卸货码" underline="true"/>
                 </div>
@@ -70,7 +70,7 @@
 <script src="${ctxPath}/static/modular/system/busiWaybill/busiWaybill_info.js"></script>
 <script type="text/javascript">
     BusiWaybillInfoDlg.getTrainId();
-    BusiWaybillInfoDlg.getBoxCode();
     BusiWaybillInfoDlg.getEndStationId();
+    var fo = document.getElementById("trainnum").focus();
 </script>
 @}

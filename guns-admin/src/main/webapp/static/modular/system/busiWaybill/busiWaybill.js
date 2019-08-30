@@ -21,7 +21,7 @@ BusiWaybill.initColumn = function () {
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
             {title: '发货方', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
             {title: '收货方', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '集装箱数量', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
+            {title: '集装箱数', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
             {title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '终点', field: 'endpiont', visible: true, align: 'center', valign: 'middle'},
             {title: '距离', field: 'distance', visible: true, align: 'center', valign: 'middle'},
@@ -53,7 +53,7 @@ BusiWaybill.openAddBusiWaybill = function () {
     var index = layer.open({
         type: 2,
         title: '添加运单管理',
-        area: ['800px', '420px'], //宽高
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybill/busiWaybill_add'
@@ -68,7 +68,7 @@ BusiWaybill.openCreateBusiWaybill = function () {
     var index = layer.open({
         type: 2,
         title: '添加运单管理',
-        area: ['800px', '420px'], //宽高
+        area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybill/busiWaybill_create'
@@ -84,7 +84,7 @@ BusiWaybill.openBusiWaybillDetail = function () {
         var index = layer.open({
             type: 2,
             title: '运单管理详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybill/busiWaybill_update/' + BusiWaybill.seItem.id

@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Harbour;
 import com.stylefeng.guns.modular.system.service.IHarbourService;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 港口控制器
@@ -160,5 +157,27 @@ public class HarbourController extends BaseController {
     @ResponseBody
     public Object detail(@PathVariable("harbourId") Integer harbourId) {
         return harbourService.selectById(harbourId);
+    }
+
+    /**
+     * 获取所有港口
+     */
+    @RequestMapping(value="/getHarbourName")
+    @ResponseBody
+    public Object getHarbourName(String condition)
+    {
+        EntityWrapper<Harbour> harbourEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            harbourEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.harbourService.selectMaps(harbourEntityWrapper);
+        List<String> listHarbourName = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            if(!m.get("harbourcode").toString().equals("CNQHD")){
+                listHarbourName.add(m.get("harbourname").toString());
+            }
+        }
+        return listHarbourName;
     }
 }
