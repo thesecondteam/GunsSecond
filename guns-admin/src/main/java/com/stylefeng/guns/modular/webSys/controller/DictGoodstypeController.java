@@ -163,10 +163,22 @@ public class DictGoodstypeController extends BaseController {
             String op="修改了Dictgoodstype:@";
             for(Map.Entry<String, Object> m : mapOld.entrySet())
             {
-             if(!m.getValue().equals(mapNew.get(m.getKey())))//比较两个字符串，不等的时候才插入
+             if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)//比较两个字符串，不等的时候才插入
+             {      if(!m.getValue().equals(mapNew.get(m.getKey())))
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+             }
+             else if(m.getValue()==null&&mapNew.get(m.getKey())==null)
              {
-                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@"   ;
-               }
+                 continue;
+             }
+             else if(m.getValue()==null&&mapNew.get(m.getKey())!=null)
+             {
+                 op+="属性："+m.getKey()+"@由\""+"空"+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+             }
+             else if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)
+             {
+                 op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+"空"+"\"@";
+             }
             }
 
 

@@ -109,7 +109,7 @@ public class TrainController extends BaseController {
             busiRecord.setOldcontent("空");
             busiRecord.setNewcontent(train.toString());
             busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
-            busiRecord.setOptype("新增火车");
+            busiRecord.setOptype("新增Train");
             busiRecord.setOptime(new Date());
             busiRecordService.insert(busiRecord);
         }
@@ -131,7 +131,7 @@ public class TrainController extends BaseController {
         busiRecord.setOldcontent(trainOld.toString());
         busiRecord.setNewcontent("空");
         busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
-        busiRecord.setOptype("删除火车");
+        busiRecord.setOptype("删除Train");
         busiRecord.setOptime(new Date());
         busiRecordService.insert(busiRecord);
 
@@ -152,18 +152,14 @@ public class TrainController extends BaseController {
         {
             Map<String,Object> mapNew=entityToMap(train);
             Map<String,Object> mapOld=entityToMap(trainOld);
-            String op="修改了Order:@";
+            String op="修改了Train:@";
             for(Map.Entry<String, Object> m : mapOld.entrySet())
             {
-                if(!m.getValue().toString().equals(mapNew.get(m.getKey()).toString()))//比较两个字符串，不等的时候才插入
+                if(!m.getValue().equals(mapNew.get(m.getKey())))//比较两个字符串，不等的时候才插入
                 {
                     op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@"   ;
                 }
             }
-
-
-
-
             BusiRecord busiRecord=new BusiRecord();
             busiRecord.setOldcontent(trainOld.toString());
             busiRecord.setNewcontent(train.toString());
