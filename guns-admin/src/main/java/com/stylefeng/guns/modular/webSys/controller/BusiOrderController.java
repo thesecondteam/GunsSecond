@@ -223,31 +223,6 @@ public class BusiOrderController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(BusiOrder busiOrder) {
-        /*********************操作记录****************************/
-        BusiOrder busiOrderOld=busiOrderService.selectById(busiOrder.getId());
-        if(busiOrderOld!=null)
-        {
-            Class clsOld=busiOrderOld.getClass();
-            Class clsNew=busiOrder.getClass();
-            Field[] fieldsOld=clsOld.getDeclaredFields();
-            Field[] fieldsNew=clsNew.getDeclaredFields();
-            String op="修改了Order:@";
-            for(int i=0;i<fieldsOld.length;i++)
-            {
-                if(fieldsOld[i]!=fieldsNew[i])
-                {
-                    op+="属性："+fieldsOld[i].getName()+",由\""+fieldsOld[i]+"\"-->\""+fieldsNew[i]+"\"@"   ;
-                }
-            }
-            BusiRecord busiRecord=new BusiRecord();
-            busiRecord.setOldcontent(busiOrderOld.toString());
-            busiRecord.setNewcontent(busiOrder.toString());
-            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
-            busiRecord.setOptype(op);
-            busiRecord.setOptime(new Date());
-            busiRecordService.insert(busiRecord);
-        }
-        /*********************操作记录****************************/
         busiOrderService.updateById(busiOrder);
         return SUCCESS_TIP;
     }

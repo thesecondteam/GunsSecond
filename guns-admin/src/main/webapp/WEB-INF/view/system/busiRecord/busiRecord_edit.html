@@ -39,7 +39,7 @@
                         <label class="col-sm-3 control-label">操作内容</label>
                         <div class="col-sm-9">
                              <textarea id="optype" name="操作内容"
-                                       underline="true" style="overflow:scroll;resize:none;width: 100%"rows="7" readonly="readonly">${item.optype}</textarea>
+                                       underline="true" style="overflow:scroll;resize:none;width: 100%"rows="7" readonly="readonly"></textarea>
                         </div>
                     </div>
                 </div>
@@ -49,4 +49,15 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/busiRecord/busiRecord_info.js"></script>
+<script>
+    /****************正则表达式替换\@为换行************************/
+    var res='${item.optype}';
+    var patt1 = /\@/g;
+
+    res=res.replace(patt1,"\n");
+    console.log(res);
+    $("#optype").val(res);
+</script>
 @}
+
+

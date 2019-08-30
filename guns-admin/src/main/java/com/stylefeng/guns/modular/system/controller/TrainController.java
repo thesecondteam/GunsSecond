@@ -3,7 +3,11 @@ package com.stylefeng.guns.modular.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiOrder;
+import com.stylefeng.guns.modular.system.model.BusiRecord;
+import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.warpper.TrainWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Train;
 import com.stylefeng.guns.modular.system.service.ITrainService;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -32,6 +38,10 @@ public class TrainController extends BaseController {
 
     @Autowired
     private ITrainService trainService;
+    /************/
+    @Autowired
+    private IBusiRecordService busiRecordService;
+    /************/
 
     /**
      * 跳转到火车首页
@@ -92,6 +102,18 @@ public class TrainController extends BaseController {
             JSONObject jsonObject=JSONObject.parseObject(str);
             return jsonObject;
         }
+        /*********************操作记录****************************/
+        Train trainOld=trainService.selectById(train.getId());
+        if(trainOld==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(train.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype("新增火车");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         trainService.insert(train);
         return SUCCESS_TIP;
     }
@@ -102,6 +124,18 @@ public class TrainController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer trainId) {
+        /*********************操作记录****************************/
+        Train trainOld=trainService.selectById(trainId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(trainOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除火车");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
         trainService.deleteById(trainId);
         return SUCCESS_TIP;
     }
@@ -112,18 +146,33 @@ public class TrainController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Train train) {
-        List<Train>l=trainService.selectList(null);
-        Set<String> s=new HashSet<String>();
-        for(Train d:l) {
-            s.add(d.getTraincode());
-        }
-        if (s.contains(train.getTraincode()))
+        /*********************操作记录****************************/
+        Train trainOld=trainService.selectById(train.getId());
+        if(trainOld!=null)
         {
-            String str="{code:2335,message:\"修改错误，火车重复！\"}";
-            System.out.println(str);
-            JSONObject jsonObject=JSONObject.parseObject(str);
-            return jsonObject;
+            Map<String,Object> mapNew=entityToMap(train);
+            Map<String,Object> mapOld=entityToMap(trainOld);
+            String op="修改了Order:@";
+            for(Map.Entry<String, Object> m : mapOld.entrySet())
+            {
+                if(!m.getValue().toString().equals(mapNew.get(m.getKey()).toString()))//比较两个字符串，不等的时候才插入
+                {
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@"   ;
+                }
+            }
+
+
+
+
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(trainOld.toString());
+            busiRecord.setNewcontent(train.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
         }
+        /*********************操作记录****************************/
         trainService.updateById(train);
         return SUCCESS_TIP;
     }
