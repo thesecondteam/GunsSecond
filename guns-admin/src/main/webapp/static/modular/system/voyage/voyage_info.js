@@ -197,6 +197,9 @@ VoyageInfoDlg.getBoxCode = function () {
 /**
  *动态增加港口option
  */
+/**
+ * StartPoint
+ */
 VoyageInfoDlg.getStartHarbourName = function () {
     var HarbourName = $("select[id=startpoint]").val();
     $("select[id=startpoint]").empty();      //清空
@@ -214,11 +217,26 @@ VoyageInfoDlg.getStartHarbourName = function () {
         },
         success: function (listHarbourName) {
             if (listHarbourName && listHarbourName.length != 0) {
-                for (var i = 0; i < listHarbourName.length; i++) {
-                    if (!isEmpty(listHarbourName[i])) {
-                        var option = "<option value=\"" + listHarbourName[i] + "\"";
-                        option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                        $("select[id=startpoint]").append(option);
+                if(listHarbourName.length > "7"){
+                    for (var i = 0; i < listHarbourName.length; i++) {
+                        var j = i;
+                        if (!isEmpty(listHarbourName[i])) {
+                            if(j == "7") {
+                                j++;
+                            }
+                            var option = "<option value=\"" +j+ "\"";
+                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                            $("select[id=startpoint]").append(option);
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < listHarbourName.length; i++) {
+                        if (!isEmpty(listHarbourName[i])) {
+                            var option = "<option value=\"" +i+ "\"";
+                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                            $("select[id=startpoint]").append(option);
+                        }
                     }
                 }
             }
@@ -226,6 +244,9 @@ VoyageInfoDlg.getStartHarbourName = function () {
     });
 }
 
+/**
+ * EndPoint
+ */
 VoyageInfoDlg.getEndHarbourName = function(){
     var HarbourName = $("select[id=endpoint]").val();
     $("select[id=endpoint]").empty();      //清空
@@ -243,11 +264,26 @@ VoyageInfoDlg.getEndHarbourName = function(){
         },
         success: function (listHarbourName) {
             if (listHarbourName && listHarbourName.length != 0) {
-                for (var i = 0; i < listHarbourName.length; i++) {
-                    if (!isEmpty(listHarbourName[i])) {
-                        var option = "<option value=\"" + listHarbourName[i] + "\"";
-                        option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                        $("select[id=endpoint]").append(option);
+                if(listHarbourName.length > "7") {
+                    for (var i = 0; i < listHarbourName.length; i++) {
+                        var j = i;
+                        if (!isEmpty(listHarbourName[i])) {
+                            if(j == "7"){
+                                j++;
+                            }
+                            var option = "<option value=\"" +j+ "\"";
+                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                            $("select[id=endpoint]").append(option);
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < listHarbourName.length; i++) {
+                        if (!isEmpty(listHarbourName[i])) {
+                            var option = "<option value=\"" +i+ "\"";
+                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
+                            $("select[id=endpoint]").append(option);
+                        }
                     }
                 }
             }

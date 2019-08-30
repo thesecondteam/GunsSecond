@@ -36,7 +36,7 @@ public class Voyage extends Model<Voyage> {
     private Integer unloadcode;
     private Integer loadtype;
     private Integer endpoint;
-    private Integer startpiont;
+    private Integer startpoint;
     private String spareone;
     private String sparetwo;
 
@@ -153,12 +153,12 @@ public class Voyage extends Model<Voyage> {
         this.endpoint = endpoint;
     }
 
-    public Integer getStartpiont() {
-        return startpiont;
+    public Integer getStartpoint() {
+        return startpoint;
     }
 
-    public void setStartpiont(Integer startpiont) {
-        this.startpiont = startpiont;
+    public void setStartpoint(Integer startpoint) {
+        this.startpoint = startpoint;
     }
 
     public String getSpareone() {
@@ -199,7 +199,7 @@ public class Voyage extends Model<Voyage> {
         ", unloadcode=" + unloadcode +
         ", loadtype=" + loadtype +
         ", endpoint=" + endpoint +
-        ", startpiont=" + startpiont +
+        ", startpiont=" + startpoint +
         ", spareone=" + spareone +
         ", sparetwo=" + sparetwo +
         "}";

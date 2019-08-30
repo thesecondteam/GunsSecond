@@ -231,7 +231,7 @@ BusiWaybillInfoDlg.getStartStationId = function () {
                         if (!isEmpty(listStationId[i])) {
                             if (i == "7") {
                                 i++;
-                                var option = "<option value=\"" + i + "\"";
+                                var option = "<option value=\"" +i+ "\"";
                                 option += ">" + listStationId[i] + "</option>";  //动态添加数据
                             }
                             $("select[id=startpoint]").append(option);
@@ -241,7 +241,7 @@ BusiWaybillInfoDlg.getStartStationId = function () {
                 else {
                     for (var i = 1; i < listStationId.length + 1; i++) {
                         if (!isEmpty(listStationId[i])) {
-                            var option = "<option value=\"" + i + "\"";
+                            var option = "<option value=\"" +i+ "\"";
                             option += ">" + listStationId[i] + "</option>";  //动态添加数据
                             $("select[id=startpoint]").append(option);
                         }

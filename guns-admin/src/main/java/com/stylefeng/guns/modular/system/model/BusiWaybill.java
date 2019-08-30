@@ -31,7 +31,7 @@ public class BusiWaybill extends Model<BusiWaybill> {
     private String recivecompany;
     private Integer boxnumber;
     private Integer startpoint;
-    private Integer endpiont;
+    private Integer endpoint;
     private BigDecimal distance;
     private Integer statecode;
     private Integer loadtype;
@@ -111,12 +111,12 @@ public class BusiWaybill extends Model<BusiWaybill> {
         this.startpoint = startpoint;
     }
 
-    public Integer getEndpiont() {
-        return endpiont;
+    public Integer getEndpoint() {
+        return endpoint;
     }
 
-    public void setEndpiont(Integer endpiont) {
-        this.endpiont = endpiont;
+    public void setEndpoint(Integer endpoint) {
+        this.endpoint = endpoint;
     }
 
     public BigDecimal getDistance() {
@@ -176,7 +176,7 @@ public class BusiWaybill extends Model<BusiWaybill> {
         ", recivecompany=" + recivecompany +
         ", boxnumber=" + boxnumber +
         ", startpoint=" + startpoint +
-        ", endpiont=" + endpiont +
+        ", endpiont=" + endpoint +
         ", distance=" + distance +
         ", statecode=" + statecode +
         ", loadtype=" + loadtype +
