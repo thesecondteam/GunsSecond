@@ -2,9 +2,13 @@ package com.stylefeng.guns.modular.webSys.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.common.annotion.BussinessLog;
 import com.stylefeng.guns.core.common.exception.BizExceptionEnum;
 import com.stylefeng.guns.core.exception.GunsException;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiOrder;
+import com.stylefeng.guns.modular.system.model.BusiRecord;
 import com.stylefeng.guns.modular.system.warpper.DictWarpper;
 import com.stylefeng.guns.modular.system.warpper.DictGoodstypeWrapper;
 import org.springframework.stereotype.Controller;
@@ -17,9 +21,12 @@ import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.DictGoodstype;
 import com.stylefeng.guns.modular.webSys.service.IDictGoodstypeService;
+import  com.stylefeng.guns.modular.system.service.IBusiRecordService;
 
+import java.lang.reflect.Field;
 import java.sql.Wrapper;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +44,8 @@ public class DictGoodstypeController extends BaseController {
 
     @Autowired
     private IDictGoodstypeService dictGoodstypeService;
-
+    @Autowired
+    private IBusiRecordService busiRecordService;
     /**
      * 跳转到goodstype首页
      */
@@ -90,9 +98,23 @@ public class DictGoodstypeController extends BaseController {
     /**
      * 新增goodstype
      */
+    @BussinessLog(value = "新增货物类型",key = "goodsId")
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(DictGoodstype dictGoodstype) {
+        /***********************操作记录***********/
+        DictGoodstype dictGoodstypeOld=dictGoodstypeService.selectById(dictGoodstype.getId());
+        if(dictGoodstypeOld==null)
+        {
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(dictGoodstype.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());
+            busiRecord.setOptype("新增Dictgoodstype");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+            /************************************************/
+        }
         dictGoodstypeService.insert(dictGoodstype);
         return SUCCESS_TIP;
     }
@@ -103,6 +125,19 @@ public class DictGoodstypeController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer dictGoodstypeId) {
+        /*********************操作记录****************************/
+       DictGoodstype dictGoodstypeOld=dictGoodstypeService.selectById(dictGoodstypeId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(dictGoodstypeOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除Dictgoodstype");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
+
         dictGoodstypeService.deleteById(dictGoodstypeId);
         return SUCCESS_TIP;
     }
@@ -119,6 +154,33 @@ public class DictGoodstypeController extends BaseController {
              throw new GunsException(BizExceptionEnum.REQUEST_NULL);
 
          }
+        /*********************操作记录****************************/
+        DictGoodstype dictGoodstypeOld=dictGoodstypeService.selectById(dictGoodstype.getId());
+        if(dictGoodstypeOld!=null)
+        {
+            Map<String,Object> mapNew=entityToMap(dictGoodstype);
+            Map<String,Object> mapOld=entityToMap(dictGoodstypeOld);
+            String op="修改了Dictgoodstype:@";
+            for(Map.Entry<String, Object> m : mapOld.entrySet())
+            {
+             if(!m.getValue().equals(mapNew.get(m.getKey())))//比较两个字符串，不等的时候才插入
+             {
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@"   ;
+               }
+            }
+
+
+
+
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(dictGoodstypeOld.toString());
+            busiRecord.setNewcontent(dictGoodstype.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         dictGoodstypeService.updateById(dictGoodstype);
         return SUCCESS_TIP;
     }
@@ -169,4 +231,7 @@ public class DictGoodstypeController extends BaseController {
         List<Map<String, Object>> list = this.dictGoodstypeService.selectMaps(dictGoodstypeEntityWrapper);
         return list;
     }
+
+
+
 }
