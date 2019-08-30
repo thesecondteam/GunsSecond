@@ -17,6 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseController {
 
@@ -124,5 +127,21 @@ public class BaseController {
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentDispositionFormData("attachment", dfileName);
         return new ResponseEntity<byte[]>(fileBytes, headers, HttpStatus.CREATED);
+    }
+    /****************实体类转化为map******************/
+    public static Map<String, Object> entityToMap(Object object) {
+        Map<String, Object> map = new HashMap();
+        for (Field field : object.getClass().getDeclaredFields()){
+            try {
+                boolean flag = field.isAccessible();
+                field.setAccessible(true);
+                Object o = field.get(object);
+                map.put(field.getName(), o);
+                field.setAccessible(flag);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return map;
     }
 }
