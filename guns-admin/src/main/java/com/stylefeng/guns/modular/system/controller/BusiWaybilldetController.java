@@ -42,15 +42,22 @@ public class BusiWaybilldetController extends BaseController {
     }
 
     /**
-     * 跳转到添加运单详情管理
+     * 跳转到添加运单详情
      */
     @RequestMapping("/busiWaybilldet_add")
     public String busiWaybilldetAdd() {
         return PREFIX + "busiWaybilldet_add.html";
     }
+    /**
+     * 跳转到双击添加运单详情
+     */
+    @RequestMapping("/busiWaybilldet_click_add")
+    public String busiWaybilldetclickAdd() {
+        return PREFIX + "busiWaybilldet_click_add.html";
+    }
 
     /**
-     * 跳转到添加运单详情管理
+     * 跳转到生成运单详情
      */
     @RequestMapping("/busiWaybilldet_create")
     public String busiWaybilldetCreate() {
@@ -85,7 +92,7 @@ public class BusiWaybilldetController extends BaseController {
     }
 
     /**
-     * 新增运单详情管理
+     * 新增运单详情
      */
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -93,9 +100,17 @@ public class BusiWaybilldetController extends BaseController {
         busiWaybilldetService.insert(busiWaybilldet);
         return SUCCESS_TIP;
     }
-
     /**
-     * 新增运单详情管理
+     * 双击新增运单详情
+     */
+    @RequestMapping(value = "/click_add")
+    @ResponseBody
+    public Object click_add(BusiWaybilldet busiWaybilldet) {
+        busiWaybilldetService.insert(busiWaybilldet);
+        return SUCCESS_TIP;
+    }
+    /**
+     * 生成运单详情
      */
     @RequestMapping(value = "/create")
     @ResponseBody
@@ -105,7 +120,7 @@ public class BusiWaybilldetController extends BaseController {
     }
 
     /**
-     * 删除运单详情管理
+     * 删除运单详情
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
@@ -115,7 +130,7 @@ public class BusiWaybilldetController extends BaseController {
     }
 
     /**
-     * 修改运单详情管理
+     * 修改运单详情
      */
     @RequestMapping(value = "/update")
     @ResponseBody

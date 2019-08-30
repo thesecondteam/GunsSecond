@@ -5,20 +5,20 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="id" name="" type="hidden"/>
-                            <#input id="waybilldetid" name="运单详情号" underline="true" readonly="true"/>
-                            <#select id="waybillid" name="运单号" underline="true"/>
-                            <#select id="boxid" name="集装箱号" underline="true"/>
-                            <#input id="boxtype" name="集装箱类型" underline="true"/>
-                            <#input id="boxsize" name="集装箱大小"/>
+                    <#input id="id" name="" type="hidden"/>
+                    <#input id="waybilldetid" name="运单详情号" underline="true" readonly="true"/>
+                    <#input id="waybillid" name="运单号" underline="true" readonly="true"/>
+                    <#select id="boxid" name="集装箱号" underline="true"/>
+                    <#input id="boxtype" name="集装箱类型" underline="true"/>
+                    <#input id="boxsize" name="集装箱大小"/>
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="boxgoods" name="集装箱物品" underline="true"/>
-                            <#input id="operation" name="操作" underline="true"/>
-                            <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
-                            <#input id="statecode" name="状态码" underline="true"/>
-                            <#input id="finish" name="完成状态" underline="true"/>
+                    <#input id="boxgoods" name="集装箱物品" underline="true"/>
+                    <#input id="operation" name="操作" underline="true"/>
+                    <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
+                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="finish" name="完成状态" underline="true"/>
                 </div>
             </div>
 
@@ -57,16 +57,24 @@
 
         /*******************************/
     }
-        //时间数字小于10，则在之前加个“0”补位。
-        function check(i){
-            //方法一，用三元运算符
-            var num;
-            i<10?num="0"+i:num=i;
-            return num;
-        }
-
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+    }
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
 </script>
 
 <script src="${ctxPath}/static/modular/system/busiWaybilldet/busiWaybilldet_info.js"></script>
-
+<script>
+    var xx = getUrlParam('d');
+    $("#waybillid").val(xx);
+</script>
 @}

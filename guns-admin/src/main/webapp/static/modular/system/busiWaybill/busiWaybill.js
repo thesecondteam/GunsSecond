@@ -45,12 +45,12 @@ BusiWaybill.check = function () {
 };
 
 /**
- * 点击添加到达运单管理
+ * 点击添加发出运单管理
  */
 BusiWaybill.openAddBusiWaybill = function () {
     var index = layer.open({
         type: 2,
-        title: '添加运单管理',
+        title: '添加发出运单',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -60,12 +60,12 @@ BusiWaybill.openAddBusiWaybill = function () {
 };
 
 /**
- * 点击生成出发运单管理
+ * 点击生成到达运单管理
  */
 BusiWaybill.openCreateBusiWaybill = function () {
     var index = layer.open({
         type: 2,
-        title: '添加运单管理',
+        title: '生成到达运单',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -81,7 +81,8 @@ BusiWaybill.openBusiWaybillDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '运单管理详情',
+
+            title: '运单',
             area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
@@ -136,4 +137,19 @@ $(function () {
     var table = new BSTable(BusiWaybill.id, "/busiWaybill/list", defaultColunms);
     table.setPaginationType("client");
     BusiWaybill.table = table.init();
+});
+
+//双击添加运单详情
+$('#'+BusiWaybill.id).on("dbl-click-row.bs.table",function(e, row, $element) {
+    if (BusiWaybill.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '添加运单详情',
+            area: ['800px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_click_add?d='+row.waybillid
+        });
+        this.layerIndex = index;
+    }
 });

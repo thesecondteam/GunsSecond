@@ -49,7 +49,7 @@ BusiWaybilldet.check = function () {
 BusiWaybilldet.openAddBusiWaybilldet = function () {
     var index = layer.open({
         type: 2,
-        title: '添加运单详情管理',
+        title: '添加运单详情',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -64,7 +64,7 @@ BusiWaybilldet.openAddBusiWaybilldet = function () {
 BusiWaybilldet.openCreateBusiWaybilldet = function () {
     var index = layer.open({
         type: 2,
-        title: '添加运单详情管理',
+        title: '生成运单详情',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -80,7 +80,7 @@ BusiWaybilldet.openBusiWaybilldetDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: '运单详情管理详情',
+            title: '运单详情',
             area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,

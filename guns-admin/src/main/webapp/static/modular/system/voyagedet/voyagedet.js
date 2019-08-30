@@ -42,12 +42,12 @@ Voyagedet.check = function () {
 };
 
 /**
- * 点击添加voyagedet
+ * 点击添加发出航次详情
  */
 Voyagedet.openAddVoyagedet = function () {
     var index = layer.open({
         type: 2,
-        title: '添加voyagedet',
+        title: '添加航次详情',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -57,12 +57,12 @@ Voyagedet.openAddVoyagedet = function () {
 };
 
 /**
- * 点击生成voyagedet
+ * 点击生成到达航次详情
  */
 Voyagedet.openCreateVoyagedet = function () {
     var index = layer.open({
         type: 2,
-        title: '添加voyagedet',
+        title: '生成航次详情',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -78,7 +78,7 @@ Voyagedet.openVoyagedetDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: 'voyagedet详情',
+            title: '航次详情',
             area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,

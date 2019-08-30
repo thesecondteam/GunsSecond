@@ -102,7 +102,7 @@ public class VoyageController extends BaseController {
     }
 
     /**
-     * 新增voyage
+     * 生成voyage
      */
     @RequestMapping(value = "/create")
     @ResponseBody

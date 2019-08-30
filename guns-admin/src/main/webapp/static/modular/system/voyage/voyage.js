@@ -51,7 +51,7 @@ Voyage.check = function () {
 Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '添加到达航次信息',
+        title: '添加航次',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -66,7 +66,7 @@ Voyage.openAddVoyage = function () {
 Voyage.openCreateVoyage = function () {
     var index = layer.open({
         type: 2,
-        title: '生成出发航次信息',
+        title: '生成航次',
         area: ['1400px', '820px'], //宽高
         fix: false, //不固定
         maxmin: true,
@@ -82,7 +82,7 @@ Voyage.openVoyageDetail = function () {
     if (this.check()) {
         var index = layer.open({
             type: 2,
-            title: 'voyage详情',
+            title: '航次',
             area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
@@ -137,4 +137,18 @@ $(function () {
     var table = new BSTable(Voyage.id, "/voyage/list", defaultColunms);
     table.setPaginationType("client");
     Voyage.table = table.init();
+});
+//双击添加航次详情
+$('#'+Voyage.id).on("dbl-click-row.bs.table",function(e, row, $element) {
+    if (Voyage.check()) {
+        var index = layer.open({
+            type: 2,
+            title: '添加航次详情',
+            area: ['800px', '420px'], //宽高
+            fix: false, //不固定
+            maxmin: true,
+            content: Feng.ctxPath + '/voyagedet/voyagedet_click_add?d='+row.voyagenum
+        });
+        this.layerIndex = index;
+    }
 });

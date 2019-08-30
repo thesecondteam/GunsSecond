@@ -1,0 +1,74 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#input id="voyagedetid" name="航次详情编号" underline="true" readonly="true"/>
+                    <#input id="voyagenum" name="航线编号" underline="true" readonly="true"/>
+                    <#select id="boxid" name="箱子编号" underline="true"/>
+                    <#input id="boxtype" name="箱子类型" underline="true"/>
+                    <#input id="boxsize" name="箱子尺寸" underline="true"/>
+                    <#input id="boxgoods" name="箱子所装货物"/>
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="statecode" name="状态码" underline="true"/>
+                    <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
+                    <#input id="operation" name="装卸货操作" underline="true"/>
+                    <#input id="finish" name="是否完成" underline="true"/>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.addSubmit()"/>
+                    </div>
+                    <div  class="col-sm-6 b-r" style="align:center;width:50%">
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.onload=function newid() {
+        //获取年月日
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth()+1;
+        var day = time.getDate();
+        //获取时分秒
+        var h = time.getHours();
+        var m = time.getMinutes();
+        var s = time.getSeconds();
+        //检查是否小于10
+        h = check(h);
+        m = check(m);
+        s = check(s);
+        month = check(month);
+        day = check(day);
+        document.getElementById("voyagedetid").value = "Y" + year + month + day + h + m + s;
+        document.getElementById("createtime").value = year + "-" + month + "-" + day;
+    }
+    //时间数字小于10，则在之前加个“0”补位。
+    function check(i){
+        //方法一，用三元运算符
+        var num;
+        i<10?num="0"+i:num=i;
+        return num;
+    }
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]); return null; //返回参数值
+    }
+</script>
+
+<script src="${ctxPath}/static/modular/system/voyagedet/voyagedet_info.js"></script>
+
+<script>
+    var xx = getUrlParam('d');
+    $("#voyagenum").val(xx);
+</script>
+@}
