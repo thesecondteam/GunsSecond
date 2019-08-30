@@ -231,12 +231,12 @@ public class BusiOrderController extends BaseController {
             Class clsNew=busiOrder.getClass();
             Field[] fieldsOld=clsOld.getDeclaredFields();
             Field[] fieldsNew=clsNew.getDeclaredFields();
-            String op="修改了Order:";
+            String op="修改了Order:@";
             for(int i=0;i<fieldsOld.length;i++)
             {
                 if(fieldsOld[i]!=fieldsNew[i])
                 {
-                    op+="属性："+fieldsOld[i].getName()+",由\""+fieldsOld[i]+"\"-->\""+fieldsNew[i]+"\"";
+                    op+="属性："+fieldsOld[i].getName()+",由\""+fieldsOld[i]+"\"-->\""+fieldsNew[i]+"\"@"   ;
                 }
             }
             BusiRecord busiRecord=new BusiRecord();
