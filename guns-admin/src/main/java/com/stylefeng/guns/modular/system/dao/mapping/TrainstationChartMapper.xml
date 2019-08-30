@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stylefeng.guns.modular.system.dao.TrainstationChartMapper">
+
+
+
+    <!-- 通用查询结果列 -->
+    <select id="list" resultType="map">
+      SELECT dict_station.`name`,COUNT(*) FROM busi_waybill,dict_station WHERE endpiont=dict_station.id GROUP BY endpiont
+
+    </select>
+
+</mapper>
