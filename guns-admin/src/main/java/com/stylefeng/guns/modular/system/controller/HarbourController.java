@@ -3,7 +3,10 @@ package com.stylefeng.guns.modular.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiRecord;
+import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.warpper.HarbourWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,8 @@ public class HarbourController extends BaseController {
 
     @Autowired
     private IHarbourService harbourService;
+    @Autowired
+    private IBusiRecordService busiRecordService;
 
     /**
      * 跳转到港口首页
@@ -92,6 +97,18 @@ public class HarbourController extends BaseController {
             JSONObject jsonObject=JSONObject.parseObject(str);
             return jsonObject;
         }
+        /*********************操作记录****************************/
+        Harbour harbourOld=harbourService.selectById(harbour.getId());
+        if(harbourOld==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(harbour.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype("新增港口");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         harbourService.insert(harbour);
         return SUCCESS_TIP;
     }
@@ -102,6 +119,18 @@ public class HarbourController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer harbourId) {
+        /*********************操作记录****************************/
+        Harbour harbourOld=harbourService.selectById(harbourId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(harbourOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除港口");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
         harbourService.deleteById(harbourId);
         return SUCCESS_TIP;
     }
@@ -112,18 +141,45 @@ public class HarbourController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(Harbour harbour) {
-        List<Harbour>l=harbourService.selectList(null);
-        Set<String> s=new HashSet<String>();
-        for(Harbour d:l) {
-            s.add(d.getHarbourcode());
-        }
-        if (s.contains(harbour.getHarbourcode()))
+        /*********************操作记录****************************/
+        Harbour harbourOld=harbourService.selectById(harbour.getId());
+        if(harbourOld!=null)
         {
-            String str="{code:2334,message:\"修改错误，港口重复！\"}";
-            System.out.println(str);
-            JSONObject jsonObject=JSONObject.parseObject(str);
-            return jsonObject;
+            Map<String,Object> mapNew=entityToMap(harbour);
+            Map<String,Object> mapOld=entityToMap(harbourOld);
+            String op="修改了Order:@";
+            for(Map.Entry<String, Object> m : mapOld.entrySet())
+            {
+                if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)//比较两个字符串，不等的时候才插入
+                {      if(!m.getValue().equals(mapNew.get(m.getKey())))
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())==null)
+                {
+                    continue;
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+"空"+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+"空"+"\"@";
+                }
+            }
+
+
+
+
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(harbourOld.toString());
+            busiRecord.setNewcontent(harbour.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
         }
+        /*********************操作记录****************************/
         harbourService.updateById(harbour);
         return SUCCESS_TIP;
     }

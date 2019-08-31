@@ -3,7 +3,10 @@ package com.stylefeng.guns.modular.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiRecord;
+import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.warpper.DictStationWarpper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,8 @@ public class DictStationController extends BaseController {
 
     @Autowired
     private IDictStationService dictStationService;
+    @Autowired
+    private IBusiRecordService busiRecordService;
 
     /**
      * 跳转到站点首页
@@ -93,6 +98,18 @@ public class DictStationController extends BaseController {
             JSONObject jsonObject=JSONObject.parseObject(str);
             return jsonObject;
         }
+        /*********************操作记录****************************/
+        DictStation dictStationOld=dictStationService.selectById(dictStation.getId());
+        if(dictStationOld==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(dictStation.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype("新增站点");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         dictStationService.insert(dictStation);
         return SUCCESS_TIP;
     }
@@ -103,6 +120,18 @@ public class DictStationController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer dictStationId) {
+        /*********************操作记录****************************/
+        DictStation dictStationOld=dictStationService.selectById(dictStationId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(dictStationOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除站点");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
         dictStationService.deleteById(dictStationId);
         return SUCCESS_TIP;
     }
@@ -113,18 +142,45 @@ public class DictStationController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(DictStation dictStation) {
-        List<DictStation>l=dictStationService.selectList(null);
-        Set<String>s=new HashSet<String>();
-        for(DictStation d:l) {
-            s.add(d.getName());
-        }
-        if (s.contains(dictStation.getName()))
+        /*********************操作记录****************************/
+        DictStation dictStationOld=dictStationService.selectById(dictStation.getId());
+        if(dictStationOld!=null)
         {
-        String str="{code:2333,message:\"修改错误，站点重复！\"}";
-        System.out.println(str);
-            JSONObject jsonObject=JSONObject.parseObject(str);
-            return jsonObject;
+            Map<String,Object> mapNew=entityToMap(dictStation);
+            Map<String,Object> mapOld=entityToMap(dictStationOld);
+            String op="修改了Order:@";
+            for(Map.Entry<String, Object> m : mapOld.entrySet())
+            {
+                if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)//比较两个字符串，不等的时候才插入
+                {      if(!m.getValue().equals(mapNew.get(m.getKey())))
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())==null)
+                {
+                    continue;
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+"空"+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+"空"+"\"@";
+                }
+            }
+
+
+
+
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(dictStationOld.toString());
+            busiRecord.setNewcontent(dictStation.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
         }
+        /*********************操作记录****************************/
         dictStationService.updateById(dictStation);
         return SUCCESS_TIP;
     }
