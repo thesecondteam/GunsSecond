@@ -18,14 +18,14 @@
         <result column="unloadcode" property="unloadcode" />
         <result column="loadtype" property="loadtype" />
         <result column="endpoint" property="endpoint" />
-        <result column="startpiont" property="startpiont" />
+        <result column="startpoint" property="startpoint" />
         <result column="spareone" property="spareone" />
         <result column="sparetwo" property="sparetwo" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, voyagenum, imo, starttime, endtime, consigncompany, recivecompany, boxnumber, distance, statecode, loadcode, unloadcode, loadtype, endpoint, startpiont, spareone, sparetwo
+        id, voyagenum, imo, starttime, endtime, consigncompany, recivecompany, boxnumber, distance, statecode, loadcode, unloadcode, loadtype, endpoint, startpoint, spareone, sparetwo
     </sql>
 
 </mapper>

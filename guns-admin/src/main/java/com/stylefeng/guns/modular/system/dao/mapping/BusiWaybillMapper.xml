@@ -13,7 +13,7 @@
         <result column="recivecompany" property="recivecompany" />
         <result column="boxnumber" property="boxnumber" />
         <result column="startpoint" property="startpoint" />
-        <result column="endpiont" property="endpiont" />
+        <result column="endpoint" property="endpoint" />
         <result column="distance" property="distance" />
         <result column="statecode" property="statecode" />
         <result column="loadtype" property="loadtype" />
@@ -23,7 +23,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, waybillid, trainnum, starttime, endtime, consigncompany, recivecompany, boxnumber, startpoint, endpiont, distance, statecode, loadtype, loadcode, unloadcode
+        id, waybillid, trainnum, starttime, endtime, consigncompany, recivecompany, boxnumber, startpoint, endpoint, distance, statecode, loadtype, loadcode, unloadcode
     </sql>
 
 </mapper>

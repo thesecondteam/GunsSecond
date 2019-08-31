@@ -199,7 +199,7 @@ public class Voyage extends Model<Voyage> {
         ", unloadcode=" + unloadcode +
         ", loadtype=" + loadtype +
         ", endpoint=" + endpoint +
-        ", startpiont=" + startpoint +
+        ", startpoint=" + startpoint +
         ", spareone=" + spareone +
         ", sparetwo=" + sparetwo +
         "}";

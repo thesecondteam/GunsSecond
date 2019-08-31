@@ -176,7 +176,7 @@ public class BusiWaybill extends Model<BusiWaybill> {
         ", recivecompany=" + recivecompany +
         ", boxnumber=" + boxnumber +
         ", startpoint=" + startpoint +
-        ", endpiont=" + endpoint +
+        ", endpoint=" + endpoint +
         ", distance=" + distance +
         ", statecode=" + statecode +
         ", loadtype=" + loadtype +

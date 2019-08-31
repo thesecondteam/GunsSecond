@@ -70,7 +70,7 @@ VoyageInfoDlg.collectData = function() {
     .set('unloadcode')
     .set('loadtype')
     .set('endpoint')
-    .set('startpiont')
+    .set('startpoint')
     .set('spareone')
     .set('sparetwo');
 }

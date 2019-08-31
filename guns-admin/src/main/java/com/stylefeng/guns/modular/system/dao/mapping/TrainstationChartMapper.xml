@@ -6,7 +6,7 @@
 
     <!-- 通用查询结果列 -->
     <select id="list" resultType="map">
-      SELECT dict_station.`name`,COUNT(*) FROM busi_waybill,dict_station WHERE endpiont=dict_station.id GROUP BY endpiont
+      SELECT dict_station.`name`,COUNT(*) FROM busi_waybill,dict_station WHERE endpoint=dict_station.id GROUP BY endpoint
 
     </select>
 
