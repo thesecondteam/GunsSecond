@@ -145,7 +145,7 @@ $('#'+BusiWaybill.id).on("dbl-click-row.bs.table",function(e, row, $element) {
         var index = layer.open({
             type: 2,
             title: '添加运单详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_click_add?d='+row.waybillid

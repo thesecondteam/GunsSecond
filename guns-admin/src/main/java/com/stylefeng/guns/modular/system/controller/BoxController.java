@@ -168,4 +168,17 @@ public class BoxController extends BaseController {
         }
         return listBoxCode;
     }
+    /**
+     * 获取特定集装箱
+     */
+    @RequestMapping(value = "/getBoxType")
+    @ResponseBody
+    public Object getBoxType(@RequestParam(value = "BoxCode")String BoxCode){
+        EntityWrapper<Box> boxEntityWrapper = new EntityWrapper<>();
+        if(ToolUtil.isNotEmpty(BoxCode)){
+            boxEntityWrapper.eq("boxcode",BoxCode);
+        }
+        Object boxType = this.boxService.selectById(boxEntityWrapper);
+        return boxType;
+    }
 }

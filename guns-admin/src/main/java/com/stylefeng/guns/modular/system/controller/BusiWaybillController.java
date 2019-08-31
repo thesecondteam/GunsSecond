@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
 import com.stylefeng.guns.core.log.LogObjectHolder;
+import com.stylefeng.guns.core.shiro.ShiroKit;
 import com.stylefeng.guns.core.util.ToolUtil;
+import com.stylefeng.guns.modular.system.model.BusiRecord;
 import com.stylefeng.guns.modular.system.model.BusiWaybill;
+import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
 import com.stylefeng.guns.modular.system.service.ITrainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.lang.String;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 运单管理控制器
@@ -35,8 +41,10 @@ public class BusiWaybillController extends BaseController {
 
     @Autowired
     private IBusiWaybillService busiWaybillService;
+    /************/
     @Autowired
-    private ITrainService trainService;
+    private IBusiRecordService busiRecordService;
+    /************/
 
     /**
      * 跳转到运单管理首页
@@ -94,6 +102,18 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(BusiWaybill busiWaybill) {
+        /*********************操作记录****************************/
+        BusiWaybill busiWaybill1Old=busiWaybillService.selectById(busiWaybill.getId());
+        if(busiWaybill1Old==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(busiWaybill.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype("新增Waybill");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         busiWaybillService.insert(busiWaybill);
         return SUCCESS_TIP;
     }
@@ -103,6 +123,18 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/create")
     @ResponseBody
     public Object create(BusiWaybill busiWaybill) {
+        /*********************操作记录****************************/
+        BusiWaybill busiWaybill1Old=busiWaybillService.selectById(busiWaybill.getId());
+        if(busiWaybill1Old==null)
+        {   BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent("空");
+            busiRecord.setNewcontent(busiWaybill.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype("新增Waybill");
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         busiWaybillService.insert(busiWaybill);
         return SUCCESS_TIP;
     }
@@ -112,6 +144,18 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam Integer busiWaybillId) {
+        /*********************操作记录****************************/
+        BusiWaybill busiWaybillOld=busiWaybillService.selectById(busiWaybillId);
+
+        BusiRecord busiRecord=new BusiRecord();
+        busiRecord.setOldcontent(busiWaybillOld.toString());
+        busiRecord.setNewcontent("空");
+        busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+        busiRecord.setOptype("删除Waybill");
+        busiRecord.setOptime(new Date());
+        busiRecordService.insert(busiRecord);
+
+        /*********************操作记录****************************/
         busiWaybillService.deleteById(busiWaybillId);
         return SUCCESS_TIP;
     }
@@ -122,6 +166,42 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(BusiWaybill busiWaybill) {
+        /*********************操作记录****************************/
+        BusiWaybill busiWaybill1Old=busiWaybillService.selectById(busiWaybill.getId());
+        if(busiWaybill1Old!=null)
+        {
+            Map<String,Object> mapNew=entityToMap(busiWaybill);
+            Map<String,Object> mapOld=entityToMap(busiWaybill1Old);
+            String op="修改了Waybill:@";
+            for(Map.Entry<String, Object> m : mapOld.entrySet())
+            {
+                if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)//比较两个字符串，不等的时候才插入
+                {      if(!m.getValue().equals(mapNew.get(m.getKey())))
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())==null)
+                {
+                    continue;
+                }
+                else if(m.getValue()==null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+"空"+"\"-->\""+mapNew.get(m.getKey())+"\"@";
+                }
+                else if(m.getValue()!=null&&mapNew.get(m.getKey())!=null)
+                {
+                    op+="属性："+m.getKey()+"@由\""+m.getValue()+"\"-->\""+"空"+"\"@";
+                }
+
+            }
+            BusiRecord busiRecord=new BusiRecord();
+            busiRecord.setOldcontent(busiWaybill1Old.toString());
+            busiRecord.setNewcontent(busiWaybill.toString());
+            busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
+            busiRecord.setOptype(op);
+            busiRecord.setOptime(new Date());
+            busiRecordService.insert(busiRecord);
+        }
+        /*********************操作记录****************************/
         busiWaybillService.updateById(busiWaybill);
         return SUCCESS_TIP;
     }
@@ -146,5 +226,23 @@ public class BusiWaybillController extends BaseController {
     public Object detail(@PathVariable("busiWaybillId") Integer busiWaybillId) {
         return busiWaybillService.selectById(busiWaybillId);
     }
-
+    /**
+     * 获取所有运单号
+     */
+    @RequestMapping(value="/getWaybillId")
+    @ResponseBody
+    public Object getWaybillId(String condition)
+    {
+        EntityWrapper<BusiWaybill> busiWaybillEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            busiWaybillEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.busiWaybillService.selectMaps(busiWaybillEntityWrapper);
+        List<String> listWaybillId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listWaybillId.add(m.get("waybillid").toString());
+        }
+        return listWaybillId;
+    }
 }

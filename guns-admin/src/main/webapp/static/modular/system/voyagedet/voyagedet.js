@@ -15,14 +15,14 @@ Voyagedet.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: '航次详情编号', field: 'voyagedetid', visible: true, align: 'center', valign: 'middle'},
-            {title: '航线编号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
+            {title: '航次号', field: 'voyagenum', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子编号', field: 'boxid', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子类型', field: 'boxtype', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子尺寸', field: 'boxsize', visible: true, align: 'center', valign: 'middle'},
             {title: '箱子所装货物', field: 'boxgoods', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
+/*            {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},*/
             {title: '创建时间', field: 'createtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '装卸货操作', field: 'operation', visible: true, align: 'center', valign: 'middle'},
+            {title: '装/卸种类', field: 'operation', visible: true, align: 'center', valign: 'middle'},
             {title: '是否完成', field: 'finish', visible: true, align: 'center', valign: 'middle'}
     ];
 };

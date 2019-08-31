@@ -117,7 +117,66 @@ BusiWaybilldetInfoDlg.editSubmit = function() {
     ajax.set(this.busiWaybilldetInfoData);
     ajax.start();
 }
-
+/**
+ *动态增加集装箱号option
+ */
+BusiWaybilldetInfoDlg.getBoxCode = function(){
+    var BoxCode = $("select[id=boxid]").val();
+    $("select[id=boxid]").empty();      //清空
+    $("#boxid").append("<option value='0'>请选择集装箱箱号</option>");
+    $.ajax({url:'/box/getBoxCode',
+        type:"post",
+        data:{
+            BoxCode : BoxCode
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listBoxCode){
+            if(listBoxCode && listBoxCode.length != 0){
+                for(var i=0; i<listBoxCode.length; i++){
+                    if(listBoxCode[i]!=""){
+                        var option="<option value=\""+listBoxCode[i]+"\"";
+                        option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
+                        $("select[id=boxid]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
+/**
+ *动态增加运单号option
+ */
+BusiWaybilldetInfoDlg.getWaybillId = function () {
+    var WaybillId = $("select[id=waybillid]").val();
+    $("select[id=waybillid]").empty();      //清空
+    $("#waybillid").append("<option value='0'>请选择运单号</option>");
+    $.ajax({url:'/busiWaybill/getWaybillId',
+        type:"post",
+        data:{
+            WaybillId : WaybillId
+        },
+        cache: false,
+        processData: false,
+        contentType: false,
+        error:function(){
+        },
+        success:function(listWaybillId){
+            if(listWaybillId && listWaybillId.length != 0){
+                for(var i=0; i<listWaybillId.length; i++){
+                    if(listWaybillId[i]!=""){
+                        var option="<option value=\""+listWaybillId[i]+"\"";
+                        option += ">"+listWaybillId[i]+"</option>";  //动态添加数据
+                        $("select[id=waybillid]").append(option);
+                    }
+                }
+            }
+        }
+    });
+}
 $(function() {
 
 });

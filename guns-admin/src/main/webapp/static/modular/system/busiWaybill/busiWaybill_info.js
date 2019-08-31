@@ -31,7 +31,6 @@ function isEmpty(obj) {
 BusiWaybillInfoDlg.set = function(key, val) {
         if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
             if(key=="endpoint"){
-                console.log("111");
                 this.busiWaybillInfoData[key] = $("#" + key).val();
                 return this;
             }

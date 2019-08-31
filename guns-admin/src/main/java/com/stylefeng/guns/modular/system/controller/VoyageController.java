@@ -163,10 +163,29 @@ public class VoyageController extends BaseController {
             shipEntityWrapper.like("imo", condition);
         }
         List<Map<String, Object>> list = this.shipService.selectMaps(shipEntityWrapper);
+        List<String> listImo = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            listImo.add(m.get("imo").toString());
+        }
+        return listImo;
+    }
+    /**
+     * 获取所有航次号
+     */
+    @RequestMapping(value="/getVoyageNum")
+    @ResponseBody
+    public Object getVoyage(String condition)
+    {
+        EntityWrapper<Voyage> voyageEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            voyageEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.voyageService.selectMaps(voyageEntityWrapper);
         List<String> listVoyageNum = new ArrayList<>();
         for(Map<String, Object> m:list)
         {
-            listVoyageNum.add(m.get("imo").toString());
+            listVoyageNum.add(m.get("voyagenum").toString());
         }
         return listVoyageNum;
     }
