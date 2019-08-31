@@ -18,26 +18,18 @@
                 <div class="hr-line-dashed"></div>
                 <#select id="endpoint" name="终点" >
                     <option id="endpointHelp">请选择运输终点</option>
-                    <option value="1">南京站</option>
-                    <option value="0">北京西站</option>
                 </#select>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">订单编号</label>
                     <div class="col-sm-9">
                         <select id="ordernumber" class="selectpicker form-control" multiple data-live-search="true" data-selected-text-format="count > 6" >
-                            <option>你好</option>
-                            <option>bull</option>
-                            <option>ASD</option>
-                            <option>Ble</option>
                         </select>
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <#select id="boxtype" name="箱型选择" >
                    <option id="boxtypeHelp">请选择箱型</option>
-                    <option value="1">通风箱</option>
-                    <option value="0">散货箱</option>
                 </#select>
                  <div class="hr-line-dashed"></div>
 
@@ -96,15 +88,25 @@
             $(this).find('#trantypeHelp').remove();
 
             var ajax = new $ax(Feng.ctxPath + "/updown/getendpoints",
-                function(data){
-
-                Feng.success("");
+                function(data) {
+                    $('#endpoint').empty();
+                    $('#endpoint').append('<option id="endpointHelp">请选择运输终点</option>');
+                    if($('#trantype').val()==='0')
+                    {
+                        for(var i=0;i<data.length;i++){
+                           $('#endpoint').append('<option value='+data[i].id+'>'+data[i].harbourname+'</option>');
+                        }
+                    }
+                    else{
+                        for(var i=0;i<data.length;i++){
+                            $('#endpoint').append('<option value='+data[i].id+'>'+data[i].name+'</option>');
+                        }
+                    }
                 },
                 function(data){
-                Feng.error("");
+                Feng.error("动态获取数据出错，请检查网络");
                 });
-
-            ajax.set();
+            ajax.set("trantype",$(this).val());
             ajax.start();
         });
 
@@ -116,13 +118,20 @@
 
             var ajax = new $ax(Feng.ctxPath + "/updown/getordernumbers",
                 function(data){
-                    Feng.success("");
+                    /*for(var i=0;i<data.length;i++){
+                        $('#ordernumber').append('<option value='+data[i].ordernumber+'>'+data[i].ordernumber+'</option>');
+                    }*/
+                    for(var i=0;i<5;i++){
+                        $('#ordernumber').append('<option value="11">你好</option>');
+                    }
+                    console.log(data);
                 },
                 function(data){
                     Feng.error("");
                 });
-            ajax.set();
-            //ajax.start();
+            ajax.set("trantype",$('#trantype').val());
+            ajax.set("endpoint",$(this).val());
+            ajax.start();
         });
 
         /*
@@ -131,14 +140,15 @@
         var boxtypeinit=function () {
             var ajax = new $ax(Feng.ctxPath + "/updown/getboxtypes",
                 function(data){
-
-                    Feng.success("");
+                    for(var i=0;i<data.length;i++){
+                        $('#boxtype').append('<option value='+data[i].id+'>'+data[i].type+'</option>');
+                    }
                 },
                 function(data){
                     Feng.error("");
                 });
             ajax.set();
-            //ajax.start();
+            ajax.start();
         };
         boxtypeinit();
 
@@ -174,6 +184,13 @@
             //ajax.start();
         };
         areainit();
+
+        /*
+         * 箱型列表动态
+         */
+        $('#boxtype').change(function () {
+            $(this).find('#boxcodeHelp').remove();
+        });
 
         /*
          * 集装箱列表动态

@@ -1,18 +1,24 @@
 package com.stylefeng.guns.modular.system.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.modular.system.model.BusiOrder;
+import com.stylefeng.guns.modular.system.service.IBoxtypeService;
+import com.stylefeng.guns.modular.system.service.IDictStationService;
+import com.stylefeng.guns.modular.system.service.IHarbourService;
+import com.stylefeng.guns.modular.webSys.service.IBusiOrderService;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.stylefeng.guns.modular.system.model.Updown;
 import com.stylefeng.guns.modular.system.service.IUpdownService;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,6 +35,18 @@ public class UpdownController extends BaseController {
 
     @Autowired
     private IUpdownService updownService;
+
+    @Autowired
+    private IDictStationService dictStationService;
+
+    @Autowired
+    private IHarbourService harbourService;
+
+    @Autowired
+    private IBoxtypeService boxtypeService;
+
+    @Autowired
+    private IBusiOrderService orderService;
 
     /**
      * 跳转到首页
@@ -101,6 +119,54 @@ public class UpdownController extends BaseController {
         return SUCCESS_TIP;
     }
 
+    /**
+     * 获取终点
+     */
+    @RequestMapping(value = "/getendpoints")
+    @ResponseBody
+    public Object getendpoints(Integer trantype) {
+        List<Map<String, Object>> list;
+        if(trantype==1)
+        {
+            list=dictStationService.selectMaps(null);
+        }else {
+            list=harbourService.selectMaps(null);
+        }
+
+        return list;
+    }
+
+    /**
+     * 获取订单
+     */
+    @RequestMapping(value = "/getordernumbers")
+    @ResponseBody
+    public Object getordernumbers(Integer trantype, Integer endpoint) {
+        EntityWrapper<BusiOrder> wrapper=new EntityWrapper<BusiOrder>();
+        wrapper.eq("trantype",trantype).and().eq("endpoint",endpoint);
+        List<Map<String, Object>> list=orderService.selectMaps(wrapper);
+        return list;
+    }
+
+    /**
+     * 获取箱型
+     */
+    @RequestMapping(value = "/getboxtypes")
+    @ResponseBody
+    public Object getboxtypes() {
+        List<Map<String, Object>> list=boxtypeService.selectMaps(null);
+        return list;
+    }
+
+    /**
+     * 获取集装箱
+     */
+    @RequestMapping(value = "/getboxcodes")
+    @ResponseBody
+    public Object getboxcodes() {
+
+        return SUCCESS_TIP;
+    }
     /**
      * 删除
      */
