@@ -6,23 +6,23 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#input id="voyagedetid" name="航次详情编号" underline="true" readonly="true"/>
-                    <#select id="voyagenum" name="航线编号" underline="true"/>
-                    <#select id="boxid" name="箱子编号" underline="true"/>
-                    <#input id="boxtype" name="箱子类型" underline="true"/>
-                    <#input id="boxsize" name="箱子尺寸" underline="true"/>
-                    <#input id="boxgoods" name="箱子所装货物"/>
+                    <#select id="voyagenum" name="航次号" underline="true"/>
+                    <#select id="boxid" name="集装箱号" underline="true"/>
+                    <#input id="boxtype" name="集装箱类型" underline="true"/>
+                    <#input id="boxsize" name="集装箱尺寸" underline="true"/>
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="statecode" name="状态码" underline="true"/>
+<!--                    <#input id="statecode" name="状态码" underline="true"/>-->
+                    <#input id="boxgoods" name="集装箱所装货物" underline="true"/>
                     <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
-                    <#input id="operation" name="装卸货操作" underline="true"/>
-                    <#input id="finish" name="是否完成" underline="true"/>
+                    <#input id="operation" name="装/卸种类" underline="true"/>
+                    <#input id="finish" name="是否完成" underline="true"  readonly="true" value="未完成"/>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.addSubmit()"/>
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyagedetInfoDlg.addSubmit()"/>
                     </div>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyagedetInfoDlg.close()"/>
                     </div>
                 </div>
             </div>
@@ -60,4 +60,9 @@
 </script>
 
 <script src="${ctxPath}/static/modular/system/voyagedet/voyagedet_info.js"></script>
+<script type="text/javascript">
+    var fo = document.getElementById("voyagenum").focus();
+    VoyagedetInfoDlg.getBoxCode();
+    VoyagedetInfoDlg.getVoyageNum();
+</script>
 @}

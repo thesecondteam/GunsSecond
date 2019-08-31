@@ -30,8 +30,20 @@ function isEmpty(obj) {
  * @param val 数据的具体值
  */
 VoyageInfoDlg.set = function(key, val) {
-    this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
-    return this;
+    if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
+        if(key=="endpoint"){
+            this.voyageInfoData[key] = $("#" + key).val();
+            return this;
+        }
+        else {
+            this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+            return this;
+        }
+    }
+    else {
+        this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).val() : val;
+        return this;
+    }
 }
 
 /**
@@ -56,11 +68,10 @@ VoyageInfoDlg.close = function() {
  */
 VoyageInfoDlg.collectData = function() {
     this
-    .set('id')
     .set('voyagenum')
     .set('imo')
     .set('starttime')
-    .set('endtime')
+/*    .set('endtime')*/
     .set('consigncompany')
     .set('recivecompany')
     .set('boxnumber')
@@ -163,36 +174,7 @@ VoyageInfoDlg.getVoyageNum = function(){
         }
     });
 }
-/**
- *动态增加集装箱号option
- */
-VoyageInfoDlg.getBoxCode = function () {
-    var BoxCode = $("select[id=boxnumber]").val();
-    $("select[id=boxnumber]").empty();      //清空
-    $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'/box/getBoxCode',
-        type:"post",
-        data:{
-            BoxCode : BoxCode
-        },
-        cache: false,
-        processData: false,
-        contentType: false,
-        error:function(){
-        },
-        success:function(listBoxCode){
-            if(listBoxCode && listBoxCode.length != 0){
-                for(var i=0; i<listBoxCode.length; i++){
-                    if(!isEmpty(listBoxCode[i])){
-                        var option="<option value=\""+listBoxCode[i]+"\"";
-                        option += ">"+listBoxCode[i]+"</option>";  //动态添加数据
-                        $("select[id=boxnumber]").append(option);
-                    }
-                }
-            }
-        }
-    });
-}
+
 
 /**
  *动态增加港口option

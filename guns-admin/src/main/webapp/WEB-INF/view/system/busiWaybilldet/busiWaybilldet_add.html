@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="col-sm-6">
-                            <#input id="boxgoods" name="集装箱物品" underline="true"/>
+                            <#input id="boxgoods" name="集装箱所装货物" underline="true"/>
                             <#input id="operation" name="操作" underline="true"/>
                             <#input id="createtime" name="创建时间" underline="true" readonly="true"/>
                             <#input id="statecode" name="状态码" underline="true"/>
@@ -68,5 +68,9 @@
 </script>
 
 <script src="${ctxPath}/static/modular/system/busiWaybilldet/busiWaybilldet_info.js"></script>
-
+<script type="text/javascript">
+    var fo = document.getElementById("waybillid").focus();
+    BusiWaybilldetInfoDlg.getBoxCode();
+    BusiWaybilldetInfoDlg.getWaybillId();
+</script>
 @}

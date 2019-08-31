@@ -6,10 +6,10 @@
 
     <!-- 通用查询结果列 -->
     <select id="list" resultType="map">
-        select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where loadcode='1' group by months
- UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where loadcode='1' group by months
- UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where unloadcode='1' group by months
- UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where unloadcode='1' group by months
+        select DATE_FORMAT(starttime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where loadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(starttime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where loadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(starttime,'%Y%m') months,SUM(boxnumber) count from busi_voyage where unloadcode='1' group by months
+ UNION ALL  select DATE_FORMAT(starttime,'%Y%m') months,SUM(boxnumber) count from busi_waybill where unloadcode='1' group by months
 
     </select>
 

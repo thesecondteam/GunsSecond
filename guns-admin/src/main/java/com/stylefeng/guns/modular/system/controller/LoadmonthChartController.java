@@ -40,6 +40,7 @@ public class LoadmonthChartController extends BaseController {
         List<Map<String,Object>> listdata = this.voyageloadChartService.list();
         Object[][] array = new Object[listdata.size()][5];
         for(int i=0;i<listdata.size();i++){
+            System.out.println("==============>>>>>>>>>"+listdata.get(i).values());
             array[i] = listdata.get(i).values().toArray();
         }
         int[] array1=new  int[60];

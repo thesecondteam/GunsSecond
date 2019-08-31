@@ -6,8 +6,8 @@
 
     <!-- 通用查询结果列 -->
     <select id="list" resultType="map">
-       select DATE_FORMAT(endtime,'%Y%m') months,count(boxnumber)-1  from busi_voyage  group by months
-UNION ALL  select DATE_FORMAT(endtime,'%Y%m') months,count(boxnumber)-1 from busi_waybill  group by months
+       select DATE_FORMAT(starttime,'%Y%m') months,count(boxnumber)-1  from busi_voyage  group by months
+UNION ALL  select DATE_FORMAT(starttime,'%Y%m') months,count(boxnumber)-1 from busi_waybill  group by months
 
     </select>
 

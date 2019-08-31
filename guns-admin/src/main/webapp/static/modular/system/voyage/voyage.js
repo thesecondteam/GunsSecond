@@ -144,7 +144,7 @@ $('#'+Voyage.id).on("dbl-click-row.bs.table",function(e, row, $element) {
         var index = layer.open({
             type: 2,
             title: '添加航次详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1400px', '820px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyagedet/voyagedet_click_add?d='+row.voyagenum
