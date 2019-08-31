@@ -1,0 +1,188 @@
+@layout("/common/_container.html"){
+<link href="${ctxPath}/static/modular/system/updown/bootstrap-select.min.css" rel="stylesheet" />
+
+<script src="${ctxPath}/static/modular/system/updown/bootstrap-select.min.js"></script>
+<script src="${ctxPath}/static/modular/system/updown/defaults-zh_CN.min.js"></script>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <#select id="trantype" name="运输方式" >
+                    <option id="trantypeHelp">请选择运输方式</option>
+                    <option value="0">海运</option>
+                    <option value="1">铁运</option>
+                </#select>
+                <div class="hr-line-dashed"></div>
+                <#select id="endpoint" name="终点" >
+                <option id="endpointHelp">请选择运输终点</option>
+                <option value="1">南京站</option>
+                <option value="0">北京西站</option>
+            </#select>
+            <div class="hr-line-dashed"></div>
+            <#select id="ordernumber" name="订单编号" >
+                <option id="ordernumberHelp">请选择订单</option>
+                <option value="1">B132131</option>
+                <option value="0">A789877</option>
+            </#select>
+            <div class="hr-line-dashed"></div>
+            <#select id="boxtype" name="箱型选择" >
+        <option id="boxtypeHelp">请选择箱型</option>
+                <option value="1">通风堆放区</option>
+                <option value="0">散货堆放区</option>
+            </#select>
+            <div class="hr-line-dashed"></div>
+    <#input id="recphone" type="hidden" name="" />
+    <#input id="recpeople" type="hidden" name="" />
+
+    </div>
+
+    <div class="col-sm-6">
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">集装箱</label>
+            <div class="col-sm-9">
+                <select id="boxcode" class="selectpicker form-control" multiple data-live-search="true" data-selected-text-format="count > 6" >
+                    <option>你好</option>
+                    <option>bull</option>
+                    <option>ASD</option>
+                    <option>Ble</option>
+                </select>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+
+        <#select id="areaid" name="接箱场地" >
+        <option id="areaidHelp">请选择堆放场地</option>
+            <option value="1">通风堆放区</option>
+            <option value="0">散货堆放区</option>
+        </#select>
+        <div class="hr-line-dashed"></div>
+        <#input id="optime" name="操作时间" underline="true"/>
+        <#input id="oppeople" name="操作人" underline="true" />
+        <#input id="optype" type="hidden" name="" value="1"/>
+        <#input id="id" type="hidden" name=""/>
+        <#input id="optype" type="hidden" name="" value="1"/>
+</div>
+</div>
+
+<div class="row btn-group-m-t">
+    <div class="col-sm-10">
+        <#button btnCss="info" name="确定" id="ensure" icon="fa-check" clickFun="UpdownInfoDlg.ploadSubmit()"/>
+        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="UpdownInfoDlg.close()"/>
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+<script src="${ctxPath}/static/modular/system/updown/updown_info.js"></script>
+<script>
+    $(function() {
+
+        /*
+         * 日期选择器
+         */
+        laydate.render({
+            elem: '#optime'
+        });
+
+        /*
+         * 订单一级级联
+         */
+        $('#trantype').change(function () {
+            $(this).find('#trantypeHelp').remove();
+
+            var ajax = new $ax(Feng.ctxPath + "/updown/pload",
+                function(data){
+                    Feng.success("");
+                },
+                function(data){
+                    Feng.error("");
+                });
+            ajax.set();
+            //ajax.start();
+        });
+
+        /*
+         * 订单二级级联
+         */
+        $('#endpoint').change(function () {
+            $(this).find('#endpointHelp').remove();
+
+            var ajax = new $ax(Feng.ctxPath + "/updown/pload",
+                function(data){
+                    Feng.success("");
+                },
+                function(data){
+                    Feng.error("");
+                });
+            ajax.set();
+            //ajax.start();
+        });
+
+        /*
+         * 集装箱类型初始化
+         */
+        var boxtypeinit=function () {
+            var ajax = new $ax(Feng.ctxPath + "/updown/pload",
+                function(data){
+                    Feng.success("");
+                },
+                function(data){
+                    Feng.error("");
+                });
+            ajax.set();
+            //ajax.start();
+        };
+        boxtypeinit();
+
+        /*
+         * 集装箱级联
+         */
+        $('#boxtype').change(function () {
+            var ajax = new $ax(Feng.ctxPath + "/updown/pload",
+                function(data){
+                    Feng.success("");
+                },
+                function(data){
+                    Feng.error("");
+                });
+            ajax.set();
+            //ajax.start();
+        });
+
+        /*
+         * 场地初始化
+         */
+        var areainit=function () {
+            var ajax = new $ax(Feng.ctxPath + "/updown/pload",
+                function(data){
+                    Feng.success("");
+                },
+                function(data){
+                    Feng.error("");
+                });
+            ajax.set();
+            //ajax.start();
+        };
+        areainit();
+
+        /*
+        * 场地列表动态
+        */
+        $('#areaid').change(function () {
+            $(this).find('#areaidHelp').remove();
+        });
+
+        /*
+         * 订单列表动态
+         */
+        $('#ordernumber').change(function () {
+            $(this).find('#ordernumberHelp').remove();
+        });
+    });
+</script>
+@}

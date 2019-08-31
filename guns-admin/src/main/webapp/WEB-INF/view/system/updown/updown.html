@@ -1,0 +1,45 @@
+@layout("/common/_container.html"){
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>管理</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <#SelectCon id="select" name="订单状态" >
+                                    <option value="10">全部</option>
+                                    <option value="0">待处理</option>
+                                    <option value="1">已装箱</option>
+                                </#SelectCon>
+                            </div>
+                            <div class="col-sm-2">
+                                <#NameCon id="condition" name="订单编号" />
+                            </div>
+                            <div class="col-sm-2">
+                                <#button name="搜索订单" icon="fa-search" clickFun="Updown.search()"/>
+                            </div>
+                        </div>
+                        <div class="hidden-xs" id="UpdownTableToolbar" role="group">
+                            @if(shiro.hasPermission("/updown/pload")){
+                               <#button name="拼单装箱" icon="fa-edit" clickFun="Updown.pload()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/updown/cload")){
+                                <#button name="拆单装箱" icon="fa-edit" clickFun="Updown.cload()" space="true"/>
+                            @}
+                            @if(shiro.hasPermission("/updown/load")){
+                                <#button name="整箱装箱" icon="fa-edit" clickFun="Updown.load()" space="true"/>
+                            @}
+                        </div>
+                        <#table id="UpdownTable"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/updown/updown.js"></script>
+@}
