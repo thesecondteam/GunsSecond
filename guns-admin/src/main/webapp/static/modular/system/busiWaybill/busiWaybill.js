@@ -116,7 +116,7 @@ BusiWaybill.finish = function () {
             Feng.success("运单已结束!");
             BusiWaybill.table.refresh();
         }, function (data) {
-            Feng.error("结束异常!" + data.responseJSON.message + "!");
+            Feng.error("结束异常!" + data.responseJSON.message + " !");
         });
         ajax.set(this.seItem);
         ajax.start();
