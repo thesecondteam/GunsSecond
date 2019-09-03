@@ -55,7 +55,7 @@ BusiOrder.openAddBusiOrder = function () {
     var index = layer.open({
         type: 2,
         title: '添加order',
-        area: ['800px', '420px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiOrder/busiOrder_add'
@@ -71,7 +71,7 @@ BusiOrder.openBusiOrderDetail = function () {
         var index = layer.open({
             type: 2,
             title: 'order详情',
-            area: ['800px', '420px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiOrder/busiOrder_update/' + BusiOrder.seItem.id
@@ -126,19 +126,33 @@ $(function () {
 //     return guid;
 // }
 /**
- * 禁用
+ * 取消
  */
 BusiOrder.disable = function () {
     if (this.check()) {
+        console.log(BusiOrder.seItem.stateName);
+        if (BusiOrder.seItem.stateName=="未处理" )
+        {
+            console.log(this.seItem.id);
         var ajax = new $ax(Feng.ctxPath + "/busiOrder/disable", function (data) {
-            Feng.success("禁用成功!");
-            BusiOrder.table.refresh();
-        }, function (data) {
-            Feng.error("禁用失败!" + data.responseJSON.message + "!");
-        });
+                Feng.success("取消成功!");
+                BusiOrder.table.refresh();
+            },
+
+            function (data) {
+                Feng.error("取消订单失败!" + data.responseJSON.message + "!");
+            });
         ajax.set(this.seItem);
         ajax.start();
     }
+    else if (BusiOrder.seItem.stateName=="已取消" ){
+            Feng.error("订单已取消，请勿重复操作");
+        }
+        else{
+            Feng.error("订单已处理，无法取消");
+        }
+}
+
 };
 
 /**

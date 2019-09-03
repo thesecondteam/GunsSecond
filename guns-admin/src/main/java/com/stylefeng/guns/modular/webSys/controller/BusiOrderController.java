@@ -237,16 +237,16 @@ public class BusiOrderController extends BaseController {
     }
 
 
-//    /**
-//     * 禁用
-//     */
-//    @RequestMapping(value = "/disable")
-//    @ResponseBody
-//    public Object disable(BusiOrder busiOrder) {
-//        busiOrder.setOrdercode(0);
-//        busiOrderService.updateById(busiOrder);
-//        return SUCCESS_TIP;
-//    }
+    /**
+     * 取消订单
+     */
+    @RequestMapping(value = "/disable")
+    @ResponseBody
+    public Object disable(BusiOrder busiOrder) {
+        busiOrder.setOrdercode(2);
+        busiOrderService.updateById(busiOrder);
+        return SUCCESS_TIP;
+    }
 //    /**
 //     * 启用
 //     */
