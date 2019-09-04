@@ -11,25 +11,25 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#select id="trantype" name="运输方式" >
-                       <option id="trantypeHelp">请选择运输方式</option>
+                       <option id="trantypeHelp" value="">请选择运输方式</option>
                         <option value="0">海运</option>
                         <option value="1">铁运</option>
                     </#select>
                 <div class="hr-line-dashed"></div>
                 <#select id="endpoint" name="终点" >
-                    <option id="endpointHelp">请选择运输终点</option>
+                    <option id="endpointHelp" value="">请选择运输终点</option>
                 </#select>
                 <div class="hr-line-dashed"></div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">订单编号</label>
                     <div class="col-sm-9">
-                        <select id="ordernumber" class="selectpicker form-control" multiple data-live-search="true" data-selected-text-format="count > 6" >
+                        <select id="ordernumber" class="selectpicker form-control" multiple data-live-search="true"  data-selected-text-format="count > 6" title="请选择订单" >
                         </select>
                     </div>
                 </div>
                 <div class="hr-line-dashed"></div>
                 <#select id="boxtype" name="箱型选择" >
-                   <option id="boxtypeHelp">请选择箱型</option>
+                   <option id="boxtypeHelp" value="">请选择箱型</option>
                 </#select>
                  <div class="hr-line-dashed"></div>
 
@@ -41,15 +41,11 @@
     <div class="col-sm-6">
 
         <#select id="boxcode" name="集装箱" >
-          <option id="boxcodeHelp">请选择集装箱</option>
-            <option value="1">B132131</option>
-            <option value="0">A789877</option>
+          <option id="boxcodeHelp" value="">请选择集装箱</option>
         </#select>
         <div class="hr-line-dashed"></div>
         <#select id="areaid" name="接箱场地" >
-            <option id="areaidHelp">请选择堆放场地</option>
-            <option value="1">通风堆放区</option>
-            <option value="0">散货堆放区</option>
+            <option id="areaidHelp" value="">请选择堆放场地</option>
         </#select>
         <div class="hr-line-dashed"></div>
         <#input id="optime" name="操作时间" underline="true"/>
@@ -79,18 +75,17 @@
          */
         laydate.render({
             elem: '#optime'
+            ,type:'datetime'
         });
 
         /*
          * 订单一级级联
          */
         $('#trantype').change(function () {
-            $(this).find('#trantypeHelp').remove();
-
             var ajax = new $ax(Feng.ctxPath + "/updown/getendpoints",
                 function(data) {
                     $('#endpoint').empty();
-                    $('#endpoint').append('<option id="endpointHelp">请选择运输终点</option>');
+                    $('#endpoint').append('<option id="endpointHelp" value="">请选择运输终点</option>');
                     if($('#trantype').val()==='0')
                     {
                         for(var i=0;i<data.length;i++){
@@ -114,20 +109,17 @@
          * 订单二级级联
          */
         $('#endpoint').change(function () {
-            $(this).find('#endpointHelp').remove();
-
             var ajax = new $ax(Feng.ctxPath + "/updown/getordernumbers",
                 function(data){
-                    /*for(var i=0;i<data.length;i++){
+                    $('#ordernumber').empty();
+                    for(var i=0;i<data.length;i++){
                         $('#ordernumber').append('<option value='+data[i].ordernumber+'>'+data[i].ordernumber+'</option>');
-                    }*/
-                    for(var i=0;i<5;i++){
-                        $('#ordernumber').append('<option value="11">你好</option>');
                     }
-                    console.log(data);
+                    $('#ordernumber').selectpicker('refresh');
+                    $('#ordernumber').selectpicker('render');
                 },
                 function(data){
-                    Feng.error("");
+                    Feng.error("动态获取数据出错，请检查网络");
                 });
             ajax.set("trantype",$('#trantype').val());
             ajax.set("endpoint",$(this).val());
@@ -156,17 +148,19 @@
          * 集装箱级联
          */
         $('#boxtype').change(function () {
-            $(this).find('#boxtypeHelp').remove();
-
             var ajax = new $ax(Feng.ctxPath + "/updown/getboxcodes",
                 function(data){
-                    Feng.success("");
+                    $('#boxcode').empty();
+                    $('#boxcode').append('<option id="boxcodeHelp" value="">请选择集装箱</option>');
+                    for(var i=0;i<data.length;i++){
+                        $('#boxcode').append('<option value='+data[i].boxcode+'>'+data[i].boxcode+'</option>');
+                    }
                 },
                 function(data){
-                    Feng.error("");
+                    Feng.error("动态获取数据出错，请检查网络");
                 });
-            ajax.set();
-            //ajax.start();
+            ajax.set("boxtype",$(this).val());
+            ajax.start();
         });
 
         /*
@@ -175,13 +169,15 @@
         var areainit=function () {
             var ajax = new $ax(Feng.ctxPath + "/updown/getareas",
                 function(data){
-                    Feng.success("");
+                    for(var i=0;i<data.length;i++){
+                        $('#areaid').append('<option value='+data[i].id+'>'+data[i].areatype+'</option>');
+                    }
                 },
                 function(data){
-                    Feng.error("");
+                    Feng.error("动态获取数据出错，请检查网络");
                 });
             ajax.set();
-            //ajax.start();
+            ajax.start();
         };
         areainit();
 
@@ -189,7 +185,7 @@
          * 箱型列表动态
          */
         $('#boxtype').change(function () {
-            $(this).find('#boxcodeHelp').remove();
+            $(this).find('#boxtypeHelp').remove();
         });
 
         /*
@@ -204,6 +200,20 @@
          */
         $('#areaid').change(function () {
             $(this).find('#areaidHelp').remove();
+        });
+
+        /*
+        * 运输终点动态
+        */
+        $('#endpoint').change(function () {
+            $(this).find('#endpointHelp').remove();
+        });
+
+        /*
+        * 运输方式动态
+        */
+        $('#trantype').change(function () {
+            $(this).find('#trantypeHelp').remove();
         });
     });
 </script>

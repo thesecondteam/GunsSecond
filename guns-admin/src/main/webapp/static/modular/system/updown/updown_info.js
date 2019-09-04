@@ -58,7 +58,7 @@ UpdownInfoDlg.collectData = function() {
 }
 
 /**
- * 提交添加
+ * 拼单添加
  */
 UpdownInfoDlg.ploadSubmit = function() {
 
@@ -67,17 +67,68 @@ UpdownInfoDlg.ploadSubmit = function() {
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/pload", function(data){
         Feng.success("添加成功!");
-        window.parent.Updown.table.refresh();
-        UpdownInfoDlg.close();
+        //window.parent.Updown.table.refresh();
+        //UpdownInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
-    var orders=this.updownInfoData.ordernumber;
-    this.updownInfoData.ordernumber=null;
-    var obj= this.updownInfoData;
-    ajax.set("obj",obj);
+    var orders=$('#ordernumber').val();
     ajax.set("orders",JSON.stringify(orders));
+    ajax.set("boxcode",$('#boxcode').val());
+    ajax.set("oppeople",$('#oppeople').val());
+    ajax.set("optime",$('#optime').val());
+    ajax.set("areaid",$('#areaid').val());
     ajax.start();
+
+}
+
+/**
+ * 拆单添加
+ */
+UpdownInfoDlg.cloadSubmit = function() {
+
+    this.clearData();
+    this.collectData();
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/updown/cload", function(data){
+        Feng.success("添加成功!");
+        //window.parent.Updown.table.refresh();
+        //UpdownInfoDlg.close();
+    },function(data){
+        Feng.error("添加失败!" + data.responseJSON.message + "!");
+    });
+    var boxcodes=$('#boxcode').val();
+    ajax.set("order",$('#ordernumber').val());
+    ajax.set("boxcodes",JSON.stringify(boxcodes));
+    ajax.set("oppeople",$('#oppeople').val());
+    ajax.set("optime",$('#optime').val());
+    ajax.set("areaid",$('#areaid').val());
+    ajax.start();
+
+}
+
+/**
+ * 整箱添加
+ */
+UpdownInfoDlg.loadSubmit = function() {
+
+    this.clearData();
+    this.collectData();
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/updown/load", function(data){
+        Feng.success("添加成功!");
+        //window.parent.Updown.table.refresh();
+        //UpdownInfoDlg.close();
+    },function(data){
+        Feng.error("添加失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set("order",$('#ordernumber').val());
+    ajax.set("boxcode",$('#boxcode').val());
+    ajax.set("oppeople",$('#oppeople').val());
+    ajax.set("optime",$('#optime').val());
+    ajax.set("areaid",$('#areaid').val());
+    ajax.start();
+
 }
 
 
