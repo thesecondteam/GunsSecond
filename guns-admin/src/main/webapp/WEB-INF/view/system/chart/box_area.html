@@ -32,40 +32,29 @@
                 }
 
                 mychart.setOption({
-                    tooltip: {
+                    tooltip : {
                         trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
                     },
                     legend: {
                         orient: 'vertical',
-                        x: 'left',
-                        data:x
+                        left: 'left',
+                        data: x
                     },
-                    series: [
+                    series : [
                         {
-                            name:'场位类型',
-                            type:'pie',
-                            radius: ['50%', '70%'],
-                            avoidLabelOverlap: false,
-                            label: {
-                                normal: {
-                                    show: false,
-                                    position: 'center'
-                                },
+                            name: '访问来源',
+                            type: 'pie',
+                            radius : '55%',
+                            center: ['50%', '60%'],
+                            data:x,
+                            itemStyle: {
                                 emphasis: {
-                                    show: true,
-                                    textStyle: {
-                                        fontSize: '30',
-                                        fontWeight: 'bold'
-                                    }
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
                                 }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            data:x
+                            }
                         }
                     ]
 
