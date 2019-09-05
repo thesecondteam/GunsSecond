@@ -236,4 +236,25 @@ public class DictStationController extends BaseController {
         }
         return listStationId;
     }
+    /**
+     * 获取所有站点id
+     */
+    @RequestMapping(value="/getStationId_id")
+    @ResponseBody
+    public Object getStationId_id(String condition)
+    {
+        EntityWrapper<DictStation> dictStationEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            dictStationEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.dictStationService.selectMaps(dictStationEntityWrapper);
+        List<String> listStationId_id = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            if(!m.get("id").toString().equals("7")){
+                listStationId_id.add(m.get("id").toString());
+            }
+        }
+        return listStationId_id;
+    }
 }

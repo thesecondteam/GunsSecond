@@ -29,13 +29,17 @@ function isEmpty(obj) {
  * @param val 数据的具体值
  */
 BusiWaybillInfoDlg.set = function(key, val) {
-        if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
-            if(key=="endpoint"){
-                this.busiWaybillInfoData[key] = $("#" + key).val();
+        if(key=="loadtype"){
+                this.busiWaybillInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+                return this;
+        }
+        else if (key=="loadtype"){
+            if($("#" + key).text().equals("装货")){
+                this.busiWaybillInfoData[key] = 0;
                 return this;
             }
             else {
-                this.busiWaybillInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+                this.busiWaybillInfoData[key] = 1;
                 return this;
             }
         }
@@ -210,8 +214,14 @@ BusiWaybillInfoDlg.getBoxCode = function () {
  */
 BusiWaybillInfoDlg.getStartStationId = function () {
     var StationId = $("select[id=startpoint]").val();
+    var StationId_id = $("select[id=startpoint]").val();
     $("select[id=startpoint]").empty();      //清空
     $("#startpoint").append("<option value='0'>请选择起点站点</option>");
+    var num = new Array();      //车站id
+    var name = new Array();     //车站名
+    /**
+     * 获得车站名序列
+     */
     $.ajax({
         url: '/dictStation/getStationId',
         type: "post",
@@ -225,71 +235,104 @@ BusiWaybillInfoDlg.getStartStationId = function () {
         },
         success: function (listStationId) {
             if(listStationId && listStationId.length != 0) {
-                if (listStationId.length > "7") {
-                    for (var i = 1; i < listStationId.length + 1; i++) {
+                    for (var i = 0; i < listStationId.length; i++) {
                         if (!isEmpty(listStationId[i])) {
-                            if (i == "7") {
-                                i++;
-                                var option = "<option value=\"" +i+ "\"";
-                                option += ">" + listStationId[i] + "</option>";  //动态添加数据
-                            }
-                            $("select[id=startpoint]").append(option);
+                            name[i] = listStationId[i];
                         }
                     }
-                }
-                else {
-                    for (var i = 1; i < listStationId.length + 1; i++) {
-                        if (!isEmpty(listStationId[i])) {
-                            var option = "<option value=\"" +i+ "\"";
-                            option += ">" + listStationId[i] + "</option>";  //动态添加数据
-                            $("select[id=startpoint]").append(option);
-                        }
-                    }
-                }
             }
+            /**
+             * 获得车站id序列
+             */
+            $.ajax({
+                url: '/dictStation/getStationId_id',
+                type: "post",
+                data: {
+                    StationId_id: StationId_id
+                },
+                cache: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (listStationId_id) {
+                    if(listStationId_id && listStationId_id.length != 0) {
+                        for (var i = 0; i < listStationId_id.length; i++) {
+                            if (!isEmpty(listStationId_id[i])) {
+                                num[i] = listStationId_id[i];
+                            }
+                        }
+                        for (var i = 0; i < listStationId_id.length; i++) {
+                            var option = "<option value=\"" +num[i]+ "\"";
+                            option += ">" + name[i] + "</option>";  //动态添加数据
+                            $("select[id=startpoint]").append(option);
+                        }
+                    }
+                }
+            });
         }
     });
 }
 
 BusiWaybillInfoDlg.getEndStationId = function () {
     var StationId = $("select[id=endpoint]").val();
+    var StationId_id = $("select[id=endpoint]").val();
     $("select[id=endpoint]").empty();      //清空
-    $("#endpoint").append("<option value='0'>请选择终点站点</option>");
-    $.ajax({url:'/dictStation/getStationId',
-        type:"post",
-        data:{
-        StationId : StationId
+    $("#endpoint").append("<option value='0'>请选择起点站点</option>");
+    var num = new Array();      //车站id
+    var name = new Array();     //车站名
+    /**
+     * 获得车站名序列
+     */
+    $.ajax({
+        url: '/dictStation/getStationId',
+        type: "post",
+        data: {
+            StationId: StationId
         },
         cache: false,
         processData: false,
         contentType: false,
-        error:function(){
+        error: function () {
         },
-        success:function(listStationId){
-        if(listStationId && listStationId.length != 0){
-            if(listStationId.length > "7"){
-                for(var i=1; i<listStationId.length+1; i++){
-                    if(!isEmpty(listStationId[i])){
-                        if(i == "7"){
-                            i++;
-                            var option="<option value=\""+i+"\"";
-                            option += ">"+listStationId[i]+"</option>";  //动态添加数据
+        success: function (listStationId) {
+            if(listStationId && listStationId.length != 0) {
+                for (var i = 0; i < listStationId.length; i++) {
+                    if (!isEmpty(listStationId[i])) {
+                        name[i] = listStationId[i];
+                    }
+                }
+            }
+            /**
+             * 获得车站id序列
+             */
+            $.ajax({
+                url: '/dictStation/getStationId_id',
+                type: "post",
+                data: {
+                    StationId_id: StationId_id
+                },
+                cache: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (listStationId_id) {
+                    if(listStationId_id && listStationId_id.length != 0) {
+                        for (var i = 0; i < listStationId_id.length; i++) {
+                            if (!isEmpty(listStationId_id[i])) {
+                                num[i] = listStationId_id[i];
+                            }
                         }
-                        $("select[id=endpoint]").append(option);
+                        for (var i = 0; i < listStationId_id.length; i++) {
+                            var option = "<option value=\"" +num[i]+ "\"";
+                            option += ">" + name[i] + "</option>";  //动态添加数据
+                            $("select[id=endpoint]").append(option);
+                        }
                     }
                 }
-            }
-        else {
-                for(var i=1; i<listStationId.length+1; i++){
-                    if(!isEmpty(listStationId[i])){
-                            var option="<option value=\""+i+"\"";
-                            option += ">"+listStationId[i]+"</option>";  //动态添加数据
-                        $("select[id=endpoint]").append(option);
-                    }
-                }
-            }
+            });
         }
-    }
     });
 }
 

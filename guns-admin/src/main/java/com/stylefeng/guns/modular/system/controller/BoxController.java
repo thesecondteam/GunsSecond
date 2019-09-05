@@ -168,6 +168,7 @@ public class BoxController extends BaseController {
         }
         return listBoxCode;
     }
+
     /**
      * 获取特定集装箱
      */

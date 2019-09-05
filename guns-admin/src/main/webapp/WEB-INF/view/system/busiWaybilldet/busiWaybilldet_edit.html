@@ -8,7 +8,7 @@
                             <#input id="id" name="" value="${item.id}" type="hidden"/>
                             <#input id="waybilldetid" name="运单详情号" value="${item.waybilldetid}" underline="true"/>
                             <#input id="waybillid" name="运单号" value="${item.waybillid}" underline="true"/>
-                            <#input id="boxid" name="集装箱号" value="${item.boxid}" underline="true"/>
+                            <#input id="boxid" name="集装箱号" value="${item.boxid}" underline="true" onchange="Onchange(this.options[this.options.selectedIndex].value)"/>
                             <#input id="boxtype" name="集装箱类型" value="${item.boxtype}" underline="true"/>
                             <#input id="boxsize" name="集装箱大小" value="${item.boxsize}" />
                 </div>

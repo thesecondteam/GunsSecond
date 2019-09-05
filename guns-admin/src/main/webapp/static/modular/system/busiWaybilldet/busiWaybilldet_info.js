@@ -84,7 +84,7 @@ BusiWaybilldetInfoDlg.addSubmit = function() {
 BusiWaybilldetInfoDlg.createSubmit = function() {
 
     this.clearData();
-    this.collectData();
+    this.collectData(); 
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/busiWaybilldet/create", function(data){
@@ -176,6 +176,13 @@ BusiWaybilldetInfoDlg.getWaybillId = function () {
             }
         }
     });
+}
+
+BusiWaybilldetInfoDlg.boxOnchange=function (x) {
+    console.log(x);
+}
+function Onchange(x){
+    console.log(x);
 }
 $(function() {
 
