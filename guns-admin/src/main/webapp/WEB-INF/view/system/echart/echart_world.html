@@ -24,7 +24,7 @@
 <script>
     var name_point;
     $.ajax({
-        url:"${ctxPath}/showEchart/getChina",
+        url:"${ctxPath}/showEchart/getWorld",
         type:"json",
         success:function(address){
             name_point=address;
@@ -43,7 +43,7 @@
 <!--全部出口地点js-->
 
 
-<!--中国代码-->
+<!--世界代码-->
 <script type="text/javascript">
 
     function getEcharts(){
@@ -60,12 +60,28 @@
         require(
             [
                 'echarts',
+                'echarts/chart/line',
+                'echarts/chart/bar',
+                'echarts/chart/scatter',
+                'echarts/chart/k',
+                'echarts/chart/pie',
+                'echarts/chart/radar',
+                'echarts/chart/force',
+                'echarts/chart/chord',
+                'echarts/chart/gauge',
+                'echarts/chart/funnel',
+                'echarts/chart/eventRiver',
+                'echarts/chart/venn',
+                'echarts/chart/treemap',
+                'echarts/chart/tree',
+                'echarts/chart/wordCloud',
+                'echarts/chart/heatmap',
                 'echarts/chart/map'
             ],
             function (ec) {
                 var name_point={};
                 $.ajax({
-                    url:"${ctxPath}/showEchart/getChina",
+                    url:"${ctxPath}/showEchart/getWorld",
                     type:"json",
                     success:function(address){
                         name_point=address;
@@ -83,7 +99,7 @@
                         },
                     },
                     title: {
-                        text: '中国货运地图',
+                        text: '世界货运地图',
                         left: 'center',
                         top: 'top'
                     },
@@ -98,11 +114,11 @@
 
                     series : [
                         {
-                            name: '全国',
+                            name: '世界',
                             type: 'map',
                             roam: false,//拖拽
                             hoverable: false,
-                            mapType: 'china',
+                            mapType: 'world',
                             itemStyle:{
                                 normal:{
                                     borderColor:'rgba(100,149,237,1)',
@@ -153,7 +169,7 @@
                         {
                             name: '秦皇岛 Top10',
                             type: 'map',
-                            mapType: 'china',
+                            mapType: 'world',
                             data:[],
                             markLine : {
                                 smooth:true,
