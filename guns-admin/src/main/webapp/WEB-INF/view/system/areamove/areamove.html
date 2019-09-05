@@ -7,7 +7,10 @@
                 <div class="col-sm-6 b-r">
                     <#input id="id" name="箱子ID" value="${item.id}" />
                     <#input id="boxcode" name="箱子编号" value="${item.boxcode}" underline="true"/>
-                    <#input id="areaid" name="所在场地" value="${item.areaid}" />
+                    <#select id="areaid" name="接箱场地" >
+                    <option id="areaidHelp" value="">请选择堆放场地</option>
+                    </#select>
+                    <div class="hr-line-dashed"></div>
                 </div>
             </div>
 
@@ -22,4 +25,31 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/areabox/areabox_info.js"></script>
+<script>
+    /*
+         * 场地初始化
+         */
+    var areainit=function () {
+        var ajax = new $ax(Feng.ctxPath + "/updown/getareas",
+            function(data){
+                for(var i=0;i<data.length;i++){
+                    $('#areaid').append('<option value='+data[i].id+'>'+data[i].areatype+'</option>');
+                }
+            },
+            function(data){
+                Feng.error("动态获取数据出错，请检查网络");
+            });
+        ajax.set();
+        ajax.start();
+    };
+    areainit();
+
+    /*
+        * 场地列表动态
+        */
+    $('#areaid').change(function () {
+        $(this).find('#areaidHelp').remove();
+    });
+
+</script>
 @}

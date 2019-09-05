@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 
@@ -49,6 +48,9 @@ public class UpdownController extends BaseController {
 
     @Autowired
     private IBoxService boxService;
+
+    @Autowired
+    private IBoxsizeService boxsizeService;
 
 
     /**
@@ -277,6 +279,19 @@ public class UpdownController extends BaseController {
         List<Map<String, Object>> list=boxService.selectMaps(wrapper);
         return list;
     }
+
+    /**
+     * 获取集装箱尺寸
+     */
+    @RequestMapping(value = "/getboxsizes")
+    @ResponseBody
+    public Object getboxsizes() {
+        EntityWrapper<Boxsize> wrapper=new EntityWrapper<Boxsize>();
+        wrapper.eq("statecode",1);
+        List<Map<String, Object>> list=boxsizeService.selectMaps(wrapper);
+        return list;
+    }
+
 
     /**
      * 获取场地类型

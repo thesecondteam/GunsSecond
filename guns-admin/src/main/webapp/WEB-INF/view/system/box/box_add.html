@@ -10,9 +10,18 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <#input id="boxtype" name="箱子类型" underline="true"/>
-                    <#input id="boxsize" name="箱子尺寸" underline="true"/>
-                    <#input id="statecode" name="状态码"/>
+                    <#select id="boxtype" name="箱型选择" >
+                        <option id="boxtypeHelp" value="">请选择箱型</option>
+                    </#select>
+                    <div class="hr-line-dashed"></div>
+                    <#select id="boxsize" name="尺寸选择" >
+                        <option id="boxsizeHelp" value="">请选择箱型</option>
+                    </#select>
+                    <div class="hr-line-dashed"></div>
+                    <#select id="statecode" name="状态码" >
+                        <option value="1">已启用</option>
+                        <option value="0">已禁用</option>
+                    </#select>
                 </div>
             </div>
 
@@ -27,4 +36,67 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/box/box_info.js"></script>
+<script>
+    $(function() {
+
+        /*
+         * 日期选择器
+         */
+        laydate.render({
+            elem: '#addtime'
+            ,type:'datetime'
+        });
+
+        /*
+         * 集装箱类型初始化
+         */
+        var boxtypeinit=function () {
+            var ajax = new $ax(Feng.ctxPath + "/updown/getboxtypes",
+                function(data){
+                    for(var i=0;i<data.length;i++){
+                        $('#boxtype').append('<option value='+data[i].id+'>'+data[i].type+'</option>');
+                    }
+                },
+                function(data){
+                    Feng.error("请检查网络");
+                });
+            ajax.set();
+            ajax.start();
+        };
+        boxtypeinit();
+
+        /*
+         * 集装箱类型初始化
+         */
+        var boxtsizeinit=function () {
+            var ajax = new $ax(Feng.ctxPath + "/updown/getboxsizes",
+                function(data){
+                    for(var i=0;i<data.length;i++){
+                        $('#boxsize').append('<option value='+data[i].sizecode+'>'+data[i].sizecode+'</option>');
+                    }
+                },
+                function(data){
+                    Feng.error("请检查网络");
+                });
+            ajax.set();
+            ajax.start();
+        };
+        boxtsizeinit();
+
+
+        /*
+         * 箱型列表动态
+         */
+        $('#boxtype').change(function () {
+            $(this).find('#boxtypeHelp').remove();
+        });
+        /*
+         * 尺寸列表动态
+         */
+        $('#boxsize').change(function () {
+            $(this).find('#boxsizeHelp').remove();
+        });
+
+    });
+</script>
 @}

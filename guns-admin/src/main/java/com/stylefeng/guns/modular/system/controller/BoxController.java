@@ -94,6 +94,7 @@ public class BoxController extends BaseController {
     @RequestMapping(value = "/add")
     @ResponseBody
     public Object add(Box box) {
+        box.setAreaid(1);
         boxService.insert(box);
         return SUCCESS_TIP;
     }
