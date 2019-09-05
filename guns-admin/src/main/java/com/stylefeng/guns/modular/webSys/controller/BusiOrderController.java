@@ -185,9 +185,17 @@ public class BusiOrderController extends BaseController {
         busiRecord.setOprman(ShiroKit.getUser().getName());//得到操作人
         busiRecord.setOptype("新增order");
         busiRecord.setOptime(new Date());
+
         busiRecordService.insert(busiRecord);
         }
         /*********************操作记录****************************/
+        if(busiOrder.getTrantype()==0)
+        {
+            busiOrder.setStartpoint(41);
+        }
+        else{
+            busiOrder.setStartpoint(7);
+        }
         busiOrderService.insert(busiOrder);
         return SUCCESS_TIP;
     }

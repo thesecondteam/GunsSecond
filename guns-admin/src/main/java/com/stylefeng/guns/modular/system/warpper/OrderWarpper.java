@@ -51,6 +51,8 @@ public class OrderWarpper extends BaseControllerWarpper {
             map.put("stateName","已装箱");
         else if(map.get("ordercode").equals(2))
             map.put("stateName","已取消");
+        else if(map.get("ordercode").equals(3))
+            map.put("stateName","已发货");
         else
                 map.put("stateName","已完成");
 
