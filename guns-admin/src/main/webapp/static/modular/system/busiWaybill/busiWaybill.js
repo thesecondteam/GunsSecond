@@ -51,7 +51,7 @@ BusiWaybill.openAddBusiWaybill = function () {
     var index = layer.open({
         type: 2,
         title: '添加发出运单',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybill/busiWaybill_add'
@@ -66,7 +66,7 @@ BusiWaybill.openCreateBusiWaybill = function () {
     var index = layer.open({
         type: 2,
         title: '生成到达运单',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybill/busiWaybill_create'
@@ -83,7 +83,7 @@ BusiWaybill.openBusiWaybillDetail = function () {
             type: 2,
 
             title: '运单',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybill/busiWaybill_update/' + BusiWaybill.seItem.id
@@ -145,7 +145,7 @@ $('#'+BusiWaybill.id).on("dbl-click-row.bs.table",function(e, row, $element) {
         var index = layer.open({
             type: 2,
             title: '添加运单详情',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_click_add?d='+row.waybillid

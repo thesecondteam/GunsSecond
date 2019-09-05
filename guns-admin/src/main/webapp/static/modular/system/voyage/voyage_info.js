@@ -30,13 +30,17 @@ function isEmpty(obj) {
  * @param val 数据的具体值
  */
 VoyageInfoDlg.set = function(key, val) {
-    if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
-        if(key=="endpoint"){
-            this.voyageInfoData[key] = $("#" + key).val();
+    if(key=="loadtype"){
+        this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+        return this;
+    }
+    else if (key=="loadtype"){
+        if($("#" + key).text().equals("装货")){
+            this.voyageInfoData[key] = 0;
             return this;
         }
         else {
-            this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+            this.voyageInfoData[key] = 1;
             return this;
         }
     }
@@ -175,7 +179,6 @@ VoyageInfoDlg.getVoyageNum = function(){
     });
 }
 
-
 /**
  *动态增加港口option
  */
@@ -184,8 +187,14 @@ VoyageInfoDlg.getVoyageNum = function(){
  */
 VoyageInfoDlg.getStartHarbourName = function () {
     var HarbourName = $("select[id=startpoint]").val();
+    var HarbourId = $("select[id=startpoint]").val();
     $("select[id=startpoint]").empty();      //清空
     $("#startpoint").append("<option value='0'>请选择起点港口</option>");
+    var num = new Array();      //港口id
+    var name = new Array();     //港口名
+    /**
+     * 获得港口名序列
+     */
     $.ajax({
         url: '/harbour/getHarbourName',
         type: "post",
@@ -199,29 +208,41 @@ VoyageInfoDlg.getStartHarbourName = function () {
         },
         success: function (listHarbourName) {
             if (listHarbourName && listHarbourName.length != 0) {
-                if(listHarbourName.length > "7"){
-                    for (var i = 0; i < listHarbourName.length; i++) {
-                        var j = i;
-                        if (!isEmpty(listHarbourName[i])) {
-                            if(j == "7") {
-                                j++;
-                            }
-                            var option = "<option value=\"" +j+ "\"";
-                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                            $("select[id=startpoint]").append(option);
-                        }
-                    }
-                }
-                else {
-                    for (var i = 0; i < listHarbourName.length; i++) {
-                        if (!isEmpty(listHarbourName[i])) {
-                            var option = "<option value=\"" +i+ "\"";
-                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                            $("select[id=startpoint]").append(option);
-                        }
+                for (var i = 0; i < listHarbourName.length; i++) {
+                    if (!isEmpty(listHarbourName[i])) {
+                        name[i] = listHarbourName[i];
                     }
                 }
             }
+            /**
+             * 获得车站id序列
+             */
+            $.ajax({
+                url: '/harbour/getHarbourId',
+                type: "post",
+                data: {
+                    HarbourId: HarbourId
+                },
+                cache: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (listHarbourId) {
+                    if(listHarbourId && listHarbourId.length != 0) {
+                        for (var i = 0; i < listHarbourId.length; i++) {
+                            if (!isEmpty(listHarbourId[i])) {
+                                num[i] = listHarbourId[i];
+                            }
+                        }
+                        for (var i = 0; i < listHarbourId.length; i++) {
+                            var option = "<option value=\"" +num[i]+ "\"";
+                            option += ">" + name[i] + "</option>";  //动态添加数据
+                            $("select[id=startpoint]").append(option);
+                        }
+                    }
+                }
+            });
         }
     });
 }
@@ -231,8 +252,14 @@ VoyageInfoDlg.getStartHarbourName = function () {
  */
 VoyageInfoDlg.getEndHarbourName = function(){
     var HarbourName = $("select[id=endpoint]").val();
+    var HarbourId = $("select[id=endpoint]").val();
     $("select[id=endpoint]").empty();      //清空
-    $("#endpoint").append("<option value='0'>请选择终点港口</option>");
+    $("#endpoint").append("<option value='0'>请选择起点港口</option>");
+    var num = new Array();      //港口id
+    var name = new Array();     //港口名
+    /**
+     * 获得港口名序列
+     */
     $.ajax({
         url: '/harbour/getHarbourName',
         type: "post",
@@ -246,29 +273,41 @@ VoyageInfoDlg.getEndHarbourName = function(){
         },
         success: function (listHarbourName) {
             if (listHarbourName && listHarbourName.length != 0) {
-                if(listHarbourName.length > "7") {
-                    for (var i = 0; i < listHarbourName.length; i++) {
-                        var j = i;
-                        if (!isEmpty(listHarbourName[i])) {
-                            if(j == "7"){
-                                j++;
-                            }
-                            var option = "<option value=\"" +j+ "\"";
-                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                            $("select[id=endpoint]").append(option);
-                        }
-                    }
-                }
-                else {
-                    for (var i = 0; i < listHarbourName.length; i++) {
-                        if (!isEmpty(listHarbourName[i])) {
-                            var option = "<option value=\"" +i+ "\"";
-                            option += ">" + listHarbourName[i] + "</option>";  //动态添加数据
-                            $("select[id=endpoint]").append(option);
-                        }
+                for (var i = 0; i < listHarbourName.length; i++) {
+                    if (!isEmpty(listHarbourName[i])) {
+                        name[i] = listHarbourName[i];
                     }
                 }
             }
+            /**
+             * 获得车站id序列
+             */
+            $.ajax({
+                url: '/harbour/getHarbourId',
+                type: "post",
+                data: {
+                    HarbourId: HarbourId
+                },
+                cache: false,
+                processData: false,
+                contentType: false,
+                error: function () {
+                },
+                success: function (listHarbourId) {
+                    if(listHarbourId && listHarbourId.length != 0) {
+                        for (var i = 0; i < listHarbourId.length; i++) {
+                            if (!isEmpty(listHarbourId[i])) {
+                                num[i] = listHarbourId[i];
+                            }
+                        }
+                        for (var i = 0; i < listHarbourId.length; i++) {
+                            var option = "<option value=\"" +num[i]+ "\"";
+                            option += ">" + name[i] + "</option>";  //动态添加数据
+                            $("select[id=endpoint]").append(option);
+                        }
+                    }
+                }
+            });
         }
     });
 }

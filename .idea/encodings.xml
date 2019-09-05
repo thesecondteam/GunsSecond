@@ -3,12 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guns-admin" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/guns-admin" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/guns-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guns-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guns-generator" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/guns-generator" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/guns-rest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guns-rest" charset="UTF-8" />
   </component>
 </project>

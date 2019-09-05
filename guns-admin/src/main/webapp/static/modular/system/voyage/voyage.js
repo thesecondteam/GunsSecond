@@ -18,8 +18,6 @@ Voyage.initColumn = function () {
             {title: '轮船号', field: 'imo', visible: true, align: 'center', valign: 'middle'},
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '发货方', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '收货方', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
             {title: '集装箱数', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
             {title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
@@ -52,7 +50,7 @@ Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
         title: '添加航次',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_add'
@@ -67,7 +65,7 @@ Voyage.openCreateVoyage = function () {
     var index = layer.open({
         type: 2,
         title: '生成航次',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_create'
@@ -83,7 +81,7 @@ Voyage.openVoyageDetail = function () {
         var index = layer.open({
             type: 2,
             title: '航次',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyage/voyage_update/' + Voyage.seItem.id
@@ -138,13 +136,14 @@ $(function () {
     table.setPaginationType("client");
     Voyage.table = table.init();
 });
+
 //双击添加航次详情
 $('#'+Voyage.id).on("dbl-click-row.bs.table",function(e, row, $element) {
     if (Voyage.check()) {
         var index = layer.open({
             type: 2,
             title: '添加航次详情',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyagedet/voyagedet_click_add?d='+row.voyagenum

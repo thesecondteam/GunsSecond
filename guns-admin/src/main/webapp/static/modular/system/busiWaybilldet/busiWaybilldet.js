@@ -50,7 +50,7 @@ BusiWaybilldet.openAddBusiWaybilldet = function () {
     var index = layer.open({
         type: 2,
         title: '添加运单详情',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_add'
@@ -65,7 +65,7 @@ BusiWaybilldet.openCreateBusiWaybilldet = function () {
     var index = layer.open({
         type: 2,
         title: '生成运单详情',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_create'
@@ -81,7 +81,7 @@ BusiWaybilldet.openBusiWaybilldetDetail = function () {
         var index = layer.open({
             type: 2,
             title: '运单详情',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_update/' + BusiWaybilldet.seItem.id
