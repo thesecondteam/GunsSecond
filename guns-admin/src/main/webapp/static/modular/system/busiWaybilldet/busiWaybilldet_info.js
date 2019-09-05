@@ -40,6 +40,7 @@ BusiWaybilldetInfoDlg.close = function() {
     parent.layer.close(window.parent.BusiWaybilldet.layerIndex);
 }
 
+
 /**
  * 收集数据
  */

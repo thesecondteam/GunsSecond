@@ -149,6 +149,6 @@ $('#'+BusiWaybill.id).on("dbl-click-row.bs.table",function(e, row, $element) {
             maxmin: true,
             content: Feng.ctxPath + '/busiWaybilldet/busiWaybilldet_click_add?d='+row.waybillid
         });
-        this.layerIndex = index;
+        window.parent.BusiWaybilldet.layerIndex = index;
     }
 });

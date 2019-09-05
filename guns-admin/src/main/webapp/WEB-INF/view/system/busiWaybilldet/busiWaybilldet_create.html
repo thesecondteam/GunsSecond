@@ -50,7 +50,7 @@
         month = check(month);
         day = check(day);
         document.getElementById("waybilldetid").value = "T" + year + month + day + h + m + s;
-        document.getElementById("createtime").value = year + "-" + month + "-" + day;
+        document.getElementById("createtime").value = year + "-" + month + "-" + day + " "+h +":"+ m +":"+ s;
     }
     //时间数字小于10，则在之前加个“0”补位。
     function check(i){
