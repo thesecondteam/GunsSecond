@@ -15,8 +15,5 @@ import java.util.Map;
  * @since 2019-08-14
  */
 public interface IVoyagedetService extends IService<Voyagedet> {
-    /**
-     * 获取所有部门列表
-     */
-    List<Map<String, Object>> list(@Param("condition") String condition);
+
 }

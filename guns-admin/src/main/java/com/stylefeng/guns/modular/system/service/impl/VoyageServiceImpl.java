@@ -20,8 +20,5 @@ import java.util.Map;
 @Service
 @Transactional
 public class VoyageServiceImpl extends ServiceImpl<VoyageMapper, Voyage> implements IVoyageService {
-    @Override
-    public List<Map<String, Object>> list(String condition) {
-        return this.baseMapper.list(condition);
-    }
+
 }

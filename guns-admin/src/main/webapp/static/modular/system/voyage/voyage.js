@@ -18,8 +18,6 @@ Voyage.initColumn = function () {
             {title: '轮船号', field: 'imo', visible: true, align: 'center', valign: 'middle'},
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
-            {title: '发货方', field: 'consigncompany', visible: true, align: 'center', valign: 'middle'},
-            {title: '收货方', field: 'recivecompany', visible: true, align: 'center', valign: 'middle'},
             {title: '集装箱数', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
             {title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},

@@ -30,13 +30,17 @@ function isEmpty(obj) {
  * @param val 数据的具体值
  */
 VoyageInfoDlg.set = function(key, val) {
-    if(key=="loadtype"||key=="startpoint"||key=="endpoint"){
-        if(key=="endpoint"){
-            this.voyageInfoData[key] = $("#" + key).val();
+    if(key=="loadtype"){
+        this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+        return this;
+    }
+    else if (key=="loadtype"){
+        if($("#" + key).text().equals("装货")){
+            this.voyageInfoData[key] = 0;
             return this;
         }
         else {
-            this.voyageInfoData[key] = (typeof val == "undefined") ? $("#" + key).id : id;
+            this.voyageInfoData[key] = 1;
             return this;
         }
     }
