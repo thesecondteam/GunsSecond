@@ -5,7 +5,6 @@
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-
                             <#input id="waybillid" name="运单号" underline="true" readonly="true"/>
                             <#select name="车次" id="trainnum" underline="true"/>
                             <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
@@ -14,19 +13,20 @@
                 </div>
 
                 <div class="col-sm-6">
-
                             <#select id="startpoint" name="起点" underline="true"/>
                             <#input id="endpoint" name="终点" underline="true" value="7" readonly="true"/>
                             <#input id="distance" name="距离" underline="true"/>
-                            <#input id="loadtype" name="装/卸种类" underline="true" value="卸货" readonly="true"/>
                             <#input id="loadcode" name="装货码" underline="true" value="0" readonly="true"/>
                             <#input id="unloadcode" name="卸货码" underline="true" value="1" readonly="true"/>
                 </div>
             </div>
 
             <div class="row btn-group-m-t">
-                <div class="col-sm-10">
+                <div class="col-sm-10"></div>
+                <div class="col-sm-1">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybillInfoDlg.addSubmit()"/>
+                </div>
+                <div class="col-sm-1">
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiWaybillInfoDlg.close()"/>
                 </div>
             </div>

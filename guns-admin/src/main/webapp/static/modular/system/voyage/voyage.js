@@ -23,7 +23,6 @@ Voyage.initColumn = function () {
             {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '里程', field: 'distance', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
-            {title: '装/卸种类', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
             {title: '装载码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},
             {title: '卸载码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'}
     ];

@@ -113,7 +113,7 @@ VoyageInfoDlg.addSubmit = function() {
 /**
  * 提交生成
  */
-VoyageInfoDlg.addSubmit = function() {
+VoyageInfoDlg.createSubmit = function() {
 
     this.clearData();
     this.collectData();

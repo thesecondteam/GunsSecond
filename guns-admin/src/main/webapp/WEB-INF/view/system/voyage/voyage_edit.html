@@ -6,22 +6,21 @@
             <div class="row">
                 <div class="col-sm-6 b-r">
                     <#input id="id" name="" type="hidden"/>
-                    <#input id="voyagenum" name="航次号" underline="true" readonly="true"/>
-                    <#select name="轮船号" id="imo" underline="true"/>
-                    <#input id="starttime" name="开始时间" underline="true" readonly="true"/>
-<!--                    <#input id="endtime" name="结束时间" underline="true"/>-->
-                    <#input id="boxnumber" name="集装箱数" underline="true"/>
-                    <#input id="statecode" name="状态码" underline="true" readonly="true"/>
+                    <#input id="voyagenum" name="航次号" value="${item.voyagenum}" underline="true" readonly="true"/>
+                    <#select name="轮船号" id="imo" value="${item.imo}" underline="true"/>
+                    <#input id="starttime" name="开始时间" value="${item.starttime}" underline="true" readonly="true"/>
+                    <#input id="endtime" name="结束时间" value="${item.endtime}" underline="true" readonly="true"/>
+                    <#input id="boxnumber" name="集装箱数" value="${item.boxnumber}" underline="true"/>
+                    <#input id="statecode" name="状态码" value="${item.statecode}" underline="true" readonly="true"/>
                 </div>
 
                 <div class="col-sm-6">
                     <#input id="id" name="" type="hidden"/>
-                    <#input id="startpoint" name="起点" underline="true" value="秦皇岛" readonly="true"/>
-                    <#input id="endpoint" name="终点" underline="true"/>
-                    <#input id="distance" name="里程" underline="true"/>
-                    <#select id="loadtype" name="装/卸种类" underline="true" value="装货" readonly="true"/>
-                    <#input id="loadcode" name="装货码" underline="true"/>
-                    <#input id="unloadcode" name="卸货码" underline="true"/>
+                    <#input id="startpoint" name="起点" value="${item.startpoint}" underline="true"/>
+                    <#input id="endpoint" name="终点" value="${item.endpoint}" underline="true"/>
+                    <#input id="distance" name="里程" value="${item.distance}" underline="true"/>
+                    <#input id="loadcode" name="装货码" value="${item.loadcode}" underline="true"/>
+                    <#input id="unloadcode" name="卸货码" value="${item.unloadcode}" underline="true"/>
                 </div>
             </div>
 
@@ -41,9 +40,6 @@
 <script src="${ctxPath}/static/modular/system/voyage/voyage_info.js"></script>
 <script type="text/javascript">
     VoyageInfoDlg.getVoyageNum();
-    $("#loadtype").append("<option value='0'>请选择装/卸种类</option>");
-    $("#loadtype").append("<option value='1'>装货</option>");
-    $("#loadtype").append("<option value='2'>卸货</option>");
     var fo = document.getElementById("imo").focus();
 </script>
 @}

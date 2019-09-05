@@ -24,7 +24,6 @@ BusiWaybill.initColumn = function () {
             {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
             {title: '距离', field: 'distance', visible: true, align: 'center', valign: 'middle'},
             {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
-            {title: '装/卸种类', field: 'loadtype', visible: true, align: 'center', valign: 'middle'},
             {title: '装货码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},
             {title: '卸货码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'}
     ];

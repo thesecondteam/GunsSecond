@@ -2,16 +2,15 @@
 <div class="ibox float-e-margins">
     <div class="ibox-content">
         <div class="form-horizontal">
-
             <div class="row">
                 <div class="col-sm-6 b-r">
                             <#input id="id" name="" value="${item.id}" type="hidden"/>
                             <#input id="waybillid" name="运单号" value="${item.waybillid}" underline="true"  readonly="true"/>
                             <#select id="trainnum" name="车次" value="${item.trainnum}" underline="true"/>
-                            <#input id="starttime" name="开始时间" value="${item.starttime}" underline="true"/>
-                            <#input id="endtime" name="结束时间" value="${item.endtime}" underline="true"/>
-
-                            <#input id="boxnumber" name="集装箱数" value="${item.boxnumber}" />
+                            <#input id="starttime" name="开始时间" value="${item.starttime}" underline="true" readonly="true"/>
+                            <#input id="endtime" name="结束时间" value="${item.endtime}" underline="true" readonly="true"/>
+                            <#input id="boxnumber" name="集装箱数" value="${item.boxnumber}" underline="true"/>
+                            <#input id="statecode" name="状态码" value="${item.statecode}" underline="true" readonly="true"/>
                 </div>
 
                 <div class="col-sm-6">
@@ -19,16 +18,16 @@
                             <#input id="startpoint" name="起点" value="${item.startpoint}" underline="true"/>
                             <#input id="endpoint" name="终点" value="${item.endpoint}" underline="true"/>
                             <#input id="distance" name="距离" value="${item.distance}" underline="true"/>
-                            <#input id="statecode" name="状态码" value="${item.statecode}" underline="true"/>
-                            <#select id="loadtype" name="装/卸种类" value="${item.loadtype}" underline="true"/>
                             <#input id="loadcode" name="装货码" value="${item.loadcode}" underline="true"/>
                             <#input id="unloadcode" name="卸货码" value="${item.unloadcode}" />
                 </div>
             </div>
-
             <div class="row btn-group-m-t">
-                <div class="col-sm-10">
+                <div class="col-sm-10"></div>
+                <div class="col-sm-1">
                     <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="BusiWaybillInfoDlg.editSubmit()"/>
+                </div>
+                <div class="col-sm-1">
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="BusiWaybillInfoDlg.close()"/>
                 </div>
             </div>
@@ -39,9 +38,6 @@
 <script src="${ctxPath}/static/modular/system/busiWaybill/busiWaybill_info.js"></script>
 <script type="text/javascript">
     BusiWaybillInfoDlg.getTrainId();
-    $("#loadtype").append("<option value='0'>请选择装/卸种类</option>");
-    $("#loadtype").append("<option value='1'>装货</option>");
-    $("#loadtype").append("<option value='2'>卸货</option>");
     var fo = document.getElementById("trainnum").focus();
 </script>
 @}
