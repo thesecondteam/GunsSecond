@@ -52,7 +52,7 @@ Voyage.openAddVoyage = function () {
     var index = layer.open({
         type: 2,
         title: '添加航次',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_add'
@@ -67,7 +67,7 @@ Voyage.openCreateVoyage = function () {
     var index = layer.open({
         type: 2,
         title: '生成航次',
-        area: ['1400px', '820px'], //宽高
+        area: ['1000px', '600px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/voyage/voyage_create'
@@ -83,7 +83,7 @@ Voyage.openVoyageDetail = function () {
         var index = layer.open({
             type: 2,
             title: '航次',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyage/voyage_update/' + Voyage.seItem.id
@@ -145,7 +145,7 @@ $('#'+Voyage.id).on("dbl-click-row.bs.table",function(e, row, $element) {
         var index = layer.open({
             type: 2,
             title: '添加航次详情',
-            area: ['1400px', '820px'], //宽高
+            area: ['1000px', '600px'], //宽高
             fix: false, //不固定
             maxmin: true,
             content: Feng.ctxPath + '/voyagedet/voyagedet_click_add?d='+row.voyagenum
