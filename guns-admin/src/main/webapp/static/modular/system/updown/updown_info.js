@@ -67,8 +67,8 @@ UpdownInfoDlg.ploadSubmit = function() {
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/pload", function(data){
         Feng.success("添加成功!");
-        //window.parent.Updown.table.refresh();
-        //UpdownInfoDlg.close();
+        window.parent.Updown.table.refresh();
+        UpdownInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
@@ -92,8 +92,8 @@ UpdownInfoDlg.cloadSubmit = function() {
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/cload", function(data){
         Feng.success("添加成功!");
-        //window.parent.Updown.table.refresh();
-        //UpdownInfoDlg.close();
+        window.parent.Updown.table.refresh();
+        UpdownInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });
@@ -117,8 +117,8 @@ UpdownInfoDlg.loadSubmit = function() {
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/load", function(data){
         Feng.success("添加成功!");
-        //window.parent.Updown.table.refresh();
-        //UpdownInfoDlg.close();
+        window.parent.Updown.table.refresh();
+        UpdownInfoDlg.close();
     },function(data){
         Feng.error("添加失败!" + data.responseJSON.message + "!");
     });

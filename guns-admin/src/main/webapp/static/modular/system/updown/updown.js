@@ -15,7 +15,6 @@ Updown.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
             {title: '订单编号', field: 'ordernumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '订单状态', field: 'ordercodeName', visible: true, align: 'center', valign: 'middle'},
             {title: '操作类型', field: 'optype', visible: true, align: 'center', valign: 'middle'},
             {title: '装箱时间', field: 'optime', visible: true, align: 'center', valign: 'middle'},
             {title: '装箱人员', field: 'oppeople', visible: true, align: 'center', valign: 'middle'},

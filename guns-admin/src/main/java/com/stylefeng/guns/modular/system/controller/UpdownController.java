@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.*;
 
 
@@ -96,9 +97,12 @@ public class UpdownController extends BaseController {
     @ResponseBody
     public Object pload(String orders, String boxcode, Date optime,String oppeople,Integer areaid) {
         List<String> ordernumbers = JSON.parseArray(orders,String.class);
-        EntityWrapper<BusiOrder> orderwrapper=new EntityWrapper<BusiOrder>();
-        List<Updown> updowns=new ArrayList<Updown>();
+        EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+
         Updown updown=new Updown();
+        boxwrapper.eq("boxcode",boxcode);
+        Box deletebox=boxService.selectOne(boxwrapper);
+        boxService.delete(boxwrapper);
         for(int i=0;i<ordernumbers.size();i++)
         {
             updown.setOrdernumber(ordernumbers.get(i));
@@ -108,9 +112,29 @@ public class UpdownController extends BaseController {
             updown.setOptime(optime);
             updown.setRecpeople("无");
             updown.setRecphone("无");
-            updowns.add(updown);
+            updownService.insert(updown);
+
+            EntityWrapper<BusiOrder> orderwrapper=new EntityWrapper<BusiOrder>();
+            orderwrapper.eq("ordernumber",ordernumbers.get(i));
+            BusiOrder order=orderService.selectOne(orderwrapper);
+            order.setOrdercode(1);
+            orderService.updateById(order);
+
+            Box box=new Box();
+            box.setOrdernumber(order.getOrdernumber());
+            box.setBoxcode(boxcode);
+            box.setBoxsize(deletebox.getBoxsize());
+            box.setBoxtype(deletebox.getBoxtype());
+            box.setGoodstype(order.getGoodstype());
+            box.setGoodsname(order.getGoodsname());
+            box.setTrantype(order.getTrantype());
+            box.setStartpoint(order.getStartpoint());
+            box.setEndpoint(order.getEndpoint());
+            box.setEmptycode(1);
+            box.setAreaid(areaid);
+            box.setStatecode(1);
+            boxService.insert(box);
         }
-        //updownService.insertBatch(updowns);
         return SUCCESS_TIP;
     }
 
@@ -121,7 +145,40 @@ public class UpdownController extends BaseController {
     @ResponseBody
     public Object cload(String order, String boxcodes, Date optime,String oppeople,Integer areaid) {
         List<String> boxs = JSON.parseArray(boxcodes,String.class);
-        System.out.println(order+"+++++"+boxs+"+++++"+optime+"+++++"+oppeople);
+        EntityWrapper<BusiOrder> orderwrapper=new EntityWrapper<BusiOrder>();
+
+        Updown updown=new Updown();
+        updown.setOrdernumber(order);
+        updown.setOppeople(oppeople);
+        updown.setOptype(1);
+        updown.setAreaid(areaid);
+        updown.setOptime(optime);
+        updown.setRecpeople("无");
+        updown.setRecphone("无");
+        updownService.insert(updown);
+
+        orderwrapper.eq("ordernumber",order);
+        BusiOrder Order=orderService.selectOne(orderwrapper);
+        Order.setOrdercode(1);
+        orderService.updateById(Order);
+
+
+        for(int i=0;i<boxs.size();i++)
+        {
+            EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+            boxwrapper.eq("boxcode",boxs.get(i));
+            Box box=boxService.selectOne(boxwrapper);
+            box.setOrdernumber(order);
+            box.setGoodstype(Order.getGoodstype());
+            box.setGoodsname(Order.getGoodsname());
+            box.setTrantype(Order.getTrantype());
+            box.setStartpoint(Order.getStartpoint());
+            box.setEndpoint(Order.getEndpoint());
+            box.setEmptycode(1);
+            box.setAreaid(areaid);
+            box.setStatecode(1);
+            boxService.updateById(box);
+        }
         return SUCCESS_TIP;
     }
 
@@ -131,7 +188,36 @@ public class UpdownController extends BaseController {
     @RequestMapping(value = "/load")
     @ResponseBody
     public Object load(String order, String boxcode, Date optime,String oppeople,Integer areaid) {
-        System.out.println(order+"+++++"+boxcode+"+++++"+optime+"+++++"+oppeople);
+        EntityWrapper<BusiOrder> orderwrapper=new EntityWrapper<BusiOrder>();
+        EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+
+        Updown updown=new Updown();
+        updown.setOrdernumber(order);
+        updown.setOppeople(oppeople);
+        updown.setOptype(1);
+        updown.setAreaid(areaid);
+        updown.setOptime(optime);
+        updown.setRecpeople("无");
+        updown.setRecphone("无");
+        updownService.insert(updown);
+
+        orderwrapper.eq("ordernumber",order);
+        BusiOrder Order=orderService.selectOne(orderwrapper);
+        Order.setOrdercode(1);
+        orderService.updateById(Order);
+
+        boxwrapper.eq("boxcode",boxcode);
+        Box box=boxService.selectOne(boxwrapper);
+        box.setOrdernumber(order);
+        box.setGoodstype(Order.getGoodstype());
+        box.setGoodsname(Order.getGoodsname());
+        box.setTrantype(Order.getTrantype());
+        box.setStartpoint(Order.getStartpoint());
+        box.setEndpoint(Order.getEndpoint());
+        box.setEmptycode(1);
+        box.setAreaid(areaid);
+        box.setStatecode(1);
+        boxService.updateById(box);
         return SUCCESS_TIP;
     }
 
