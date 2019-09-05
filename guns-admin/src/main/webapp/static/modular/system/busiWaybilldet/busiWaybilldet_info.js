@@ -177,6 +177,13 @@ BusiWaybilldetInfoDlg.getWaybillId = function () {
         }
     });
 }
+
+BusiWaybilldetInfoDlg.boxOnchange=function (x) {
+    console.log(x);
+}
+function Onchange(x){
+    console.log(x);
+}
 $(function() {
 
 });

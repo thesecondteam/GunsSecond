@@ -138,6 +138,7 @@ $(function () {
     table.setPaginationType("client");
     Voyage.table = table.init();
 });
+
 //双击添加航次详情
 $('#'+Voyage.id).on("dbl-click-row.bs.table",function(e, row, $element) {
     if (Voyage.check()) {

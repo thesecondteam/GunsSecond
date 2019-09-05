@@ -236,4 +236,25 @@ public class HarbourController extends BaseController {
         }
         return listHarbourName;
     }
+    /**
+     * 获取所有港口id
+     */
+    @RequestMapping(value="/getHarbourId")
+    @ResponseBody
+    public Object getHarbourId(String condition)
+    {
+        EntityWrapper<Harbour> harbourEntityWrapper = new EntityWrapper<>();
+        if (ToolUtil.isNotEmpty(condition) ) {
+            harbourEntityWrapper.like("id", condition);
+        }
+        List<Map<String, Object>> list = this.harbourService.selectMaps(harbourEntityWrapper);
+        List<String> listHarbourId = new ArrayList<>();
+        for(Map<String, Object> m:list)
+        {
+            if(!m.get("harbourcode").toString().equals("CNQHD")){
+                listHarbourId.add(m.get("id").toString());
+            }
+        }
+        return listHarbourId;
+    }
 }
