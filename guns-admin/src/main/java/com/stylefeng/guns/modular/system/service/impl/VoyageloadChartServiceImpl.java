@@ -23,8 +23,20 @@ import java.util.Map;
 public class VoyageloadChartServiceImpl extends ServiceImpl<VoyageloadChartMapper, Voyage> implements IVoyageloadChartService {
 
     @Override
-    public List<Map<String, Object>> list() {
-        return this.baseMapper.list();
+    public List<Map<String, Object>> list1() {
+        return this.baseMapper.list1();
+    }
+    @Override
+    public List<Map<String, Object>> list2() {
+        return this.baseMapper.list2();
+    }
+    @Override
+    public List<Map<String, Object>> list3() {
+        return this.baseMapper.list3();
+    }
+    @Override
+    public List<Map<String, Object>> list4() {
+        return this.baseMapper.list4();
     }
 
 }

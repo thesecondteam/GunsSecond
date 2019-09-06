@@ -23,8 +23,13 @@ import java.util.Map;
 public class VoyagewillChartServiceImpl extends ServiceImpl<VoyagewillChartMapper, Voyage> implements IVoyagewillChartService {
 
     @Override
-    public List<Map<String, Object>> list() {
-        return this.baseMapper.list();
+    public List<Map<String, Object>> list1() {
+        return this.baseMapper.list1();
     }
+    @Override
+    public List<Map<String, Object>> list2() {
+        return this.baseMapper.list2();
+    }
+
 
 }

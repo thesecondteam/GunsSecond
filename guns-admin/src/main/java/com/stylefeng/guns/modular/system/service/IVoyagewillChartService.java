@@ -15,6 +15,8 @@ import java.util.Map;
  * @since 2019-08-15
  */
 public interface IVoyagewillChartService extends IService<Voyage> {
-    List<Map<String, Object>> list();
+    List<Map<String, Object>> list1();
+    List<Map<String, Object>> list2();
+
 
 }
