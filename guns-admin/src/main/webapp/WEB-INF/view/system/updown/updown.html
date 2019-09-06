@@ -9,17 +9,10 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-2">
-                                <#SelectCon id="select" name="订单状态" >
-                                    <option value="10">全部</option>
-                                    <option value="0">待处理</option>
-                                    <option value="1">已装箱</option>
-                                </#SelectCon>
-                            </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <#NameCon id="condition" name="订单编号" />
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <#button name="搜索订单" icon="fa-search" clickFun="Updown.search()"/>
                             </div>
                         </div>

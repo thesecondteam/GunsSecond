@@ -9,10 +9,16 @@
                 <div class="row row-lg">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                            <div class="col-sm-2">
+                                <#SelectCon id="select" name="显示选择" >
+                                    <option value="0">空箱</option>
+                                    <option value="1">已装箱</option>
+                                </#SelectCon>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
+                                <#NameCon id="condition" name="集装箱编号" />
+                            </div>
+                            <div class="col-sm-2">
                                 <#button name="搜索" icon="fa-search" clickFun="Box.search()"/>
                             </div>
                         </div>
@@ -35,4 +41,9 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/system/box/box.js"></script>
+<script>
+    $('#select').change(function () {
+        Box.search();
+    });
+</script>
 @}

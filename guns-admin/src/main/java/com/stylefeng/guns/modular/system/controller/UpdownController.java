@@ -3,8 +3,10 @@ package com.stylefeng.guns.modular.system.controller;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.stylefeng.guns.core.base.controller.BaseController;
+import com.stylefeng.guns.core.util.ToolUtil;
 import com.stylefeng.guns.modular.system.model.*;
 import com.stylefeng.guns.modular.system.service.*;
+import com.stylefeng.guns.modular.system.warpper.UpdownWarpper;
 import com.stylefeng.guns.modular.webSys.service.IBusiOrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,7 +91,17 @@ public class UpdownController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return updownService.selectList(null);
+        List<Map<String, Object>> list;
+        if (ToolUtil.isNotEmpty(condition)) {
+            EntityWrapper<Updown> updownwrapper=new EntityWrapper<Updown>();
+            updownwrapper.like("ordernumber",condition);
+            list=updownService.selectMaps(updownwrapper);
+        }
+        else
+        {
+            list=updownService.selectMaps(null);
+        }
+        return new UpdownWarpper(list).warp();
     }
 
     /**

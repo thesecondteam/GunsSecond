@@ -39,6 +39,7 @@ public class BoxController extends BaseController {
 
     private String PREFIX = "/system/box/";
 
+
     @Autowired
     private IBoxService boxService;
     /**************业务记录*************/
@@ -81,9 +82,26 @@ public class BoxController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
+    public Object list(String condition,Integer viewtype) {
         List<Map<String, Object>> list;
-        list=boxService.selectMaps(null);
+
+        if (ToolUtil.isNotEmpty(condition)&&ToolUtil.isNotEmpty(viewtype)) {
+            EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+            boxwrapper.like("boxcode",condition).and().eq("emptycode",viewtype);
+            list=boxService.selectMaps(boxwrapper);
+        }
+        else if(ToolUtil.isNotEmpty(viewtype))
+        {
+            EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+            boxwrapper.eq("emptycode",viewtype);
+            list=boxService.selectMaps(boxwrapper);
+        }
+        else
+        {
+            EntityWrapper<Box> boxwrapper=new EntityWrapper<Box>();
+            boxwrapper.eq("emptycode",0);
+            list=boxService.selectMaps(boxwrapper);
+        }
         return new BoxWarpper(list).warp() ;
     }
 

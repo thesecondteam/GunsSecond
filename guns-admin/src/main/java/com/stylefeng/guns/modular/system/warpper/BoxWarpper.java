@@ -23,11 +23,21 @@ public class BoxWarpper extends BaseControllerWarpper {
     private Map<Object,Object> boxtypemaps=dicFactory.getBoxTypeMap();
     private Map<Object,Object> goodstypemaps=dicFactory.getGoodsTypeMap();
     private Map<Object,Object> areatypemaps=dicFactory.getAreaTypeMap();
+    private Map<Object,Object>harbourmaps=dicFactory.getHarbourMap();
     @Override
     public void warpTheMap(Map<String, Object> map) {
 
-        map.put("startpointName",stationmaps.get(map.get("startpoint")));
-        map.put("endpointName",stationmaps.get(map.get("endpoint")));
+        Integer H=0; Integer L=1;
+
+        if(H.equals(map.get("trantype")))
+        {  map.put("transName","海运");
+            map.put("startpointName",harbourmaps.get(map.get("startpoint")));
+            map.put("endpointName",harbourmaps.get(map.get("endpoint")));}
+        else if(L.equals(map.get("trantype"))) {
+            map.put("transName", "陆运");
+            map.put("startpointName",stationmaps.get(map.get("startpoint")));
+            map.put("endpointName",stationmaps.get(map.get("endpoint")));
+        }
         map.put("boxtypeName",boxtypemaps.get(map.get("boxtype")));
         map.put("goodstypeName",goodstypemaps.get(map.get("goodstype")));
         map.put("areatypeName",areatypemaps.get(map.get("areaid")));
