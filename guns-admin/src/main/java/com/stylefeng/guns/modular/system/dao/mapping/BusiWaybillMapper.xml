@@ -25,5 +25,16 @@
     <sql id="Base_Column_List">
         id, waybillid, trainnum, starttime, endtime, consigncompany, recivecompany, boxnumber, startpoint, endpoint, distance, statecode, loadtype, loadcode, unloadcode
     </sql>
-
+    <select id="getWayBoxNumsStartMonth" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_waybill WHERE DATE_FORMAT( #{time}, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and startpoint=7
+    </select>
+    <select id="getWayBoxNumsStart" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_waybill WHERE  startpoint=7
+    </select>
+    <select id="getWayBoxNumsEndMonth" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_waybill WHERE DATE_FORMAT( #{time}, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and endpoint=7
+    </select>
+    <select id="getWayBoxNumsEnd" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_waybill WHERE  endpoint=7
+    </select>
 </mapper>

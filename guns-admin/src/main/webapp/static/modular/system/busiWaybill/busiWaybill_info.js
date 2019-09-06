@@ -154,7 +154,7 @@ BusiWaybillInfoDlg.getTrainId = function () {
     var TrainId = $("select[id=trainnum]").val();
     $("select[id=trainnum]").empty();      //清空
     $("#trainnum").append("<option value='0'>请选择车次</option>");
-    $.ajax({url:'/train/getTrainId',
+    $.ajax({url:'${ctxPath}/train/getTrainId',
         type:"post",
         data:{
             TrainId : TrainId
@@ -185,7 +185,7 @@ BusiWaybillInfoDlg.getBoxCode = function () {
     var BoxCode = $("select[id=boxnumber]").val();
     $("select[id=boxnumber]").empty();      //清空
     $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'/box/getBoxCode',
+    $.ajax({url:'${ctxPath}/box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode
@@ -223,7 +223,7 @@ BusiWaybillInfoDlg.getStartStationId = function () {
      * 获得车站名序列
      */
     $.ajax({
-        url: '/dictStation/getStationId',
+        url: '${ctxPath}/dictStation/getStationId',
         type: "post",
         data: {
             StationId: StationId
@@ -245,7 +245,7 @@ BusiWaybillInfoDlg.getStartStationId = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '/dictStation/getStationId_id',
+                url: '${ctxPath}/dictStation/getStationId_id',
                 type: "post",
                 data: {
                     StationId_id: StationId_id
@@ -285,7 +285,7 @@ BusiWaybillInfoDlg.getEndStationId = function () {
      * 获得车站名序列
      */
     $.ajax({
-        url: '/dictStation/getStationId',
+        url: '${ctxPath}/dictStation/getStationId',
         type: "post",
         data: {
             StationId: StationId
@@ -307,7 +307,7 @@ BusiWaybillInfoDlg.getEndStationId = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '/dictStation/getStationId_id',
+                url: '${ctxPath}/dictStation/getStationId_id',
                 type: "post",
                 data: {
                     StationId_id: StationId_id
@@ -343,7 +343,7 @@ BusiWaybillInfoDlg.getEndStationId = function () {
     this.alert("1111");*/
 /*    var index = document.getElementById("boxnumber").selectedIndex;
     this.console(index);*/
-   /* $.ajax({url:'/box/boxnumber',
+   /* $.ajax({url:'${ctxPath}/box/boxnumber',
         type:"post",
         data:{
             BoxCode : BoxCode

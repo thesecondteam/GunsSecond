@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2019-08-15
  */
 public interface BoxMapper extends BaseMapper<Box> {
-
+    Integer getAllBoxesNum();
 }

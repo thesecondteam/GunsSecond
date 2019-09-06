@@ -27,5 +27,16 @@
     <sql id="Base_Column_List">
         id, voyagenum, imo, starttime, endtime, consigncompany, recivecompany, boxnumber, distance, statecode, loadcode, unloadcode, loadtype, endpoint, startpoint, spareone, sparetwo
     </sql>
-
+    <select id="getVoyageBoxNumsStartMonth" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_voyage WHERE DATE_FORMAT( #{time}, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and startpoint=7
+    </select>
+    <select id="getVoyageBoxNumsStart" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_voyage WHERE  startpoint=7
+    </select>
+    <select id="getVoyageBoxNumsEndMonth" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_voyage WHERE DATE_FORMAT( #{time}, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and endpoint=7
+    </select>
+    <select id="getVoyageBoxNumsEnd" resultType="Integer">
+        SELECT sum(boxnumber) FROM busi_voyage WHERE  endpoint=7
+    </select>
 </mapper>

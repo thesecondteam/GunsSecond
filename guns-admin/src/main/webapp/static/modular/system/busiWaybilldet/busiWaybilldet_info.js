@@ -125,7 +125,7 @@ BusiWaybilldetInfoDlg.getBoxCode = function(){
     var BoxCode = $("select[id=boxid]").val();
     $("select[id=boxid]").empty();      //清空
     $("#boxid").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'/box/getBoxCode',
+    $.ajax({url:'${ctxPath}/box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode
@@ -155,7 +155,7 @@ BusiWaybilldetInfoDlg.getWaybillId = function () {
     var WaybillId = $("select[id=waybillid]").val();
     $("select[id=waybillid]").empty();      //清空
     $("#waybillid").append("<option value='0'>请选择运单号</option>");
-    $.ajax({url:'/busiWaybill/getWaybillId',
+    $.ajax({url:'${ctxPath}/busiWaybill/getWaybillId',
         type:"post",
         data:{
             WaybillId : WaybillId

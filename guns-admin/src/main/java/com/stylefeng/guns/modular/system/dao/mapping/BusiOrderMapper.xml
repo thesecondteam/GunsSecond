@@ -27,5 +27,10 @@
     <sql id="Base_Column_List">
 
     </sql>
-
+    <select id="getOrderNumsStartMonth" resultType="Integer">
+        SELECT count(*) FROM busi_order WHERE DATE_FORMAT( #{time}, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) and startpoint=7
+    </select>
+    <select id="getOrderNumsStart" resultType="Integer">
+        SELECT count(*) FROM busi_order WHERE  startpoint=7
+    </select>
 </mapper>

@@ -143,15 +143,18 @@ public class EchartController {
             }
         }
         //返回markpoint使用
+        Integer max=0;
         List<Map<String,Object>> list2=new ArrayList<>();
         for(Map.Entry<String,Object> me:mapB.entrySet()) {
+            if(me.getValue()!=null&&Integer.parseInt(me.getValue().toString())>max)
+                max=Integer.parseInt(me.getValue().toString());
             Map<String,Object> mf=new HashMap<>();
             mf.put("name", me.getKey());
             mf.put("value", me.getValue());
             list2.add(mf);
         }
         //
-
+        System.out.println("---------------------->"+max);
         List<List<Map<String,Object>>> list4=new ArrayList<>();
         for(Map<String,Object> mp2:list2)
         {   List<Map<String,Object>> list3=new ArrayList<>();
@@ -178,9 +181,9 @@ public class EchartController {
                                                             "name":"江苏省",
                                                             "value":205
                                                         }*/
-        reList.add(list4);//返回这样的格式 [{name:'天津'}, {name:'秦皇岛',value:95}],
-                        //[{name:'河北省'}, {name:'北京',value:90}]
-        return  reList;//一个接口返回三组数据
+        reList.add(list4);//返回这样的格式 [{name:'天津'}, {name:'秦皇岛',value:95}], //[{name:'河北省'}, {name:'北京',value:90}]
+        reList.add(max+300);
+        return  reList;//一个接口返回四组数据
     }
     @RequestMapping("/getWorld")
     @ResponseBody
@@ -281,8 +284,11 @@ public class EchartController {
             }
         }
         //返回markpoint使用
+        Integer max=0;
         List<Map<String,Object>> list2=new ArrayList<>();
         for(Map.Entry<String,Object> me:mapB.entrySet()) {
+            if(me.getValue()!=null&&Integer.parseInt(me.getValue().toString())>max)
+                max=Integer.parseInt(me.getValue().toString());
             Map<String,Object> mf=new HashMap<>();
             mf.put("name", me.getKey());
             mf.put("value", me.getValue());
@@ -318,6 +324,7 @@ public class EchartController {
                                                         }*/
         reList.add(list4);//返回这样的格式 [{name:'天津'}, {name:'秦皇岛',value:95}],
         //[{name:'河北省'}, {name:'北京',value:90}]
+        reList.add(max+300);//添加上限
         return  reList;//一个接口返回三组数据
     }
 }

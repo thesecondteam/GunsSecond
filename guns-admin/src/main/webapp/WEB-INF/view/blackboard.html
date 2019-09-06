@@ -22,8 +22,8 @@
                                 <h1 class="font-weight-normal mb-3">当月进货量
                                     <i class="mdi mdi-airplane-landing mdi-24px float-right"></i>
                                 </h1>
-                                <h2 class="mb-5">$ 15,0000</h2>
-                                <h3 class="card-text">总进货量 $ 15,0000</h3>
+                                <h2 class="mb-5" id="monthIn"></h2>
+                                <h3 class="card-text" id="allIn">总进货量</h3>
 
                             </div>
                         </div>
@@ -36,8 +36,8 @@
                                 <h1 class="font-weight-normal mb-3">当月出货量
                                     <i class="mdi  mdi-airplane-takeoff mdi-24px float-right"></i>
                                 </h1>
-                                <h2 class="mb-5">45,6334</h2>
-                                <h3 class="card-text">总出货量</h3>
+                                <h2 class="mb-5" id="monthOut"></h2>
+                                <h3 class="card-text" id="allOut">总出货量</h3>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,8 @@
                                 <h1 class="font-weight-normal mb-3">现存货箱数
                                     <i class="mdi mdi-package-variant-closed  mdi-24px float-right"></i>
                                 </h1>
-                                <h2 class="mb-5">95,5741</h2>
-                                <h3 class="card-text">流通货箱数</h3>
+                                <h2 class="mb-5"id="nowBoxesNum"></h2>
+                                <h3 class="card-text"id="flue">流通货箱数</h3>
                             </div>
                         </div>
                     </div>
@@ -62,8 +62,8 @@
                                 <h1 class="font-weight-normal mb-3">当月订单数
                                     <i class="mdi mdi-checkbox-marked-circle-outline  mdi-24px float-right"></i>
                                 </h1>
-                                <h2 class="mb-5">95,5741</h2>
-                                <h3 class="card-text">总订单数</h3>
+                                <h2 class="mb-5"id="monthOrder"></h2>
+                                <h3 class="card-text"id="allOrder">总订单数</h3>
                             </div>
                         </div>
                     </div>
@@ -93,4 +93,23 @@
 
     </div>
 </div>
+<script>
+    $(function () {
+        $.ajax({
+            url:"${ctxPath}/getInfoHome/homeInfo",
+            success:function (data) {
+                console.log(data);
+                $("#monthIn").text(data[0]+"箱");
+                $("#allIn").text("总进货量"+data[1]+"箱");
+                $("#monthOut").text(data[2]+"箱");
+                $("#allOut").text("总出货量"+data[3]+"箱");
+                $("#nowBoxesNum").text(data[4]+"箱");
+                $("#flue").text("月净货流"+data[5]+"箱");
+                $("#monthOrder").text(data[6]+"单");
+                $("#allOrder").text("总订单量"+data[7]+"单");
+
+            }
+        })
+    })
+</script>
 @}

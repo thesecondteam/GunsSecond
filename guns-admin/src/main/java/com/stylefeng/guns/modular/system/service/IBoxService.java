@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2019-08-15
  */
 public interface IBoxService extends IService<Box> {
-
+    Integer getAllBoxesNum();
 }

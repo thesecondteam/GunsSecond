@@ -75,7 +75,7 @@
                 myChart2.setOption({
                     dataRange: {
                         min : 0,
-                        max : 300,
+                        max : name_point[3],
                         calculable : true,
                         color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
                         textStyle:{
@@ -83,7 +83,7 @@
                         },
                     },
                     title: {
-                        text: '中国货运地图',
+                        text: '运单货运图',
                         left: 'center',
                         top: 'top'
                     },
@@ -98,7 +98,7 @@
 
                     series : [
                         {
-                            name: '全国',
+                            name: '运单货运图',
                             type: 'map',
                             roam: false,//拖拽
                             hoverable: false,
@@ -131,8 +131,8 @@
                             geoCoord:name_point[0],
                             markPoint : {
                                 symbol:'emptyCircle',
-                                symbolSize : function (v){
-                                    return 10 + v/10
+                                symbolSize : function (v){//圈的大小
+                                    return 15
                                 },
                                 effect : {
                                     show: true,

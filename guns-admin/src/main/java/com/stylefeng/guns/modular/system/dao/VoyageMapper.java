@@ -4,6 +4,7 @@ import com.stylefeng.guns.modular.system.model.Voyage;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 /**
@@ -15,5 +16,8 @@ import java.util.Map;
  * @since 2019-08-14
  */
 public interface VoyageMapper extends BaseMapper<Voyage> {
-
+    Integer getVoyageBoxNumsStart();
+    Integer getVoyageBoxNumsStartMonth(Date time);
+    Integer getVoyageBoxNumsEnd();
+    Integer getVoyageBoxNumsEndMonth(Date time);
 }

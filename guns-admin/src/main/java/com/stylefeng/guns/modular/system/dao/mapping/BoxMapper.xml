@@ -26,5 +26,7 @@
     <sql id="Base_Column_List">
         spare1, spare2, ordernumber, trantype, boxcode, areaid, addtime, boxtype, boxsize, goodstype, goodsname, startpoint, endpoint, emptycode, statecode, id
     </sql>
-
+    <select id="getAllBoxesNum" resultType="Integer">
+        select count(distinct boxcode) from enti_box
+    </select>
 </mapper>
