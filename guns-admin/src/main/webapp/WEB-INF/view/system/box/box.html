@@ -26,7 +26,7 @@
                             @if(shiro.hasPermission("/box/add")){
                                 <#button name="添加空箱" icon="fa-plus" clickFun="Box.openAddBox()"/>
                             @}
-                            @if(shiro.hasPermission("/box/update")){
+                            @if(shiro.hasPermission("/box/move")){
                                 <#button name="场位移动" icon="fa-edit" clickFun="Box.openBoxDetail()" space="true"/>
                             @}
                             @if(shiro.hasPermission("/box/delete")){
