@@ -11,6 +11,7 @@ import com.stylefeng.guns.modular.system.model.BusiWaybill;
 import com.stylefeng.guns.modular.system.service.IBusiRecordService;
 import com.stylefeng.guns.modular.system.service.IBusiWaybillService;
 import com.stylefeng.guns.modular.system.service.ITrainService;
+import com.stylefeng.guns.modular.system.warpper.BusiWaybillWarpper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,14 +87,24 @@ public class BusiWaybillController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        if(ToolUtil.isEmpty(condition)) {
+        EntityWrapper<BusiWaybill> busiWaybillEntityWrapper = new EntityWrapper<>();
+        List<Map<String,Object>> list;
+/*        if(ToolUtil.isEmpty(condition)) {
             return busiWaybillService.selectList(null);
         }else
         {
             EntityWrapper<BusiWaybill> entityWrapper=new EntityWrapper<>();
             Wrapper<BusiWaybill> wrapper=entityWrapper.like("Waybillid",condition);
             return busiWaybillService.selectList(wrapper);
+        }*/
+        if(ToolUtil.isNotEmpty(condition)){
+            busiWaybillEntityWrapper.like("Waybillid",condition);
+            list = busiWaybillService.selectMaps(busiWaybillEntityWrapper);
         }
+        else {
+            list = busiWaybillService.selectMaps(null);
+        }
+        return new BusiWaybillWarpper(list).warp();
     }
 
     /**

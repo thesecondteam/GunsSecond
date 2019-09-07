@@ -89,7 +89,6 @@ public class DicFactory {
         Map<Object,Object> map=new HashMap<Object,Object>();
         List<Map<String, Object>> list = harbourMapper.selectMaps(null);
         for (Integer i=0;i<list.size();i++) {
-
             map.put(list.get(i).get("id"),list.get(i).get("harbourname"));
         }
         return map;

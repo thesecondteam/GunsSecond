@@ -19,10 +19,10 @@ Voyage.initColumn = function () {
             {title: '开始时间', field: 'starttime', visible: true, align: 'center', valign: 'middle'},
             {title: '结束时间', field: 'endtime', visible: true, align: 'center', valign: 'middle'},
             {title: '集装箱数', field: 'boxnumber', visible: true, align: 'center', valign: 'middle'},
-            {title: '起点', field: 'startpoint', visible: true, align: 'center', valign: 'middle'},
-            {title: '终点', field: 'endpoint', visible: true, align: 'center', valign: 'middle'},
+            {title: '起点', field: 'startpointName', visible: true, align: 'center', valign: 'middle'},
+            {title: '终点', field: 'endpointName', visible: true, align: 'center', valign: 'middle'},
             {title: '里程', field: 'distance', visible: true, align: 'center', valign: 'middle'},
-            {title: '状态码', field: 'statecode', visible: true, align: 'center', valign: 'middle'},
+            {title: '状态码', field: 'statename', visible: true, align: 'center', valign: 'middle'},
             {title: '装载码', field: 'loadcode', visible: true, align: 'center', valign: 'middle'},
             {title: '卸载码', field: 'unloadcode', visible: true, align: 'center', valign: 'middle'}
     ];

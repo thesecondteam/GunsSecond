@@ -83,12 +83,15 @@ public class VoyageController extends BaseController {
         * 声明条件构造器
         */
         EntityWrapper<Voyage> voyageEntityWrapper = new EntityWrapper<>();
-
+        List<Map<String,Object>> list;
         if(ToolUtil.isNotEmpty(condition)){
             voyageEntityWrapper.like("voyagenum",condition);
+            list = voyageService.selectMaps(voyageEntityWrapper);
         }
-        List<Map<String,Object>>list = this.voyageService.selectMaps(voyageEntityWrapper);
-        return super.warpObject(new VoyageWarpper(list));
+        else {
+            list = voyageService.selectMaps(null);
+        }
+        return new VoyageWarpper(list).warp();
     }
 
     /**
