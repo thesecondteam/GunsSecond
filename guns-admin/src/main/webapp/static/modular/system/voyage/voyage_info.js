@@ -155,7 +155,7 @@ VoyageInfoDlg.getVoyageNum = function(){
     var VoyageNum = $("select[id=imo]").val();
     $("select[id=imo]").empty();      //清空
     $("#imo").append("<option value='0'>请选择轮船号</option>");
-    $.ajax({url:'${ctxPath}/voyage/getImo',
+    $.ajax({url:'/voyage/getImo',
         type:"post",
         data:{
             VoyageNum: VoyageNum
@@ -196,7 +196,7 @@ VoyageInfoDlg.getStartHarbourName = function () {
      * 获得港口名序列
      */
     $.ajax({
-        url: '${ctxPath}/harbour/getHarbourName',
+        url: '/harbour/getHarbourName',
         type: "post",
         data: {
             HarbourName: HarbourName
@@ -218,7 +218,7 @@ VoyageInfoDlg.getStartHarbourName = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '${ctxPath}/harbour/getHarbourId',
+                url: '/harbour/getHarbourId',
                 type: "post",
                 data: {
                     HarbourId: HarbourId
@@ -261,7 +261,7 @@ VoyageInfoDlg.getEndHarbourName = function(){
      * 获得港口名序列
      */
     $.ajax({
-        url: '${ctxPath}/harbour/getHarbourName',
+        url: '/harbour/getHarbourName',
         type: "post",
         data: {
             HarbourName: HarbourName
@@ -283,7 +283,7 @@ VoyageInfoDlg.getEndHarbourName = function(){
              * 获得车站id序列
              */
             $.ajax({
-                url: '${ctxPath}/harbour/getHarbourId',
+                url: '/harbour/getHarbourId',
                 type: "post",
                 data: {
                     HarbourId: HarbourId
