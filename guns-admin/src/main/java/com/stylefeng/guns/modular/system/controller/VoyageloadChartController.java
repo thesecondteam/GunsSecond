@@ -115,7 +115,7 @@ public class VoyageloadChartController extends BaseController {
 
         for( int i=0;i<listdata4.size();i++){
             array4[i] = listdata4.get(i).values().toArray();
-            str4[i]=array1[i][0].toString();
+            str4[i]=array4[i][0].toString();
         }
         for(int i=0;i<12;i++)
         {

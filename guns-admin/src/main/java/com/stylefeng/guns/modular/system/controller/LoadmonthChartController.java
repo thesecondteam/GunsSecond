@@ -95,7 +95,7 @@ public class LoadmonthChartController extends BaseController {
 
         for( int i=0;i<listdata3.size();i++){
             array3[i] = listdata3.get(i).values().toArray();
-            str3[i]=array1[i][0].toString();
+            str3[i]=array3[i][0].toString();
         }
         for(int i=0;i<12;i++)
         {
@@ -121,7 +121,7 @@ public class LoadmonthChartController extends BaseController {
 
         for( int i=0;i<listdata4.size();i++){
             array4[i] = listdata4.get(i).values().toArray();
-            str4[i]=array1[i][0].toString();
+            str4[i]=array4[i][0].toString();
         }
         for(int i=0;i<12;i++)
         {
