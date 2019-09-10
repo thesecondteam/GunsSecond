@@ -1,7 +1,7 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="voyagedetForm">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
@@ -19,10 +19,10 @@
                     <#input id="operation" name="装/卸种类" underline="true"/>
                     <#input id="finish" name="是否完成" underline="true"  readonly="true" value="未完成"/>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.addSubmit()"/>
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyagedetInfoDlg.addSubmit()"/>
                     </div>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyagedetInfoDlg.close()"/>
                     </div>
                 </div>
             </div>

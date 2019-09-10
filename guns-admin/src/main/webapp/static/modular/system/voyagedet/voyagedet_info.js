@@ -2,9 +2,81 @@
  * 初始化voyagedet详情对话框
  */
 var VoyagedetInfoDlg = {
-    voyagedetInfoData : {}
+    voyagedetInfoData : {},
+    validateFields:{
+        voyagedetid:{
+            validators:{
+                notEmpty:{
+                    message:"航次详情编号不能为空"
+                }
+            }
+        },
+        voyagenum:{
+            validators:{
+                notEmpty:{
+                    message:"航次号不能为空"
+                }
+            }
+        },
+        boxid:{
+            validators:{
+                notEmpty:{
+                    message:"集装箱号不能为空"
+                }
+            }
+        },
+        boxtype:{
+            validators:{
+                notEmpty:{
+                    message:"集装箱类型不能为空"
+                }
+            }
+        },
+        boxsize:{
+            validators:{
+                notEmpty:{
+                    message:"集装箱尺寸不能为空"
+                }
+            }
+        },
+        boxgoods:{
+            validators:{
+                notEmpty:{
+                    message:"集装箱所装货物不能为空"
+                }
+            }
+        },
+        createtime:{
+            validators:{
+                notEmpty:{
+                    message:"创建时间不能为空"
+                }
+            }
+        },
+        operation:{
+            validators:{
+                notEmpty:{
+                    message:"装/卸种类不能为空"
+                }
+            }
+        },
+        finish:{
+            validators:{
+                notEmpty:{
+                    message:"是否完成不能为空"
+                }
+            }
+        }
+    }
 };
-
+/**
+ * 验证数据是否为空
+ */
+VoyagedetInfoDlg.validate = function () {
+    $('#voyagedetForm').data("bootstrapValidator").resetForm();
+    $('#voyagedetForm').bootstrapValidator('validate');
+    return $("#voyagedetForm").data('bootstrapValidator').isValid();
+}
 /**
  * 清除数据
  */
@@ -67,7 +139,9 @@ VoyagedetInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyagedet/add", function(data){
         Feng.success("添加成功!");
@@ -87,7 +161,9 @@ VoyagedetInfoDlg.createSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyagedet/create", function(data){
         Feng.success("生成成功!");
@@ -107,7 +183,9 @@ VoyagedetInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyagedet/update", function(data){
         Feng.success("修改成功!");
@@ -126,7 +204,7 @@ VoyagedetInfoDlg.getBoxCode = function () {
     var BoxCode = $("select[id=boxid]").val();
     $("select[id=boxid]").empty();      //清空
     $("#boxid").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'../box/getBoxCode',
+    $.ajax({url:Feng.ctxPath+'/box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode
@@ -156,7 +234,7 @@ VoyagedetInfoDlg.getVoyageNum = function () {
     var VoyageNum = $("select[id=voyagenum]").val();
     $("select[id=voyagenum]").empty();      //清空
     $("#voyagenum").append("<option value='0'>请选择航次号</option>");
-    $.ajax({url:'../voyage/getVoyageNum',
+    $.ajax({url:Feng.ctxPath+'/voyage/getVoyageNum',
         type:"post",
         data:{
             VoyageNum : VoyageNum
@@ -180,5 +258,5 @@ VoyagedetInfoDlg.getVoyageNum = function () {
     });
 }
 $(function() {
-
+    Feng.initValidator("voyagedetForm", VoyagedetInfoDlg.validateFields);
 });

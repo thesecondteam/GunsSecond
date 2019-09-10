@@ -2,9 +2,82 @@
  * 初始化voyage详情对话框
  */
 var VoyageInfoDlg = {
-    voyageInfoData : {}
+    voyageInfoData : {},
+    validateFields:{
+        voyagenum:{
+            validators:{
+                notEmpty:{
+                    message:"运输类型不能为空"
+                }
+            }
+        },
+        starttime:{
+            validators:{
+                notEmpty:{
+                    message:"开始时间不能为空"
+                }
+            }
+        },
+        boxnumber:{
+            validators:{
+                notEmpty:{
+                    message:"集装箱数不能为空"
+                }
+            }
+        },
+        statecode:{
+            validators:{
+                notEmpty:{
+                    message:"状态码不能为空"
+                }
+            }
+        },
+        startpoint:{
+            validators:{
+                notEmpty:{
+                    message:"起始点不能为空"
+                }
+            }
+        },
+        endpoint:{
+            validators:{
+                notEmpty:{
+                    message:"结束点不能为空"
+                }
+            }
+        },
+        distance:{
+            validators:{
+                notEmpty:{
+                    message:"距离不能为空"
+                }
+            }
+        },
+        loadcode:{
+            validators:{
+                notEmpty:{
+                    message:"装货码不能为空"
+                }
+            }
+        },
+        unloadcode:{
+            validators:{
+                notEmpty:{
+                    message:"卸货码不能为空"
+                }
+            }
+        }
+    }
 };
 
+/**
+ * 验证数据是否为空
+ */
+VoyageInfoDlg.validate = function () {
+    $('#voyageForm').data("bootstrapValidator").resetForm();
+    $('#voyageForm').bootstrapValidator('validate');
+    return $("#voyageForm").data('bootstrapValidator').isValid();
+}
 /**
  * 清除数据
  */
@@ -98,6 +171,9 @@ VoyageInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyage/add", function(data){
         Feng.success("添加成功!");
@@ -117,7 +193,9 @@ VoyageInfoDlg.createSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyage/create", function(data){
         Feng.success("生成成功!");
@@ -136,7 +214,9 @@ VoyageInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
-
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/voyage/update", function(data){
         Feng.success("修改成功!");
@@ -155,7 +235,7 @@ VoyageInfoDlg.getVoyageNum = function(){
     var VoyageNum = $("select[id=imo]").val();
     $("select[id=imo]").empty();      //清空
     $("#imo").append("<option value='0'>请选择轮船号</option>");
-    $.ajax({url:'../voyage/getImo',
+    $.ajax({url:Feng.ctxPath+'/voyage/getImo',
         type:"post",
         data:{
             VoyageNum: VoyageNum
@@ -196,7 +276,7 @@ VoyageInfoDlg.getStartHarbourName = function () {
      * 获得港口名序列
      */
     $.ajax({
-        url: '../harbour/getHarbourName',
+        url: Feng.ctxPath+'/harbour/getHarbourName',
         type: "post",
         data: {
             HarbourName: HarbourName
@@ -218,7 +298,7 @@ VoyageInfoDlg.getStartHarbourName = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '../harbour/getHarbourId',
+                url: Feng.ctxPath+'/harbour/getHarbourId',
                 type: "post",
                 data: {
                     HarbourId: HarbourId
@@ -261,7 +341,7 @@ VoyageInfoDlg.getEndHarbourName = function(){
      * 获得港口名序列
      */
     $.ajax({
-        url: '../harbour/getHarbourName',
+        url: Feng.ctxPath+'/harbour/getHarbourName',
         type: "post",
         data: {
             HarbourName: HarbourName
@@ -283,7 +363,7 @@ VoyageInfoDlg.getEndHarbourName = function(){
              * 获得车站id序列
              */
             $.ajax({
-                url: '../harbour/getHarbourId',
+                url: Feng.ctxPath+'/harbour/getHarbourId',
                 type: "post",
                 data: {
                     HarbourId: HarbourId
@@ -313,5 +393,5 @@ VoyageInfoDlg.getEndHarbourName = function(){
 }
 
 $(function() {
-
+    Feng.initValidator("voyageForm", VoyageInfoDlg.validateFields);
 });

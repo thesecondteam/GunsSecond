@@ -1,10 +1,11 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="voyagedetForm">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
+                    <#input id="id" name="ID" value="${item.id}" underline="true" readonly="readonly"/>
                     <#input id="voyagedetid" name="航次详情编号" value="${item.voyagedetid}" underline="true"/>
                     <#input id="voyagenum" name="航线编号" value="${item.voyagenum}" underline="true"/>
                     <#select id="boxid" name="集装箱号" value="${item.boxid}" underline="true"/>
@@ -19,10 +20,10 @@
                     <#input id="operation" name="装/卸种类" value="${item.operation}" underline="true"/>
                     <#input id="finish" name="是否完成" value="${item.finish}" underline="true"/>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyageInfoDlg.editSubmit()"/>
+                        <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VoyagedetInfoDlg.editSubmit()"/>
                     </div>
                     <div  class="col-sm-6 b-r" style="align:center;width:50%">
-                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyageInfoDlg.close()"/>
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VoyagedetInfoDlg.close()"/>
                     </div>
                 </div>
             </div>
