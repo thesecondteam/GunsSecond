@@ -126,7 +126,7 @@ VoyagedetInfoDlg.getBoxCode = function () {
     var BoxCode = $("select[id=boxid]").val();
     $("select[id=boxid]").empty();      //清空
     $("#boxid").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'${ctxPath}/box/getBoxCode',
+    $.ajax({url:'../box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode
@@ -156,7 +156,7 @@ VoyagedetInfoDlg.getVoyageNum = function () {
     var VoyageNum = $("select[id=voyagenum]").val();
     $("select[id=voyagenum]").empty();      //清空
     $("#voyagenum").append("<option value='0'>请选择航次号</option>");
-    $.ajax({url:'${ctxPath}/voyage/getVoyageNum',
+    $.ajax({url:'../voyage/getVoyageNum',
         type:"post",
         data:{
             VoyageNum : VoyageNum

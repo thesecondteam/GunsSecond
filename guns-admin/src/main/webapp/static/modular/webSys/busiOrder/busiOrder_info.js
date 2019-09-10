@@ -232,24 +232,29 @@ BusiOrderInfoDlg.editSubmit = function() {
         ajax.start();
     });
 
+
 $("#trantype").change(function () {
 
            if($(this).val()==0){
                $("#endpoint").empty();
            for (var key in dataInfo.harbour) {
                console.log(key);
-               var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
-               option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
-               $("#endpoint").append(option);
+               if(dataInfo.harbour[key].statecode==1) {
+                   var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
+                   option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
+                   $("#endpoint").append(option);
+               }
            }
            }
     if($(this).val()==1) {
         $("#endpoint").empty();
         for (var key in dataInfo.station) {
             console.log(key);
+            if(dataInfo.station[key].statecode==1)
+            {
             var option = "<option value=\"" + dataInfo.station[key].id + "\"";
             option += ">" + dataInfo.station[key].name + "</option>";  //动态添加数据
-            $("#endpoint").append(option);
+            $("#endpoint").append(option);}
         }
 
     }
@@ -293,7 +298,7 @@ BusiOrderInfoDlg.getGoodsId = function () {
 
                 for(var i=0; i<listGoodsId.length; i++){
                     console.log(listGoodsId[i]);
-                    if(listGoodsId[i]){
+                    if(listGoodsId[i]&&listGoodsId[i].statecode==1){
                         var option="<option value=\""+ listGoodsId[i].id+"\"";
                         option += ">"+listGoodsId[i].goodstype+"</option>";  //动态添加数据
                         $("select[id=goodstype]").append(option);

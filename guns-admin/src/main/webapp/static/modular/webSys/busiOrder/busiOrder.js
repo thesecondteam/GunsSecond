@@ -55,7 +55,7 @@ BusiOrder.openAddBusiOrder = function () {
     var index = layer.open({
         type: 2,
         title: '添加order',
-        area: ['1000px', '600px'], //宽高
+        area: ['800px', '550px'], //宽高
         fix: false, //不固定
         maxmin: true,
         content: Feng.ctxPath + '/busiOrder/busiOrder_add'

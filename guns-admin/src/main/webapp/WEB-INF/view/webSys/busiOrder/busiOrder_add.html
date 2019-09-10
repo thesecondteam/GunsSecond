@@ -10,20 +10,23 @@
                             <#select  id="goodstype" name="货物类型" underline="true"/>
                             <#input id="goodsname" name="货物名称" underline="true"/>
                             <#input id="goodsvolume" name="货物容量(单位：吨)" underline="true"/>
-                            <#input id="recephone" name="收货方电话" underline="true"/>
-                            <#input id="receiver" name="收货方"/>
+
                             <#select id="trantype"  onchange="BusiOrderInfoDlg.getfirst1()" name="运输方式" underline="true">
-                              <option value="">-- --</option>
+                              <option value="">请选择运输方式</option>
                              <option value="1">陆运</option>
                              <option value="0">海运</option>
                             </#select>
+                            <#select name="站点/港口" id="endpoint"   onchange="BusiOrderInfoDlg.choose()" underline="true"/>
 
                </div>
                 <div class="col-sm-6">
 
-                            <#select name="站点/港口" id="endpoint"   onchange="BusiOrderInfoDlg.choose()" underline="true"/>
-                            <#input id="consiphone" name="发货方电话" underline="true"/>
                             <#input id="consignor" name="发货方" underline="true"/>
+                            <#input id="consiphone" name="发货方电话" underline="true"/>
+
+                            <#input id="receiver" name="收货方" underline="true"/>
+                           <#input id="recephone" name="收货方电话" underline="true"/>
+
                             <#input id="creationtime" name="创建时间" underline="true"  readonly="true" />
 
                             <#input id="note" name="备注" underline="true"/>
