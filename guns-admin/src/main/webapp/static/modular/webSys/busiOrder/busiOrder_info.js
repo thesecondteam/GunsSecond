@@ -144,23 +144,23 @@ BusiOrderInfoDlg.close = function() {
  */
 BusiOrderInfoDlg.collectData = function() {
     this
-    .set('id')
-    .set('ordernumber')
-    .set('trantype')
-    .set('goodstype')
-    .set('goodsname')
-    .set('goodsvolume')
-    .set('startpoint')
-    .set('recephone')
-    .set('receiver')
-    .set('endpoint')
-    .set('consiphone')
-    .set('consignor')
-    .set('creationtime')
-    .set('ordercode')
-    .set('note')
-    .set('spare')
-    .set('spare1');
+        .set('id')
+        .set('ordernumber')
+        .set('trantype')
+        .set('goodstype')
+        .set('goodsname')
+        .set('goodsvolume')
+        .set('startpoint')
+        .set('recephone')
+        .set('receiver')
+        .set('endpoint')
+        .set('consiphone')
+        .set('consignor')
+        .set('creationtime')
+        .set('ordercode')
+        .set('note')
+        .set('spare')
+        .set('spare1');
 }
 
 /**
@@ -183,17 +183,17 @@ BusiOrderInfoDlg.addSubmit = function() {
     if (!this.validate()) {
         return;
     }
-        //提交信息
-        var ajax = new $ax(Feng.ctxPath + "/busiOrder/add", function (data) {
-            Feng.success("添加成功!");
-            window.parent.BusiOrder.table.refresh();
-            BusiOrderInfoDlg.close();
-        }, function (data) {
-            Feng.error("添加失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set(this.busiOrderInfoData);
-        ajax.start();
-    }
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/busiOrder/add", function (data) {
+        Feng.success("添加成功!");
+        window.parent.BusiOrder.table.refresh();
+        BusiOrderInfoDlg.close();
+    }, function (data) {
+        Feng.error("添加失败!" + data.responseJSON.message + "!");
+    });
+    ajax.set(this.busiOrderInfoData);
+    ajax.start();
+}
 
 /**
  * 提交修改
@@ -218,38 +218,43 @@ BusiOrderInfoDlg.editSubmit = function() {
     ajax.set(this.busiOrderInfoData);
     ajax.start();
 }
-    $(function(){
-        Feng.initValidator("busForm", BusiOrderInfoDlg.validateFields);
-        //提交信息
-        var ajax = new $ax(Feng.ctxPath + "/busiOrder/getInfoS", function(data){
-            dataInfo=data;
-        },function(data){
+$(function(){
+    Feng.initValidator("busForm", BusiOrderInfoDlg.validateFields);
+    //提交信息
+    var ajax = new $ax(Feng.ctxPath + "/busiOrder/getInfoS", function(data){
+        dataInfo=data;
+    },function(data){
 
 
 
-            Feng.error("失败!" + data.responseJSON.message + "!");
-        });
-        ajax.start();
+        Feng.error("失败!" + data.responseJSON.message + "!");
     });
+    ajax.start();
+});
+
 
 $("#trantype").change(function () {
 
-           if($(this).val()==0){
-               $("#endpoint").empty();
-           for (var key in dataInfo.harbour) {
-               console.log(key);
-               var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
-               option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
-               $("#endpoint").append(option);
-           }
-           }
+    if($(this).val()==0){
+        $("#endpoint").empty();
+        for (var key in dataInfo.harbour) {
+            console.log(key);
+            if(dataInfo.harbour[key].statecode==1) {
+                var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
+                option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
+                $("#endpoint").append(option);
+            }
+        }
+    }
     if($(this).val()==1) {
         $("#endpoint").empty();
         for (var key in dataInfo.station) {
             console.log(key);
-            var option = "<option value=\"" + dataInfo.station[key].id + "\"";
-            option += ">" + dataInfo.station[key].name + "</option>";  //动态添加数据
-            $("#endpoint").append(option);
+            if(dataInfo.station[key].statecode==1)
+            {
+                var option = "<option value=\"" + dataInfo.station[key].id + "\"";
+                option += ">" + dataInfo.station[key].name + "</option>";  //动态添加数据
+                $("#endpoint").append(option);}
         }
 
     }
@@ -293,7 +298,7 @@ BusiOrderInfoDlg.getGoodsId = function () {
 
                 for(var i=0; i<listGoodsId.length; i++){
                     console.log(listGoodsId[i]);
-                    if(listGoodsId[i]){
+                    if(listGoodsId[i]&&listGoodsId[i].statecode==1){
                         var option="<option value=\""+ listGoodsId[i].id+"\"";
                         option += ">"+listGoodsId[i].goodstype+"</option>";  //动态添加数据
                         $("select[id=goodstype]").append(option);

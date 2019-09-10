@@ -25,6 +25,13 @@ var VoyageInfoDlg = {
                 }
             }
         },
+        imo:{
+            validators:{
+                notEmpty:{
+                    message:"轮船号不能为空"
+                }
+            }
+        },
         statecode:{
             validators:{
                 notEmpty:{
@@ -234,7 +241,7 @@ VoyageInfoDlg.editSubmit = function() {
 VoyageInfoDlg.getVoyageNum = function(){
     var VoyageNum = $("select[id=imo]").val();
     $("select[id=imo]").empty();      //清空
-    $("#imo").append("<option value='0'>请选择轮船号</option>");
+    $("#imo").append("<option value=''>请选择轮船号</option>");
     $.ajax({url:Feng.ctxPath+'/voyage/getImo',
         type:"post",
         data:{
@@ -269,7 +276,7 @@ VoyageInfoDlg.getStartHarbourName = function () {
     var HarbourName = $("select[id=startpoint]").val();
     var HarbourId = $("select[id=startpoint]").val();
     $("select[id=startpoint]").empty();      //清空
-    $("#startpoint").append("<option value='0'>请选择起点港口</option>");
+    $("#startpoint").append("<option value=''>请选择起点港口</option>");
     var num = new Array();      //港口id
     var name = new Array();     //港口名
     /**
@@ -334,7 +341,7 @@ VoyageInfoDlg.getEndHarbourName = function(){
     var HarbourName = $("select[id=endpoint]").val();
     var HarbourId = $("select[id=endpoint]").val();
     $("select[id=endpoint]").empty();      //清空
-    $("#endpoint").append("<option value='0'>请选择起点港口</option>");
+    $("#endpoint").append("<option value=''>请选择起点港口</option>");
     var num = new Array();      //港口id
     var name = new Array();     //港口名
     /**

@@ -52,7 +52,6 @@ public class DicFactory {
         for (Integer i=0;i<list.size();i++) {
             map.put(list.get(i).get("id"),list.get(i).get("goodstype"));
         }
-        System.out.println("===========qqqqqqqqqq===>"+map);
         return map;
     }
 

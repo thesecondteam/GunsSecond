@@ -153,8 +153,8 @@ BusiWaybillInfoDlg.editSubmit = function() {
 BusiWaybillInfoDlg.getTrainId = function () {
     var TrainId = $("select[id=trainnum]").val();
     $("select[id=trainnum]").empty();      //清空
-    $("#trainnum").append("<option value='0'>请选择车次</option>");
-    $.ajax({url:'../train/getTrainId',
+    $("#trainnum").append("<option value=''>请选择车次</option>");
+    $.ajax({url:Feng.ctxPath+'/train/getTrainId',
         type:"post",
         data:{
             TrainId : TrainId
@@ -184,8 +184,8 @@ BusiWaybillInfoDlg.getTrainId = function () {
 BusiWaybillInfoDlg.getBoxCode = function () {
     var BoxCode = $("select[id=boxnumber]").val();
     $("select[id=boxnumber]").empty();      //清空
-    $("#boxnumber").append("<option value='0'>请选择集装箱箱号</option>");
-    $.ajax({url:'../box/getBoxCode',
+    $("#boxnumber").append("<option value=''>请选择集装箱箱号</option>");
+    $.ajax({url:Feng.ctxPath+'/box/getBoxCode',
         type:"post",
         data:{
             BoxCode : BoxCode
@@ -216,14 +216,14 @@ BusiWaybillInfoDlg.getStartStationId = function () {
     var StationId = $("select[id=startpoint]").val();
     var StationId_id = $("select[id=startpoint]").val();
     $("select[id=startpoint]").empty();      //清空
-    $("#startpoint").append("<option value='0'>请选择起点站点</option>");
+    $("#startpoint").append("<option value=''>请选择起点站点</option>");
     var num = new Array();      //车站id
     var name = new Array();     //车站名
     /**
      * 获得车站名序列
      */
     $.ajax({
-        url: '../dictStation/getStationId',
+        url: Feng.ctxPath+'/dictStation/getStationId',
         type: "post",
         data: {
             StationId: StationId
@@ -245,7 +245,7 @@ BusiWaybillInfoDlg.getStartStationId = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '../dictStation/getStationId_id',
+                url: Feng.ctxPath+'/dictStation/getStationId_id',
                 type: "post",
                 data: {
                     StationId_id: StationId_id
@@ -278,14 +278,14 @@ BusiWaybillInfoDlg.getEndStationId = function () {
     var StationId = $("select[id=endpoint]").val();
     var StationId_id = $("select[id=endpoint]").val();
     $("select[id=endpoint]").empty();      //清空
-    $("#endpoint").append("<option value='0'>请选择起点站点</option>");
+    $("#endpoint").append("<option value=''>请选择起点站点</option>");
     var num = new Array();      //车站id
     var name = new Array();     //车站名
     /**
      * 获得车站名序列
      */
     $.ajax({
-        url: '../dictStation/getStationId',
+        url: Feng.ctxPath+'/dictStation/getStationId',
         type: "post",
         data: {
             StationId: StationId
@@ -307,7 +307,7 @@ BusiWaybillInfoDlg.getEndStationId = function () {
              * 获得车站id序列
              */
             $.ajax({
-                url: '../dictStation/getStationId_id',
+                url: Feng.ctxPath+'/dictStation/getStationId_id',
                 type: "post",
                 data: {
                     StationId_id: StationId_id
