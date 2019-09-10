@@ -257,7 +257,7 @@ $("#trantype").change(function () {
 });
 BusiOrderInfoDlg.getfirst = function () {
 
-    $.ajax({url:'${ctxPath}/busiOrder/getInfoS',
+    $.ajax({url:'/busiOrder/getInfoS',
         type:"post",
         cache: false,
         processData: false,
@@ -277,7 +277,7 @@ BusiOrderInfoDlg.getGoodsId = function () {
     var GoodsId = $("select[id=goodstype]").val();
     $("select[id=goodstype]").empty();      //清空
     $("#goodstype").append("<option value='0'>请选择类型</option>");
-    $.ajax({url:'${ctxPath}/dictGoodstype/getGoodsId',
+    $.ajax({url:'/dictGoodstype/getGoodsId',
         type:"post",
         data:{
             GoodsId: GoodsId
