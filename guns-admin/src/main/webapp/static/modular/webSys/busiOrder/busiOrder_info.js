@@ -232,29 +232,24 @@ BusiOrderInfoDlg.editSubmit = function() {
         ajax.start();
     });
 
-
 $("#trantype").change(function () {
 
            if($(this).val()==0){
                $("#endpoint").empty();
            for (var key in dataInfo.harbour) {
                console.log(key);
-               if(dataInfo.harbour[key].statecode==1) {
-                   var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
-                   option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
-                   $("#endpoint").append(option);
-               }
+               var option = "<option value=\"" + dataInfo.harbour[key].id + "\"";
+               option += ">" + dataInfo.harbour[key].harbourname + "</option>";  //动态添加数据
+               $("#endpoint").append(option);
            }
            }
     if($(this).val()==1) {
         $("#endpoint").empty();
         for (var key in dataInfo.station) {
             console.log(key);
-            if(dataInfo.station[key].statecode==1)
-            {
             var option = "<option value=\"" + dataInfo.station[key].id + "\"";
             option += ">" + dataInfo.station[key].name + "</option>";  //动态添加数据
-            $("#endpoint").append(option);}
+            $("#endpoint").append(option);
         }
 
     }
@@ -262,7 +257,7 @@ $("#trantype").change(function () {
 });
 BusiOrderInfoDlg.getfirst = function () {
 
-    $.ajax({url:'/busiOrder/getInfoS',
+    $.ajax({url:Feng.ctxPath+'/busiOrder/getInfoS',
         type:"post",
         cache: false,
         processData: false,
@@ -282,7 +277,7 @@ BusiOrderInfoDlg.getGoodsId = function () {
     var GoodsId = $("select[id=goodstype]").val();
     $("select[id=goodstype]").empty();      //清空
     $("#goodstype").append("<option value='0'>请选择类型</option>");
-    $.ajax({url:'/dictGoodstype/getGoodsId',
+    $.ajax({url:Feng.ctxPath+'/dictGoodstype/getGoodsId',
         type:"post",
         data:{
             GoodsId: GoodsId
@@ -298,7 +293,7 @@ BusiOrderInfoDlg.getGoodsId = function () {
 
                 for(var i=0; i<listGoodsId.length; i++){
                     console.log(listGoodsId[i]);
-                    if(listGoodsId[i]&&listGoodsId[i].statecode==1){
+                    if(listGoodsId[i]){
                         var option="<option value=\""+ listGoodsId[i].id+"\"";
                         option += ">"+listGoodsId[i].goodstype+"</option>";  //动态添加数据
                         $("select[id=goodstype]").append(option);
