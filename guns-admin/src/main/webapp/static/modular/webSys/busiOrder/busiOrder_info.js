@@ -232,7 +232,6 @@ $(function(){
     ajax.start();
 });
 
-
 $("#trantype").change(function () {
 
     if($(this).val()==0){
