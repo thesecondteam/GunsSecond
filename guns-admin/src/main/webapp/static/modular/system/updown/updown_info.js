@@ -4,8 +4,30 @@
  * 初始化详情对话框
  */
 var UpdownInfoDlg = {
-    updownInfoData : {}
+    updownInfoData : {},
+    validateFields: {
+        oppeople: {
+            validators: {
+                notEmpty: {
+                    message: '操作人不能为为空'
+                }
+            }
+        },
+        optime: {
+            validators: {
+                notEmpty: {
+                    message: '操作时间不能为空'
+                }
+            }
+        }
+    }
 };
+
+UpdownInfoDlg.validate = function () {
+    $('#updownInfoForm').data("bootstrapValidator").resetForm();
+    $('#updownInfoForm').bootstrapValidator('validate');
+    return $("#updownInfoForm").data('bootstrapValidator').isValid();
+}
 
 /**
  * 清除数据
@@ -64,6 +86,9 @@ UpdownInfoDlg.ploadSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/pload", function(data){
         Feng.success("添加成功!");
@@ -89,6 +114,9 @@ UpdownInfoDlg.cloadSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/cload", function(data){
         Feng.success("添加成功!");
@@ -114,6 +142,9 @@ UpdownInfoDlg.loadSubmit = function() {
 
     this.clearData();
     this.collectData();
+    if (!this.validate()) {
+        return;
+    }
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/updown/load", function(data){
         Feng.success("添加成功!");

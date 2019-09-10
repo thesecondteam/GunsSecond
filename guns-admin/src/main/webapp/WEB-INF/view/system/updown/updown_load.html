@@ -6,7 +6,7 @@
 
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="updownInfoForm">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
@@ -65,7 +65,7 @@
 <script src="${ctxPath}/static/modular/system/updown/updown_info.js"></script>
 <script>
     $(function() {
-
+        Feng.initValidator("updownInfoForm", UpdownInfoDlg.validateFields);
         /*
          * 日期选择器
          */
