@@ -343,7 +343,7 @@ BusiWaybillInfoDlg.getEndStationId = function () {
     this.alert("1111");*/
 /*    var index = document.getElementById("boxnumber").selectedIndex;
     this.console(index);*/
-   /* $.ajax({url:'${ctxPath}/box/boxnumber',
+   /* $.ajax({url:Feng.ctxPath+'/box/boxnumber',
         type:"post",
         data:{
             BoxCode : BoxCode

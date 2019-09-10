@@ -132,7 +132,7 @@ public class EchartController {
         {
             DictStation listStation = this.dictStationService.selectById(bwb.getEndpoint());
 
-            if(mapB.containsKey(listStation.getProvince()))
+            if(!mapB.isEmpty()&&mapB.containsKey(listStation.getProvince()))
             {
 
                 mapB.put(listStation.getProvince(),bwb.getBoxnumber()+Integer.parseInt(mapB.get(listStation.getProvince()).toString()));
